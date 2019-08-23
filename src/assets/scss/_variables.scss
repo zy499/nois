@@ -4,11 +4,11 @@
 $--color-primary: #667AFA;
 
 // Navbar
-$navbar--background-color: $--color-primary;
+$navbar--background-color: #fff;
 
 // Sidebar
-$sidebar--background-color-dark: #263238;
-$sidebar--color-text-dark: #8a979e;
+$sidebar--background-color-dark:rgba(255,255,255,1);
+$sidebar--color-text-dark: rgba(32,46,61,1);
 
 // Content
 $content--background-color: #f1f4f5;

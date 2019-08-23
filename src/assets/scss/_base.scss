@@ -74,7 +74,7 @@ img {
   .site-sidebar,
   .site-sidebar__inner,
   .el-menu.site-sidebar__menu {
-    width: 64px;
+    width: 62px;
   }
   .site-navbar__body,
   .site-content__wrapper {
@@ -110,7 +110,7 @@ img {
 .site-sidebar__menu-icon,
 .site-content__wrapper,
 .site-content--tabs > .el-tabs .el-tabs__header {
-  transition: inline-block .3s, left .3s, width .3s, margin-left .3s, font-size .3s;
+  transition: inline-block .3s, left .3s, width .3s, margin-left .3s, font-size .3s;border-left: 1px solid #f1f4f5;
 }
 
 
@@ -132,7 +132,11 @@ img {
     }
     .el-menu {
       > .el-menu-item,
-      > .el-submenu > .el-submenu__title {
+      > .el-submenu
+      > .el-menu-item {
+        width: 98%;
+      }
+      .el-submenu__title {
         color: #fff;
         &:focus,
         &:hover {
@@ -142,7 +146,7 @@ img {
       }
       > .el-menu-item.is-active,
       > .el-submenu.is-active > .el-submenu__title {
-        border-bottom-color: mix(#fff, $navbar--background-color, 85%);
+        border-bottom-color: mix(rgba(63,81,181,1), $navbar--background-color, 85%);
       }
       .el-menu-item i,
       .el-submenu__title i,
@@ -170,14 +174,14 @@ img {
     margin: 0;
     line-height: 50px;
     font-size: 20px;
-    text-align: center;
+    // text-align: center;
     text-transform: uppercase;
     white-space: nowrap;
     color: #fff;
 
     &-lg,
     &-mini {
-      margin: 0 5px;
+      // margin: 0 5px;
       color: rgb(69, 27, 122);
       &:focus,
       &:hover {
@@ -255,11 +259,13 @@ img {
   z-index: 1020;
   width: 230px;
   overflow: hidden;
-
+  .site-sidebar--dark .site-sidebar__menu .el-menu .el-submenu .is-opened {
+    background-color: #fff;
+  }
   &--dark,
   &--dark-popper {
     background-color: $sidebar--background-color-dark;
-    .site-sidebar__menu.el-menu,
+    .site-sidebar__menu .el-menu,
     > .el-menu--popup {
       background-color: $sidebar--background-color-dark;
       .el-menu-item,
@@ -275,9 +281,19 @@ img {
       .el-submenu.is-opened {
         background-color: mix(#000, $sidebar--background-color-dark, 15%);
       }
+      .el-menu-item {
+        width: 98%;
+        margin-bottom: 10px;
+        // height: 37px;
+        // line-height: 37px;
+      }
       .el-menu-item.is-active,
       .el-submenu.is-active > .el-submenu__title {
-        color: mix(#fff, $sidebar--color-text-dark, 80%);
+        // color: mix(rgba(63,81,181,1), $sidebar--color-text-dark, 80%);
+        border-radius: 20px;
+        color: #fff;
+        background-color: slateblue;
+        
       }
     }
   }
@@ -317,7 +333,7 @@ img {
     background: $content--background-color;
   }
   &--tabs {
-    padding: 5px 0 0;
+    padding: 55px 0 0;
   }
   > .el-tabs {
     > .el-tabs__header {

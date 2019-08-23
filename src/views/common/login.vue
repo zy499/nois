@@ -6,42 +6,41 @@
  * @LastEditTime: 2019-08-22 23:10:10
  -->
 <template>
-  <div class="site-wrapper site-page--login">
-    <div class="site-content__wrapper">
-      <div class="site-content">
-        <!-- <div class='brand-info'>
-          <h2 class='brand-info__text'>闲时洗车后台管理系统</h2>
-          <p class='brand-info__intro'>数据管理，可视化操作</p>
-        </div>-->
-        <img class="ncccLogo" src="../../assets/img/nccclogo.png" alt />
-        <img class="CDmetroLogo" src="../../assets/img/CDmetrologo.png" alt />
-        <div class="login-main">
-          <p class="login-title">登录</p>
-          <p class="login-title-blck">Hi，欢迎回来</p>
+  <div class='site-wrapper site-page--login'>
+    <div class='site-content__wrapper'>
+      <div class='site-content'>
+        <img class='ncccLogo' src='../../assets/img/nccclogo.png' alt />
+        <img class='CDmetroLogo' src='../../assets/img/CDmetrologo.png' alt />
+        <div class='login-main'>
+          <p class='login-title'>登录</p>
+          <p class='login-title-blck'>Hi，欢迎回来</p>
           <el-form
-            :model="dataForm"
-            :rules="dataRule"
-            ref="dataForm"
-            @keyup.enter.native="dataFormSubmit()"
+            :model='dataForm'
+            :rules='dataRule'
+            ref='dataForm'
+            @keyup.enter.native='dataFormSubmit()'
             status-icon
           >
             <template>
-              <p class="style-uaerName">账号</p>
+              <p class='style-uaerName'>账号</p>
             </template>
-            <el-form-item prop="userName">
-              <el-input v-model="dataForm.userName"></el-input>
+            <el-form-item prop='userName'>
+              <el-input v-model='dataForm.userName'></el-input>
             </el-form-item>
             <template>
-              <p class="style-password">密码</p>
+              <p class='style-password'>密码</p>
             </template>
-            <el-form-item prop="password">
-              <el-input v-model="dataForm.password" type="password"></el-input>
+            <el-form-item prop='password'>
+              <el-input v-model='dataForm.password' ref="password" :type='passwordType'></el-input>
+              <span class='show-pwd' @click="showPwd">
+                <img src='../../assets/img/show.png' />
+              </span>
             </el-form-item>
             <template>
-              <p class="forget_password">忘记密码?</p>
+              <p class='forget_password'>忘记密码?</p>
             </template>
             <el-form-item>
-              <el-button class="login-btn-submit" type="primary" @click="dataFormSubmit()">登录</el-button>
+              <el-button class='login-btn-submit' type='primary' @click='dataFormSubmit()'>登录</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -52,47 +51,58 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       dataForm: {
-        userName: "",
-        password: "",
-        uuid: ""
+        userName: '',
+        password: ''
       },
+      passwordType: 'password',
       dataRule: {
         userName: [
-          { required: true, message: "帐号不能为空", trigger: "blur" }
+          { required: true, message: '帐号不能为空', trigger: 'blur' }
         ],
-        password: [{ required: true, message: "密码不能为空", trigger: "blur" }]
+        password: [{ required: true, message: '密码不能为空', trigger: 'blur' }]
       }
-    };
+    }
   },
   methods: {
     // 提交表单
-    dataFormSubmit() {
-      this.$refs["dataForm"].validate(valid => {
+    dataFormSubmit () {
+      this.$refs['dataForm'].validate(valid => {
         if (valid) {
           // console.log(this.$http.adornUrl('/sys/login'))
           this.$http({
-            url: this.$http.adornUrl("sys/login"),
-            method: "post",
+            url: this.$http.adornUrl('sys/login'),
+            method: 'post',
             data: this.$http.adornData({
               username: this.dataForm.userName,
               password: this.dataForm.password
             })
           }).then(({ data }) => {
             if (data && data.code === 0) {
-              this.$cookie.set("token", data.token);
-              this.$router.replace({ name: "home" });
+              this.$cookie.set('token', data.token)
+              this.$router.replace({ name: 'home' })
             } else {
-              this.$message.error(data.msg);
+              this.$message.error(data.msg)
             }
-          });
+          })
         }
-      });
+      })
+    },
+    // password show
+    showPwd () {
+      if (this.passwordType === 'password') {
+        this.passwordType = ''
+      } else {
+        this.passwordType = 'password'
+      }
+      this.$nextTick(() => {
+        this.$refs.password.focus()
+      })
     }
   }
-};
+}
 </script>
 
 <style lang='scss'>
@@ -111,7 +121,7 @@ export default {
     z-index: -1;
     width: 100%;
     height: 100%;
-    content: "";
+    content: '';
     background-image: url(~@/assets/img/rightimg@2x.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -142,6 +152,9 @@ export default {
       z-index: 999;
       bottom: 30px;
       left: 240px;
+    }
+    .el-input__suffix {
+      right: 20px;
     }
   }
   .login-main {
@@ -204,6 +217,12 @@ export default {
     font-weight: 400;
     color: rgba(148, 158, 168, 1);
     line-height: 20px;
+  }
+  .show-pwd {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
   }
   .login-captcha {
     overflow: hidden;

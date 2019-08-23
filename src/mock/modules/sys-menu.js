@@ -435,7 +435,7 @@ var navDataList = [
         'parentId': 1,
         'parentName': null,
         'name': 'SQL监控',
-        'url': 'http://localhost:8080/renren-fast/druid/sql.html',
+        'url': 'https://www.baidu.com',
         'perms': null,
         'type': 1,
         'icon': 'sql',
