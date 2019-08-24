@@ -1,3 +1,10 @@
+<!--
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-08-22 21:28:23
+ * @LastEditors: zy
+ * @LastEditTime: 2019-08-24 18:09:58
+ -->
 <template>
   <aside class="site-sidebar" :class="'site-sidebar--' + sidebarLayoutSkin">
     <div class="site-sidebar__inner">
@@ -10,6 +17,10 @@
           <icon-svg name="shouye" class="site-sidebar__menu-icon"></icon-svg>
           <span slot="title">首页</span>
         </el-menu-item>
+        <!-- <el-menu-item index="passengerFlowWaring" @click="$router.push({ name: 'passengerFlowWaring' })">
+          <icon-svg name="shouye" class="site-sidebar__menu-icon"></icon-svg>
+          <span slot="title">客流监测与预警</span>
+        </el-menu-item> -->
         <!-- <el-submenu index="demo">
           <template slot="title">
             <icon-svg name="shoucang" class="site-sidebar__menu-icon"></icon-svg>

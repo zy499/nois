@@ -1,3 +1,10 @@
+/*
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-08-22 21:28:23
+ * @LastEditors: zy
+ * @LastEditTime: 2019-08-24 17:14:41
+ */
 /**
  * 全站路由配置
  *
@@ -34,7 +41,8 @@ const mainRoutes = {
     // 2. iframeUrl: 是否通过iframe嵌套展示内容, '以http[s]://开头': 是, '': 否
     // 提示: 如需要通过iframe嵌套展示内容, 但不通过tab打开, 请自行创建组件使用iframe处理!
     { path: '/home', component: _import('common/home'), name: 'home', meta: { title: '首页' } },
-    { path: '/theme', component: _import('common/theme'), name: 'theme', meta: { title: '主题' } }
+    { path: '/theme', component: _import('common/theme'), name: 'theme', meta: { title: '主题' } },
+    { path: '/passengerFlowWaring', component: _import('passengerFlow/passengerFlowWaring/index'), name: 'passengerFlowWaring', meta: { title: '客流监测与预警' } },
     // { path: '/demo-echarts', component: _import('demo/echarts'), name: 'demo-echarts', meta: { title: 'demo-echarts', isTab: true } },
     // { path: '/demo-ueditor', component: _import('demo/ueditor'), name: 'demo-ueditor', meta: { title: 'demo-ueditor', isTab: true } }
   ],

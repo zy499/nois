@@ -1,3 +1,10 @@
+<!--
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-08-24 12:04:28
+ * @LastEditors: zy
+ * @LastEditTime: 2019-08-24 17:15:44
+ -->
 <template>
   <main class="site-content" :class="{ 'site-content--tabs': $route.meta.isTab }">
     <!-- 主入口标签页 s -->
@@ -21,7 +28,7 @@
         :key="item.name"
         :label="item.title"
         :name="item.name">
-        <el-card :body-style="siteContentViewHeight">
+        <div :body-style="siteContentViewHeight">
           <iframe
             v-if="item.type === 'iframe'"
             :src="item.iframeUrl"
@@ -30,15 +37,15 @@
           <keep-alive v-else>
             <router-view v-if="item.name === mainTabsActiveName" />
           </keep-alive>
-        </el-card>
+        </div>
       </el-tab-pane>
     </el-tabs>
     <!-- 主入口标签页 e -->
-    <el-card v-else :body-style="siteContentViewHeight">
+    <div v-else :body-style="siteContentViewHeight">
       <keep-alive>
         <router-view />
       </keep-alive>
-    </el-card>
+    </div>
   </main>
 </template>
 
