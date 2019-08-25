@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-22 21:28:23
  * @LastEditors: zy
- * @LastEditTime: 2019-08-25 20:30:06
+ * @LastEditTime: 2019-08-25 22:20:43
  */
 /**
  * 全站路由配置
@@ -57,7 +57,7 @@ const mainRoutes = {
 }
 
 const router = new Router({
-  mode: 'history',
+  mode: 'hash',
   scrollBehavior: () => ({ y: 0 }),
   isAddDynamicMenuRoutes: false, // 是否已经添加动态(菜单)路由
   routes: globalRoutes.concat(mainRoutes)
