@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 17:01:27
  * @LastEditors: zy
- * @LastEditTime: 2019-08-25 17:07:26
+ * @LastEditTime: 2019-08-25 20:27:42
  -->
 <template>
   <div class="passengerFlowWaringBody">
@@ -94,7 +94,6 @@ export default {
   }
 }
 </script>
-
 <style lang='scss' scoped>
 .passengerFlowWaringBody {
   .header {
