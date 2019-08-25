@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-22 21:28:23
  * @LastEditors: zy
- * @LastEditTime: 2019-08-24 17:14:41
+ * @LastEditTime: 2019-08-25 16:48:29
  */
 /**
  * 全站路由配置
@@ -31,7 +31,7 @@ const globalRoutes = [
 // 主入口路由(需嵌套上左右整体布局)
 const mainRoutes = {
   path: '/',
-  component: _import('main'),
+  component: _import('layout/main'),
   name: 'main',
   redirect: { name: 'home' },
   meta: { title: '主入口整体布局' },
@@ -41,8 +41,8 @@ const mainRoutes = {
     // 2. iframeUrl: 是否通过iframe嵌套展示内容, '以http[s]://开头': 是, '': 否
     // 提示: 如需要通过iframe嵌套展示内容, 但不通过tab打开, 请自行创建组件使用iframe处理!
     { path: '/home', component: _import('common/home'), name: 'home', meta: { title: '首页' } },
-    { path: '/theme', component: _import('common/theme'), name: 'theme', meta: { title: '主题' } },
-    { path: '/passengerFlowWaring', component: _import('passengerFlow/passengerFlowWaring/index'), name: 'passengerFlowWaring', meta: { title: '客流监测与预警' } },
+    { path: '/theme', component: _import('common/theme'), name: 'theme', meta: { title: '主题' } }
+    // { path: '/passengerFlowWaring', component: _import('passengerFlow/passengerFlowWaring/index'), name: 'passengerFlowWaring', meta: { title: '客流监测与预警' } }
     // { path: '/demo-echarts', component: _import('demo/echarts'), name: 'demo-echarts', meta: { title: 'demo-echarts', isTab: true } },
     // { path: '/demo-ueditor', component: _import('demo/ueditor'), name: 'demo-ueditor', meta: { title: 'demo-ueditor', isTab: true } }
   ],
@@ -57,7 +57,7 @@ const mainRoutes = {
 }
 
 const router = new Router({
-  mode: 'hash',
+  mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
   isAddDynamicMenuRoutes: false, // 是否已经添加动态(菜单)路由
   routes: globalRoutes.concat(mainRoutes)
@@ -122,9 +122,9 @@ function fnAddDynamicMenuRoutes (menuList = [], routes = []) {
     } else if (menuList[i].url && /\S/.test(menuList[i].url)) {
       menuList[i].url = menuList[i].url.replace(/^\//, '')
       var route = {
-        path: menuList[i].url.replace('/', '-'),
+        path: menuList[i].url.replace(/\//g, '-'),
         component: null,
-        name: menuList[i].url.replace('/', '-'),
+        name: menuList[i].url.replace(/\//g, '-'),
         meta: {
           menuId: menuList[i].menuId,
           title: menuList[i].name,
@@ -140,7 +140,7 @@ function fnAddDynamicMenuRoutes (menuList = [], routes = []) {
         route['meta']['iframeUrl'] = menuList[i].url
       } else {
         try {
-          route['component'] = _import(`modules/${menuList[i].url}`) || null
+          route['component'] = _import(`${menuList[i].url}`) || null
         } catch (e) {}
       }
       routes.push(route)

@@ -1,3 +1,10 @@
+/*
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-08-22 21:28:23
+ * @LastEditors: zy
+ * @LastEditTime: 2019-08-25 15:51:08
+ */
 // https://eslint.org/docs/user-guide/configuring
 
 module.exports = {

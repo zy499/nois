@@ -1,0 +1,39 @@
+// text
+.text_right {
+  text-align: right;
+}
+.font-size14 {
+  font-size: 14px;
+}
+.font-size20 {
+  font-size: 20px !important;
+}
+// margin
+.margin-left75 {
+  margin-left: -75px;
+}
+.margin-top3 {
+  margin-top: 3px;
+}
+.margin-bottom10 {
+  margin-bottom: 10px !important;
+}
+.margin-bottom30 {
+  margin-bottom: 30px;
+}
+
+// flex
+.flexStart {
+  display: flex;
+}
+.flex-flow-reverse {
+  flex-flow: row-reverse;
+}
+
+.justify-content-space-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}

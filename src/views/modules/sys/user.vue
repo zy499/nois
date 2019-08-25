@@ -1,3 +1,10 @@
+<!--
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-08-24 21:21:06
+ * @LastEditors: zy
+ * @LastEditTime: 2019-08-25 15:55:54
+ -->
 <template>
   <div class="mod-user">
     <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
@@ -114,18 +121,17 @@
 </template>
 
 <script>
-import echarts from "echarts";
-import AddOrUpdate from "./user-add-or-update";
+import AddOrUpdate from './user-add-or-update'
 import LineEchart from '@/components/echarts/line'
 export default {
-  data() {
+  data () {
     return {
       // chartLine: null,
       dialogVisible: false,
-      value: "",
+      value: '',
       options: [],
       dataForm: {
-        userName: ""
+        userName: ''
       },
       dataList: [],
       pageIndex: 1,
@@ -134,25 +140,25 @@ export default {
       dataListLoading: false,
       dataListSelections: [],
       addOrUpdateVisible: false
-    };
+    }
   },
   components: {
     AddOrUpdate,
     LineEchart
   },
-  activated() {
-    this.getDataList();
+  activated () {
+    this.getDataList()
     if (this.chartLine) {
-      this.chartLine.resize();
+      this.chartLine.resize()
     }
   },
   methods: {
     // 获取数据列表
-    getDataList() {
-      this.dataListLoading = true;
+    getDataList () {
+      this.dataListLoading = true
       this.$http({
-        url: this.$http.adornUrl("/sys/user/list"),
-        method: "get",
+        url: this.$http.adornUrl('/sys/user/list'),
+        method: 'get',
         params: this.$http.adornParams({
           page: this.pageIndex,
           limit: this.pageSize,
@@ -160,84 +166,84 @@ export default {
         })
       }).then(({ data }) => {
         if (data && data.code === 0) {
-          this.dataList = data.page.list;
-          this.totalPage = data.page.totalCount;
+          this.dataList = data.page.list
+          this.totalPage = data.page.totalCount
         } else {
-          this.dataList = [];
-          this.totalPage = 0;
+          this.dataList = []
+          this.totalPage = 0
         }
-        this.dataListLoading = false;
-      });
+        this.dataListLoading = false
+      })
     },
     // 每页数
-    sizeChangeHandle(val) {
-      this.pageSize = val;
-      this.pageIndex = 1;
-      this.getDataList();
+    sizeChangeHandle (val) {
+      this.pageSize = val
+      this.pageIndex = 1
+      this.getDataList()
     },
     // 当前页
-    currentChangeHandle(val) {
-      this.pageIndex = val;
-      this.getDataList();
+    currentChangeHandle (val) {
+      this.pageIndex = val
+      this.getDataList()
     },
     // 多选
-    selectionChangeHandle(val) {
-      this.dataListSelections = val;
+    selectionChangeHandle (val) {
+      this.dataListSelections = val
     },
     // 新增 / 修改
-    addOrUpdateHandle(id) {
-      this.addOrUpdateVisible = true;
+    addOrUpdateHandle (id) {
+      this.addOrUpdateVisible = true
       this.$nextTick(() => {
-        this.$refs.addOrUpdate.init(id);
-      });
+        this.$refs.addOrUpdate.init(id)
+      })
     },
     // 删除
-    deleteHandle(id) {
+    deleteHandle (id) {
       var userIds = id
         ? [id]
         : this.dataListSelections.map(item => {
-            return item.userId;
-          });
+          return item.userId
+        })
       this.$confirm(
-        `确定对[id=${userIds.join(",")}]进行[${id ? "删除" : "批量删除"}]操作?`,
-        "提示",
+        `确定对[id=${userIds.join(',')}]进行[${id ? '删除' : '批量删除'}]操作?`,
+        '提示',
         {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning"
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
         }
       )
         .then(() => {
           this.$http({
-            url: this.$http.adornUrl("/sys/user/delete"),
-            method: "post",
+            url: this.$http.adornUrl('/sys/user/delete'),
+            method: 'post',
             data: this.$http.adornData(userIds, false)
           }).then(({ data }) => {
             if (data && data.code === 0) {
               this.$message({
-                message: "操作成功",
-                type: "success",
+                message: '操作成功',
+                type: 'success',
                 duration: 1500,
                 onClose: () => {
-                  this.getDataList();
+                  this.getDataList()
                 }
-              });
+              })
             } else {
-              this.$message.error(data.msg);
+              this.$message.error(data.msg)
             }
-          });
+          })
         })
-        .catch(() => {});
+        .catch(() => {})
     },
-    //打开窗口
-    openDialog() {
-      this.dialogVisible = true;
+    // 打开窗口
+    openDialog () {
+      this.dialogVisible = true
     }
   },
-  mounted() {
+  mounted () {
     // this.initChartLine();
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .margin-none {

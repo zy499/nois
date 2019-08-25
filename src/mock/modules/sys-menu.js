@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 12:04:28
  * @LastEditors: zy
- * @LastEditTime: 2019-08-24 18:12:13
+ * @LastEditTime: 2019-08-25 16:57:55
  */
 // 生成数据列表
 var dataList = [
@@ -391,132 +391,132 @@ var navDataList = [
     'parentId': 0,
     'parentName': null,
     'name': '客流监测与预警',
-    'url': 'passengerFlowWaring',
+    'url': 'passengerFlow/passengerFlowWaring/index',
     'perms': null,
     'type': 0,
     'icon': 'shouye',
     'orderNum': 0,
-    'open': null,
+    'open': null
     // 'list': null
+  },
+  {
+    'menuId': 1,
+    'parentId': 0,
+    'parentName': null,
+    'name': '系统管理',
+    'url': null,
+    'perms': null,
+    'type': 0,
+    'icon': 'system',
+    'orderNum': 0,
+    'open': null,
+    'list': [
+      {
+        'menuId': 2,
+        'parentId': 1,
+        'parentName': null,
+        'name': '管理员列表',
+        'url': 'modules/sys/user',
+        'perms': null,
+        'type': 1,
+        'icon': 'admin',
+        'orderNum': 1,
+        'open': null,
+        'list': null
+      }
+      // {
+      //   'menuId': 3,
+      //   'parentId': 1,
+      //   'parentName': null,
+      //   'name': '角色管理',
+      //   'url': 'sys/role',
+      //   'perms': null,
+      //   'type': 1,
+      //   'icon': 'role',
+      //   'orderNum': 2,
+      //   'open': null,
+      //   'list': null
+      // },
+      // {
+      //   'menuId': 4,
+      //   'parentId': 1,
+      //   'parentName': null,
+      //   'name': '菜单管理',
+      //   'url': 'sys/menu',
+      //   'perms': null,
+      //   'type': 1,
+      //   'icon': 'menu',
+      //   'orderNum': 3,
+      //   'open': null,
+      //   'list': null
+      // },
+      // {
+      //   'menuId': 5,
+      //   'parentId': 1,
+      //   'parentName': null,
+      //   'name': 'SQL监控',
+      //   'url': 'https://www.baidu.com',
+      //   'perms': null,
+      //   'type': 1,
+      //   'icon': 'sql',
+      //   'orderNum': 4,
+      //   'open': null,
+      //   'list': null
+      // },
+      // {
+      //   'menuId': 6,
+      //   'parentId': 1,
+      //   'parentName': null,
+      //   'name': '定时任务',
+      //   'url': 'job/schedule',
+      //   'perms': null,
+      //   'type': 1,
+      //   'icon': 'job',
+      //   'orderNum': 5,
+      //   'open': null,
+      //   'list': null
+      // },
+      // {
+      //   'menuId': 27,
+      //   'parentId': 1,
+      //   'parentName': null,
+      //   'name': '参数管理',
+      //   'url': 'sys/config',
+      //   'perms': 'sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete',
+      //   'type': 1,
+      //   'icon': 'config',
+      //   'orderNum': 6,
+      //   'open': null,
+      //   'list': null
+      // },
+      // {
+      //   'menuId': 30,
+      //   'parentId': 1,
+      //   'parentName': null,
+      //   'name': '文件上传',
+      //   'url': 'oss/oss',
+      //   'perms': 'sys:oss:all',
+      //   'type': 1,
+      //   'icon': 'oss',
+      //   'orderNum': 6,
+      //   'open': null,
+      //   'list': null
+      // },
+      // {
+      //   'menuId': 29,
+      //   'parentId': 1,
+      //   'parentName': null,
+      //   'name': '系统日志',
+      //   'url': 'sys/log',
+      //   'perms': 'sys:log:list',
+      //   'type': 1,
+      //   'icon': 'log',
+      //   'orderNum': 7,
+      //   'open': null,
+      //   'list': null
+      // }
+    ]
   }
-  // {
-  //   'menuId': 1,
-  //   'parentId': 0,
-  //   'parentName': null,
-  //   'name': '系统管理',
-  //   'url': null,
-  //   'perms': null,
-  //   'type': 0,
-  //   'icon': 'system',
-  //   'orderNum': 0,
-  //   'open': null,
-  //   'list': [
-  //     {
-  //       'menuId': 2,
-  //       'parentId': 1,
-  //       'parentName': null,
-  //       'name': '管理员列表',
-  //       'url': 'sys/user',
-  //       'perms': null,
-  //       'type': 1,
-  //       'icon': 'admin',
-  //       'orderNum': 1,
-  //       'open': null,
-  //       'list': null
-  //     },
-  //     {
-  //       'menuId': 3,
-  //       'parentId': 1,
-  //       'parentName': null,
-  //       'name': '角色管理',
-  //       'url': 'sys/role',
-  //       'perms': null,
-  //       'type': 1,
-  //       'icon': 'role',
-  //       'orderNum': 2,
-  //       'open': null,
-  //       'list': null
-  //     },
-  //     {
-  //       'menuId': 4,
-  //       'parentId': 1,
-  //       'parentName': null,
-  //       'name': '菜单管理',
-  //       'url': 'sys/menu',
-  //       'perms': null,
-  //       'type': 1,
-  //       'icon': 'menu',
-  //       'orderNum': 3,
-  //       'open': null,
-  //       'list': null
-  //     },
-  //     {
-  //       'menuId': 5,
-  //       'parentId': 1,
-  //       'parentName': null,
-  //       'name': 'SQL监控',
-  //       'url': 'https://www.baidu.com',
-  //       'perms': null,
-  //       'type': 1,
-  //       'icon': 'sql',
-  //       'orderNum': 4,
-  //       'open': null,
-  //       'list': null
-  //     },
-  //     {
-  //       'menuId': 6,
-  //       'parentId': 1,
-  //       'parentName': null,
-  //       'name': '定时任务',
-  //       'url': 'job/schedule',
-  //       'perms': null,
-  //       'type': 1,
-  //       'icon': 'job',
-  //       'orderNum': 5,
-  //       'open': null,
-  //       'list': null
-  //     },
-  //     {
-  //       'menuId': 27,
-  //       'parentId': 1,
-  //       'parentName': null,
-  //       'name': '参数管理',
-  //       'url': 'sys/config',
-  //       'perms': 'sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete',
-  //       'type': 1,
-  //       'icon': 'config',
-  //       'orderNum': 6,
-  //       'open': null,
-  //       'list': null
-  //     },
-  //     {
-  //       'menuId': 30,
-  //       'parentId': 1,
-  //       'parentName': null,
-  //       'name': '文件上传',
-  //       'url': 'oss/oss',
-  //       'perms': 'sys:oss:all',
-  //       'type': 1,
-  //       'icon': 'oss',
-  //       'orderNum': 6,
-  //       'open': null,
-  //       'list': null
-  //     },
-  //     {
-  //       'menuId': 29,
-  //       'parentId': 1,
-  //       'parentName': null,
-  //       'name': '系统日志',
-  //       'url': 'sys/log',
-  //       'perms': 'sys:log:list',
-  //       'type': 1,
-  //       'icon': 'log',
-  //       'orderNum': 7,
-  //       'open': null,
-  //       'list': null
-  //     }
-  //   ]
-  // }
 ]
 
 // 获取导航菜单列表 / 权限

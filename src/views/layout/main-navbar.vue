@@ -1,13 +1,20 @@
+<!--
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-08-24 12:04:28
+ * @LastEditors: zy
+ * @LastEditTime: 2019-08-25 16:43:45
+ -->
 <template>
   <nav class="site-navbar" :class="'site-navbar--' + navbarLayoutType">
     <div class="site-navbar__header">
       <h1 class="site-navbar__brand" @click="$router.push({ name: 'home' })">
         <a class="site-navbar__brand-lg" href="javascript:;">
-          <img src="../assets/img/logo1@1x.png" style="margin-left: 20px;margin-right: 10px;" alt />
-          <img src="../assets/img/logo2@1x.png" alt />
+          <img src="../../assets/img/logo1@1x.png" style="margin-left: 20px;margin-right: 10px;" alt />
+          <img src="../../assets/img/logo2@1x.png" alt />
         </a>
         <a class="site-navbar__brand-mini" href="javascript:;">
-          <img src="../assets/img/logo1@1x.png" alt />
+          <img src="../../assets/img/logo1@1x.png" alt />
         </a>
       </h1>
     </div>
@@ -45,76 +52,76 @@
 </template>
 
 <script>
-import UpdatePassword from "./main-navbar-update-password";
-import { clearLoginInfo } from "@/utils";
+import UpdatePassword from './main-navbar-update-password'
+import { clearLoginInfo } from '@/utils'
 export default {
-  data() {
+  data () {
     return {
-      updatePassowrdVisible: false,
-    };
+      updatePassowrdVisible: false
+    }
   },
   components: {
     UpdatePassword
   },
   computed: {
     navbarLayoutType: {
-      get() {
-        return this.$store.state.common.navbarLayoutType;
+      get () {
+        return this.$store.state.common.navbarLayoutType
       }
     },
     sidebarFold: {
-      get() {
-        return this.$store.state.common.sidebarFold;
+      get () {
+        return this.$store.state.common.sidebarFold
       },
-      set(val) {
-        this.$store.commit("common/updateSidebarFold", val);
+      set (val) {
+        this.$store.commit('common/updateSidebarFold', val)
       }
     },
     mainTabs: {
-      get() {
-        return this.$store.state.common.mainTabs;
+      get () {
+        return this.$store.state.common.mainTabs
       },
-      set(val) {
-        this.$store.commit("common/updateMainTabs", val);
+      set (val) {
+        this.$store.commit('common/updateMainTabs', val)
       }
     },
     userName: {
-      get() {
-        return this.$store.state.user.name;
+      get () {
+        return this.$store.state.user.name
       }
     }
   },
   methods: {
     // 修改密码
-    updatePasswordHandle() {
-      this.updatePassowrdVisible = true;
+    updatePasswordHandle () {
+      this.updatePassowrdVisible = true
       this.$nextTick(() => {
-        this.$refs.updatePassowrd.init();
-      });
+        this.$refs.updatePassowrd.init()
+      })
     },
     // 退出
-    logoutHandle() {
-      this.$confirm(`确定进行[退出]操作?`, "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
+    logoutHandle () {
+      this.$confirm(`确定进行[退出]操作?`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       })
         .then(() => {
           this.$http({
-            url: this.$http.adornUrl("/sys/logout"),
-            method: "post",
+            url: this.$http.adornUrl('/sys/logout'),
+            method: 'post',
             data: this.$http.adornData()
           }).then(({ data }) => {
             if (data && data.code === 0) {
-              clearLoginInfo();
-              this.$router.push({ name: "login" });
+              clearLoginInfo()
+              this.$router.push({ name: 'login' })
             }
-          });
+          })
         })
-        .catch(() => {});
+        .catch(() => {})
     }
   }
-};
+}
 </script>
 <style scoped>
 

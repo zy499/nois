@@ -323,8 +323,6 @@ img {
 ------------------------------ */
 .site-content {
   position: relative;
-  padding: 40px 30px;
-
   &__wrapper {
     position: relative;
     padding-top: 50px;
@@ -353,7 +351,7 @@ img {
       }
     }
     > .el-tabs__content {
-      padding: 0 15px 15px;
+      padding: 30px 30px;
       > .site-tabs__tools {
         position: fixed;
         top: 50px;
