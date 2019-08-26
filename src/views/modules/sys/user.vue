@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 21:21:06
  * @LastEditors: zy
- * @LastEditTime: 2019-08-25 15:55:54
+ * @LastEditTime: 2019-08-26 22:28:47
  -->
 <template>
   <div class="mod-user">
@@ -79,7 +79,7 @@
     <el-dialog title="预计今日" :visible.sync="dialogVisible" width="60%">
       <div class="dialog-top">
         <el-row :gutter="20">
-          <el-col :span="4">
+          <el-col :span="6">
             <p class="goOn margin-none">线网出行量</p>
             <h4 class="num margin-none">3,024,162</h4>
           </el-col>
@@ -91,7 +91,7 @@
             <p class="goOn margin-none">线网换乘量</p>
             <h4 class="num margin-none">3,024,162</h4>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <p class="goOn margin-none">线网客运量</p>
             <h4 class="num margin-none">3,024,162</h4>
           </el-col>
