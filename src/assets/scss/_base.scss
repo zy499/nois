@@ -322,12 +322,11 @@ img {
 /* Content
 ------------------------------ */
 .site-content {
-  position: relative;
   &__wrapper {
     position: relative;
     padding-top: 50px;
     margin-left: 230px;
-    min-height: 100%;
+    height: 100%;
     background: $content--background-color;
   }
   &--tabs {
@@ -351,7 +350,7 @@ img {
       }
     }
     > .el-tabs__content {
-      padding: 30px 30px;
+      padding: 0 15px;
       > .site-tabs__tools {
         position: fixed;
         top: 50px;
