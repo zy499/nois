@@ -387,7 +387,7 @@ var dataList = [
 ]
 var navDataList = [
   {
-    'menuId': 1,
+    'menuId': 999,
     'parentId': 0,
     'parentName': null,
     'name': '客流监测与预警',
@@ -396,8 +396,8 @@ var navDataList = [
     'type': 0,
     'icon': 'shouye',
     'orderNum': 0,
-    'open': null
-    // 'list': null
+    'open': null,
+    'list': null
   },
   {
     'menuId': 1,

@@ -37,3 +37,8 @@
 .align-items-center {
   align-items: center;
 }
+
+// element 重置样式
+.el-table::before {
+  height: 0;
+}

@@ -75,93 +75,7 @@
         <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
       </div>
       <div class="cont">
-        <el-row :gutter="20">
-          <el-row :gutter="20">
-            <el-col :span="2">&nbsp;</el-col>
-            <el-col :span="22">
-              <el-row :gutter="20">
-                <el-col :span="6">
-                  <p>现网出行量</p>
-                  <h4>1,3352,977</h4>
-                </el-col>
-                <el-col :span="4">
-                  <p>现网出行量</p>
-                  <h4>1,3352,977</h4>
-                </el-col>
-                <el-col :span="4">
-                  <p>现网出行量</p>
-                  <h4>1,3352,977</h4>
-                </el-col>
-                <el-col :span="4">
-                  <p>现网出行量</p>
-                  <h4>1,3352,977</h4>
-                </el-col>
-                <el-col :span="4">
-                  <p>现网出行量</p>
-                  <h4>1,3352,977</h4>
-                </el-col>
-              </el-row>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" style="marginTop:10px;margin-bottom:10px">
-            <el-col :span="2">
-              <p class="estimate">预计今日</p>
-            </el-col>
-            <el-col :span="22">
-              <el-row :gutter="20">
-                <el-col :span="6">
-                  <h5>1,3352555555,977</h5>
-                </el-col>
-                <el-col :span="4">
-                  <h5>1,3352,977</h5>
-                </el-col>
-                <el-col :span="4">
-                  <h5>1,3352,977</h5>
-                </el-col>
-                <el-col :span="4">
-                  <h5>1,3352,977</h5>
-                </el-col>
-                <el-col :span="4">
-                  <h5>1,3352,977</h5>
-                </el-col>
-              </el-row>
-            </el-col>
-          </el-row>
-          <div>
-            <el-table :data="tableData" stripe style="width: 100%;padding-left:10px;font-size:10px" :show-header='false'>
-              <el-table-column prop="name" label="名称"  align="left" width="160"></el-table-column>
-              <el-table-column prop="xwcxl" label="线网出行量" align="right" width="172"></el-table-column>
-              <el-table-column prop="xwczl" label="线网出站量" width="172"></el-table-column>
-               <el-table-column prop="xwhxl" label="线网换行量" width="172"></el-table-column>
-                <el-table-column prop="xwkyl" label="线网客运量" width="172"></el-table-column>
-                 <el-table-column prop="xwzxrs" label="线网在网人数" align="right" width="172"></el-table-column>
-            </el-table>
-          </div>
-          <!-- <el-col :span="20" :offset="2">
-            <el-row type="flex" justify="space-between">
-              <el-col>
-                <p>现网出行量</p>
-                <h4>1,3352,977</h4>
-              </el-col>
-              <el-col>
-                <p>现网出行量</p>
-                <h4>1,3352,977</h4>
-              </el-col>
-              <el-col>
-                <p>现网出行量</p>
-                <h4>1,3352,977</h4>
-              </el-col>
-              <el-col>
-                <p>现网出行量</p>
-                <h4>1,3352,977</h4>
-              </el-col>
-              <el-col>
-                <p>现网出行量</p>
-                <h4>1,3352,977</h4>
-              </el-col>
-            </el-row>
-          </el-col>-->
-        </el-row>
+        <LintTable />
       </div>
     </el-card>
     <!-- content end -->
@@ -170,7 +84,11 @@
 
 <script>
 import { parseTime } from '@/utils'
+import LintTable from '@/components/passengerWarning/LineTable'
 export default {
+  components: {
+    LintTable
+  },
   data () {
     return {
       xianwang_option: [
@@ -225,41 +143,7 @@ export default {
       date_val: '1',
       yj_biaoge_date: '',
       yj_biaoge_tag: '实时',
-      yj_biaoge_title: '线网指标',
-      tableData: [
-        {
-          name: '上周同期',
-          xwcxl: '1,491,781',
-          xwczl: '1,491,781',
-          xwhxl: '1,491,781',
-          xwkyl: '1,491,781',
-          xwzxrs: '1,491,781'
-        },
-        {
-          name: '月日均值',
-          xwcxl: '1,491,781',
-          xwczl: '1,491,781',
-          xwhxl: '1,491,781',
-          xwkyl: '1,491,781',
-          xwzxrs: '1,491,781'
-        },
-        {
-          name: '峰值',
-          xwcxl: '1,491,781',
-          xwczl: '1,491,781',
-          xwhxl: '1,491,781',
-          xwkyl: '1,491,781',
-          xwzxrs: '1,491,781'
-        },
-        {
-          name: '年累计',
-          xwcxl: '1,491,781',
-          xwczl: '1,491,781',
-          xwhxl: '1,491,781',
-          xwkyl: '1,491,781',
-          xwzxrs: '1,491,781'
-        }
-      ]
+      yj_biaoge_title: '线网指标'
     }
   },
   mounted () {
@@ -294,19 +178,16 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
-p {
-  padding: 0;
-}
-h4 {
-  margin: 0;
-}
 .passengerFlowWaringBody {
+  p {
+    margin: 0;
+  }
+  font-family: Roboto-regular;
   .header {
     .header-body {
       .title {
         color: #101010;
         font-size: 20px;
-        font-family: Roboto-regular;
         margin-bottom: 10px;
       }
       /deep/ .el-select--medium {
@@ -337,62 +218,41 @@ h4 {
   .yujingbiaoge {
     min-height: 272px;
     /deep/ .el-card__header {
+      padding-bottom: 0;
       border-bottom: none;
     }
     .yj_biaoge_title {
       color: rgba(16, 16, 16, 1);
       font-size: 16px;
       text-align: left;
-      font-family: Roboto-regular;
       margin-right: 30px;
     }
     .yj_biaoge_date {
       color: rgba(16, 16, 16, 0.5);
       font-size: 12px;
       text-align: left;
-      font-family: Roboto-regular;
       margin-right: 10px;
     }
     .yj_biaoge_tag {
       min-width: 70px;
       text-align: center;
     }
-    .cont {
-      text-align: right;
-      p {
-        margin: 10px 0;
-      }
-      h4 {
-        font-size: 16px;
-        font-weight: 800;
-      }
-      h5 {
-        font-weight: 200;
-        margin: 10px 0;
-        color: red;
-      }
-      .estimate {
-        text-decoration: underline;
-      }
-    }
   }
-  p {
-    margin: 0;
+  .text-decoration {
+    text-decoration:underline;
+    cursor: pointer;
   }
   .keliu-title-Font {
     color: rgba(16, 16, 16, 0.5);
     font-size: 12px;
-    font-family: Roboto-regular;
   }
   .tianqiFont {
     color: rgba(16, 16, 16, 0.5);
     font-size: 12px;
-    font-family: Roboto-regular;
   }
   .pub-yujing-font {
     color: rgba(16, 16, 16, 1);
     font-size: 14px;
-    font-family: Roboto-regular;
   }
 }
 </style>
