@@ -18,6 +18,7 @@ const http = axios.create({
  */
 http.interceptors.request.use(config => {
   config.headers['token'] = Vue.cookie.get('token') // 请求头带上token
+  config.headers['timestamp'] = new Date()
   return config
 }, error => {
   return Promise.reject(error)
@@ -50,7 +51,7 @@ http.adornUrl = (actionName) => {
  * @param {*} params 参数对象
  * @param {*} openDefultParams 是否开启默认参数?
  */
-http.adornParams = (params = {}, openDefultParams = true) => {
+http.adornParams = (params = {}, openDefultParams = false) => {
   var defaults = {
     't': new Date().getTime()
   }
@@ -65,7 +66,7 @@ http.adornParams = (params = {}, openDefultParams = true) => {
  *  json: 'application/json; charset=utf-8'
  *  form: 'application/x-www-form-urlencoded; charset=utf-8'
  */
-http.adornData = (data = {}, openDefultdata = true, contentType = 'json') => {
+http.adornData = (data = {}, openDefultdata = false, contentType = 'json') => {
   var defaults = {
     't': new Date().getTime()
   }

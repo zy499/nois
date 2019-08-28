@@ -75,54 +75,11 @@
     ></el-pagination>
     <!-- 弹窗, 新增 / 修改 -->
     <add-or-update v-if="addOrUpdateVisible" ref="addOrUpdate" @refreshDataList="getDataList"></add-or-update>
-    <el-button @click="openDialog">按钮</el-button>
-    <el-dialog title="预计今日" :visible.sync="dialogVisible" width="60%">
-      <div class="dialog-top">
-        <el-row :gutter="20">
-          <el-col :span="6">
-            <p class="goOn margin-none">线网出行量</p>
-            <h4 class="num margin-none">3,024,162</h4>
-          </el-col>
-          <el-col :span="6">
-            <p class="goOn margin-none">线网出站量</p>
-            <h4 class="num margin-none">3,024,162</h4>
-          </el-col>
-          <el-col :span="6">
-            <p class="goOn margin-none">线网换乘量</p>
-            <h4 class="num margin-none">3,024,162</h4>
-          </el-col>
-          <el-col :span="6">
-            <p class="goOn margin-none">线网客运量</p>
-            <h4 class="num margin-none">3,024,162</h4>
-          </el-col>
-        </el-row>
-      </div>
-      <div style="border: 0.5px solid gray;marginTop:30px"></div>
-      <div class="dialog-main">
-        <div>
-          <span>维度</span>
-          <el-select v-model="value" placeholder="请选择">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-        </div>
-        <div class="charts">
-          <p>09.24之后为测试数据</p>
-          <LineEchart />
-          <!-- <div id="chartLineBox" class="chart-box"></div> -->
-        </div>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
 <script>
 import AddOrUpdate from './user-add-or-update'
-import LineEchart from '@/components/echarts/line'
 export default {
   data () {
     return {
@@ -143,8 +100,7 @@ export default {
     }
   },
   components: {
-    AddOrUpdate,
-    LineEchart
+    AddOrUpdate
   },
   activated () {
     this.getDataList()
@@ -234,49 +190,10 @@ export default {
           })
         })
         .catch(() => {})
-    },
-    // 打开窗口
-    openDialog () {
-      this.dialogVisible = true
     }
-  },
-  mounted () {
-    // this.initChartLine();
   }
 }
 </script>
 <style lang="scss" scoped>
-.margin-none {
-  margin: 0;
-}
-.dialog-top {
-  padding: 0 30px;
-  .goOn {
-    text-align: right;
-    font-size: 12px;
-  }
-  .num {
-    text-align: right;
-    font-size: 16px;
-  }
-}
-.dialog-main {
-  margin: 20px 0px;
-  span {
-    font-size: 12px;
-  }
-  /deep/ .el-input__inner {
-    height: 24px;
-    font-size: 8px;
-    line-height: 24px;
-  }
-  .charts {
-    .chart-box {
-      min-height: 400px;
-    }
-    p {
-      font-size: 12px;
-    }
-  }
-}
+
 </style>

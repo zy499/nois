@@ -60,11 +60,17 @@
         </template>
       </el-table-column>
     </el-table>
+    <!-- 今日预计弹窗 -->
+    <TodayEstimate :isShow="isShow" @closeDialogFather="getSonCancel" />
   </div>
 </template>
 
 <script>
+import TodayEstimate from '@/components/passengerWarning/TodayEstimate'
 export default {
+  components: {
+    TodayEstimate
+  },
   data () {
     return {
       tableData: [
@@ -115,12 +121,16 @@ export default {
           xwkyl: '1,248,420,112',
           xwzxrs: '1,248,420,112'
         }
-      ]
+      ],
+      isShow: false
     }
   },
   methods: {
     openJryj () {
-      alert(1)
+      this.isShow = true
+    },
+    getSonCancel (val) {
+      this.isShow = val
     }
   }
 }
@@ -153,6 +163,10 @@ export default {
         }
       }
     }
+  }
+  .text-decoration {
+    text-decoration:underline;
+    cursor: pointer; 
   }
 }
 </style>

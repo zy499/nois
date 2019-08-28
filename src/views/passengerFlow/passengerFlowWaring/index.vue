@@ -68,9 +68,9 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-card class="yujingbiaoge">
+    <el-card class="yujingbiaoge margin-bottom30">
       <div slot="header">
-        <span class="yj_biaoge_title">{{yj_biaoge_title}}</span>
+        <span class="yj_biaoge_title">{{yj_biaoge_title}}指标</span>
         <span class="yj_biaoge_date">{{yj_biaoge_date}}</span>
         <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
       </div>
@@ -78,6 +78,130 @@
         <LintTable />
       </div>
     </el-card>
+    <el-row class="xianwang_map_box margin-bottom30" type="flex" justify="space-between">
+      <el-col :span="15">
+        <el-card style="min-height:600px">
+          <div slot="header">
+            <span class="yj_biaoge_title">线网地图</span>
+            <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
+          </div>
+          <div class="xianwang_map_cont"></div>
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card style="min-height:600px">
+          <div slot="header">
+            <span class="yj_biaoge_title">线路客流排名</span>
+            <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
+          </div>
+          <el-tabs v-model="activeName" class="xianwang_keliu_cont">
+            <el-tab-pane label="进站量" name="first">
+              <ul>
+                <li v-for="item in xianlukeliu_options" :key="item.id" class="flexStart justify-content-space-between">
+                  <div class="flexStart">
+                    <el-tag type="info" class="margin_right_10">{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
+                    <div>
+                      <p class="font-size12 font_weight_bold padding-bottom2">{{item.name}}</p>
+                      <div class="flexStart font-size12 corol_909399">
+                        <span class="margin_right_10">客运量：{{item.keyunliang}}</span>
+                        <span>⬆️</span>
+                        <span>{{item.shangshen}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <el-tag type="info" style="min-width: 80px;font-size: 16px;text-align: center;background-color:#ccc">{{item.name}}</el-tag>
+                </li>
+              </ul>
+            </el-tab-pane>
+            <el-tab-pane label="出站量" name="second">
+              <ul>
+                <li v-for="item in xianlukeliu_options" :key="item.id" class="flexStart justify-content-space-between">
+                  <div class="flexStart">
+                    <el-tag type="info" class="margin_right_10">{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
+                    <div>
+                      <p class="font-size12 font_weight_bold padding-bottom2">{{item.name}}</p>
+                      <div class="flexStart font-size12 corol_909399">
+                        <span class="margin_right_10">客运量：{{item.keyunliang}}</span>
+                        <span>⬆️</span>
+                        <span>{{item.shangshen}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <el-tag type="info" style="min-width: 80px;font-size: 16px;text-align: center;background-color:#ccc">{{item.name}}</el-tag>
+                </li>
+              </ul>
+            </el-tab-pane>
+            <el-tab-pane label="换乘量" name="third">
+              <ul>
+                <li v-for="item in xianlukeliu_options" :key="item.id" class="flexStart justify-content-space-between">
+                  <div class="flexStart">
+                    <el-tag type="info" class="margin_right_10">{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
+                    <div>
+                      <p class="font-size12 font_weight_bold padding-bottom2">{{item.name}}</p>
+                      <div class="flexStart font-size12 corol_909399">
+                        <span class="margin_right_10">客运量：{{item.keyunliang}}</span>
+                        <span>⬆️</span>
+                        <span>{{item.shangshen}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <el-tag type="info" style="min-width: 80px;font-size: 16px;text-align: center;background-color:#ccc">{{item.name}}</el-tag>
+                </li>
+              </ul>
+            </el-tab-pane>
+            <el-tab-pane label="换乘量" name="fourth">
+              <ul>
+                <li v-for="item in xianlukeliu_options" :key="item.id" class="flexStart justify-content-space-between">
+                  <div class="flexStart">
+                    <el-tag type="info" class="margin_right_10">{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
+                    <div>
+                      <p class="font-size12 font_weight_bold padding-bottom2">{{item.name}}</p>
+                      <div class="flexStart font-size12 corol_909399">
+                        <span class="margin_right_10">客运量：{{item.keyunliang}}</span>
+                        <span>⬆️</span>
+                        <span>{{item.shangshen}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <el-tag type="info" style="min-width: 80px;font-size: 16px;text-align: center;background-color:#ccc">{{item.name}}</el-tag>
+                </li>
+              </ul>
+            </el-tab-pane>
+          </el-tabs>
+        </el-card>
+      </el-col>
+    </el-row>
+    <el-row type="flex" justify="space-between">
+      <el-col :span="7">
+        <el-card style="min-height:456px">
+          <div slot="header">
+            <span class="yj_biaoge_title">{{yj_biaoge_title}}车站客流排名</span>
+            <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
+          </div>
+          <el-tabs v-model="activeName">
+            <el-tab-pane label="进站量" name="first">进站量</el-tab-pane>
+            <el-tab-pane label="出站量" name="second">配置管理</el-tab-pane>
+            <el-tab-pane label="换乘量" name="third">角色管理</el-tab-pane>
+          </el-tabs>
+        </el-card>
+      </el-col>
+      <el-col :span="7">
+        <el-card style="min-height:456px">
+          <div slot="header">
+            <span class="yj_biaoge_title">{{yj_biaoge_title}}断面最大拥挤度</span>
+            <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card style="min-height:456px">
+          <div slot="header">
+            <span class="yj_biaoge_title">{{yj_biaoge_title}}断面客流量排名</span>
+            <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
     <!-- content end -->
   </div>
 </template>
@@ -91,6 +215,7 @@ export default {
   },
   data () {
     return {
+      activeName: 'first',
       xianwang_option: [
         {
           label: '线网',
@@ -139,6 +264,44 @@ export default {
           value: '4'
         }
       ],
+      xianlukeliu_options: [
+        {
+          id: '1',
+          name: '1号线',
+          keyunliang: '9,19,233',
+          shangshen: '3.7%'
+        },
+        {
+          id: '2',
+          name: '2号线',
+          keyunliang: '9,19,233',
+          shangshen: '3.7%'
+        },
+        {
+          id: '3',
+          name: '3号线',
+          keyunliang: '9,19,233',
+          shangshen: '3.7%'
+        },
+        {
+          id: '7',
+          name: '7号线',
+          keyunliang: '9,19,233',
+          shangshen: '3.7%'
+        },
+        {
+          id: '10',
+          name: '10号线',
+          keyunliang: '9,19,233',
+          shangshen: '3.7%'
+        },
+        {
+          id: '4',
+          name: '4号线',
+          keyunliang: '9,19,233',
+          shangshen: '3.7%'
+        }
+      ],
       xianwang_val: '1',
       date_val: '1',
       yj_biaoge_date: '',
@@ -170,7 +333,7 @@ export default {
     changeTitle (val) {
       this.xianwang_option.forEach(item => {
         if (item['value'] === val) {
-          this.yj_biaoge_title = item['label'] + '指标'
+          this.yj_biaoge_title = item['label']
         }
       })
     }
@@ -215,12 +378,15 @@ export default {
       }
     }
   }
+  /deep/ .el-card__header {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  /deep/ .el-tabs__header {
+    border-left: none;
+  }
   .yujingbiaoge {
     min-height: 272px;
-    /deep/ .el-card__header {
-      padding-bottom: 0;
-      border-bottom: none;
-    }
     .yj_biaoge_title {
       color: rgba(16, 16, 16, 1);
       font-size: 16px;
@@ -238,8 +404,24 @@ export default {
       text-align: center;
     }
   }
+  .xianwang_map_box {
+    height: 600px;
+    .xianwang_map_cont {
+      height: 500px;
+      background-color: #f1f4f5;
+    }
+  }
+  .xianwang_keliu_cont {
+    ul {
+      padding: 0;
+      li {
+        list-style: none;
+        margin-bottom: 20px;
+      }
+    }
+  }
   .text-decoration {
-    text-decoration:underline;
+    text-decoration: underline;
     cursor: pointer;
   }
   .keliu-title-Font {

@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import md5 from 'js-md5'
+import { Base64 } from 'js-base64'
 export default {
   data () {
     return {
@@ -71,13 +73,12 @@ export default {
     dataFormSubmit () {
       this.$refs['dataForm'].validate(valid => {
         if (valid) {
-          // console.log(this.$http.adornUrl('/sys/login'))
           this.$http({
             url: this.$http.adornUrl('sys/login'),
             method: 'post',
             data: this.$http.adornData({
               username: this.dataForm.userName,
-              password: this.dataForm.password
+              password: Base64.encode(md5(this.dataForm.password) + ';' + new Date())
             })
           }).then(({ data }) => {
             if (data && data.code === 0) {
