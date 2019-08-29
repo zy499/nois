@@ -386,19 +386,19 @@ var dataList = [
   }
 ]
 var navDataList = [
-  {
-    'menuId': 999,
-    'parentId': 0,
-    'parentName': null,
-    'name': '客流监测与预警',
-    'url': 'passengerFlow/passengerFlowWaring/index',
-    'perms': null,
-    'type': 0,
-    'icon': 'shouye',
-    'orderNum': 0,
-    'open': null,
-    'list': null
-  },
+  // {
+  //   'menuId': 999,
+  //   'parentId': 0,
+  //   'parentName': null,
+  //   'name': '客流监测与预警',
+  //   'url': 'passengerFlow/passengerFlowWaring/index',
+  //   'perms': null,
+  //   'type': 0,
+  //   'icon': 'shouye',
+  //   'orderNum': 0,
+  //   'open': null,
+  //   'list': null
+  // },
   {
     'menuId': 1,
     'parentId': 0,

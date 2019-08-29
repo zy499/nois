@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import md5 from 'js-md5'
-import { Base64 } from 'js-base64'
+// import md5 from 'js-md5'
+// import { Base64 } from 'js-base64'
 export default {
   data () {
     return {
@@ -78,7 +78,8 @@ export default {
             method: 'post',
             data: this.$http.adornData({
               username: this.dataForm.userName,
-              password: Base64.encode(md5(this.dataForm.password) + ';' + new Date())
+              // password: Base64.encode(md5(this.dataForm.password) + ';' + new Date())
+              password: this.dataForm.password
             })
           }).then(({ data }) => {
             if (data && data.code === 0) {

@@ -27,7 +27,33 @@ const globalRoutes = [
   { path: '/404', component: _import('common/404'), name: '404', meta: { title: '404未找到' } },
   { path: '/login', component: _import('common/login'), name: 'login', meta: { title: '登录' } }
 ]
-
+// const mainBox = {
+//   path: '/',
+//   component: _import('layout/main'),
+//   name: 'main',
+//   redirect: { name: 'home' },
+//   meta: { title: '主入口整体布局' },
+//   children: [
+//     // 通过meta对象设置路由展示方式
+//     // 1. isTab: 是否通过tab展示内容, true: 是, false: 否
+//     // 2. iframeUrl: 是否通过iframe嵌套展示内容, '以http[s]://开头': 是, '': 否
+//     // 提示: 如需要通过iframe嵌套展示内容, 但不通过tab打开, 请自行创建组件使用iframe处理!
+//     { path: '/home', component: _import('common/home'), name: 'home', meta: { title: '首页' } },
+//     { path: '/theme', component: _import('common/theme'), name: 'theme', meta: { title: '主题' } },
+//     { path: '/demo-echarts', component: _import('demo/echarts'), name: 'demo-echarts', meta: { title: 'demo-echarts', isTab: true } },
+//     { path: '/demo-ueditor', component: _import('demo/ueditor'), name: 'demo-ueditor', meta: { title: 'demo-ueditor', isTab: true } },
+//     { path: '/demo-d3', component: _import('demo/d3'), name: 'demo-d3', meta: { title: 'demo-d3', isTab: true } },
+//     { path: '/passengerFlowWaring', component: _import('passengerFlow/passengerFlowWaring/index'), name: 'passengerFlowWaring', meta: { title: '客流监测与预警', isTab: true } }
+//   ],
+//   beforeEnter (to, from, next) {
+//     let token = Vue.cookie.get('token')
+//     if (!token || !/\S/.test(token)) {
+//       clearLoginInfo()
+//       next({ name: 'login' })
+//     }
+//     next()
+//   }
+// }
 // 主入口路由(需嵌套上左右整体布局)
 const mainRoutes = {
   path: '/',
@@ -36,15 +62,30 @@ const mainRoutes = {
   redirect: { name: 'home' },
   meta: { title: '主入口整体布局' },
   children: [
-    // 通过meta对象设置路由展示方式
-    // 1. isTab: 是否通过tab展示内容, true: 是, false: 否
-    // 2. iframeUrl: 是否通过iframe嵌套展示内容, '以http[s]://开头': 是, '': 否
-    // 提示: 如需要通过iframe嵌套展示内容, 但不通过tab打开, 请自行创建组件使用iframe处理!
-    { path: '/home', component: _import('common/home'), name: 'home', meta: { title: '首页' } },
-    { path: '/theme', component: _import('common/theme'), name: 'theme', meta: { title: '主题' } },
-    { path: '/demo-echarts', component: _import('demo/echarts'), name: 'demo-echarts', meta: { title: 'demo-echarts', isTab: true } },
-    { path: '/demo-ueditor', component: _import('demo/ueditor'), name: 'demo-ueditor', meta: { title: 'demo-ueditor', isTab: true } },
-    { path: '/demo-d3', component: _import('demo/d3'), name: 'demo-d3', meta: { title: 'demo-d3', isTab: true } }
+    {
+      path: '/mainCont',
+      component: _import('layout/mainSidebarCont'),
+      name: 'mainCont',
+      meta: { title: '整体' },
+      children: [
+        // 通过meta对象设置路由展示方式
+        // 1. isTab: 是否通过tab展示内容, true: 是, false: 否
+        // 2. iframeUrl: 是否通过iframe嵌套展示内容, '以http[s]://开头': 是, '': 否
+        // 提示: 如需要通过iframe嵌套展示内容, 但不通过tab打开, 请自行创建组件使用iframe处理!
+        { path: '/home', component: _import('common/home'), name: 'home', meta: { title: '首页' } },
+        { path: '/theme', component: _import('common/theme'), name: 'theme', meta: { title: '主题' } },
+        { path: '/demo-echarts', component: _import('demo/echarts'), name: 'demo-echarts', meta: { title: 'demo-echarts', isTab: true } },
+        { path: '/demo-ueditor', component: _import('demo/ueditor'), name: 'demo-ueditor', meta: { title: 'demo-ueditor', isTab: true } },
+        { path: '/demo-d3', component: _import('demo/d3'), name: 'demo-d3', meta: { title: 'demo-d3', isTab: true } },
+        { path: '/passengerFlowWaring', component: _import('passengerFlow/passengerFlowWaring/index'), name: 'passengerFlowWaring', meta: { title: '客流监测与预警', isTab: true } }
+      ]
+    },
+    {
+      path: '/test',
+      component: _import('layout/test'),
+      name: 'test',
+      meta: { title: 'test' }
+    }
   ],
   beforeEnter (to, from, next) {
     let token = Vue.cookie.get('token')
@@ -55,14 +96,12 @@ const mainRoutes = {
     next()
   }
 }
-
 const router = new Router({
   mode: 'hash',
   scrollBehavior: () => ({ y: 0 }),
   isAddDynamicMenuRoutes: false, // 是否已经添加动态(菜单)路由
   routes: globalRoutes.concat(mainRoutes)
 })
-
 router.beforeEach((to, from, next) => {
   // 添加动态(菜单)路由
   // 1. 已经添加 or 全局路由, 直接访问
@@ -74,7 +113,7 @@ router.beforeEach((to, from, next) => {
       url: http.adornUrl('/sys/menu/nav'),
       method: 'get',
       params: http.adornParams()
-    }).then(({data}) => {
+    }).then(({ data }) => {
       if (data && data.code === 0) {
         fnAddDynamicMenuRoutes(data.menuList)
         router.options.isAddDynamicMenuRoutes = true
@@ -103,7 +142,8 @@ function fnCurrentRouteType (route, globalRoutes = []) {
     if (route.path === globalRoutes[i].path) {
       return 'global'
     } else if (globalRoutes[i].children && globalRoutes[i].children.length >= 1) {
-      temp = temp.concat(globalRoutes[i].children)
+      // debugger
+      temp = temp.concat(globalRoutes[i].children[0].children)
     }
   }
   return temp.length >= 1 ? fnCurrentRouteType(route, temp) : 'main'
@@ -141,7 +181,7 @@ function fnAddDynamicMenuRoutes (menuList = [], routes = []) {
       } else {
         try {
           route['component'] = _import(`${menuList[i].url}`) || null
-        } catch (e) {}
+        } catch (e) { }
       }
       routes.push(route)
     }
@@ -150,15 +190,16 @@ function fnAddDynamicMenuRoutes (menuList = [], routes = []) {
     fnAddDynamicMenuRoutes(temp, routes)
   } else {
     mainRoutes.name = 'main-dynamic'
-    mainRoutes.children = routes
+    mainRoutes.children[0].children = routes
     router.addRoutes([
       mainRoutes,
       { path: '*', redirect: { name: '404' } }
     ])
-    sessionStorage.setItem('dynamicMenuRoutes', JSON.stringify(mainRoutes.children || '[]'))
+    console.log(mainRoutes.children[0].children)
+    sessionStorage.setItem('dynamicMenuRoutes', JSON.stringify(mainRoutes.children[0].children || '[]'))
     console.log('\n')
     console.log('%c!<-------------------- 动态(菜单)路由 s -------------------->', 'color:blue')
-    console.log(mainRoutes.children)
+    console.log(mainRoutes.children[0].children)
     console.log('%c!<-------------------- 动态(菜单)路由 e -------------------->', 'color:blue')
   }
 }

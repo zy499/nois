@@ -35,6 +35,10 @@
             <span slot="title">d3</span>
           </el-menu-item>
         </el-submenu>
+        <el-menu-item index="passengerFlowWaring" @click="$router.push({ name: 'passengerFlowWaring' })">
+          <icon-svg name="shouye" class="site-sidebar__menu-icon"></icon-svg>
+          <span slot="title">客流监测与预警</span>
+        </el-menu-item>
         <sub-menu
           v-for="menu in menuList"
           :key="menu.menuId"

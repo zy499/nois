@@ -179,7 +179,24 @@
             <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
           </div>
           <el-tabs v-model="activeName">
-            <el-tab-pane label="进站量" name="first">进站量</el-tab-pane>
+            <el-tab-pane label="进站量" name="first">
+                  <ul>
+                <li v-for="item in xianlukeliu_options" :key="item.id" class="flexStart justify-content-space-between">
+                  <div class="flexStart">
+                    <el-tag type="info" class="margin_right_10">{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
+                    <div>
+                      <p class="font-size12 font_weight_bold padding-bottom2">{{item.name}}</p>
+                      <div class="flexStart font-size12 corol_909399">
+                        <span class="margin_right_10">客运量：{{item.keyunliang}}</span>
+                        <span>⬆️</span>
+                        <span>{{item.shangshen}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <el-tag type="info" style="min-width: 80px;font-size: 16px;text-align: center;background-color:#ccc">{{item.name}}</el-tag>
+                </li>
+              </ul>
+            </el-tab-pane>
             <el-tab-pane label="出站量" name="second">配置管理</el-tab-pane>
             <el-tab-pane label="换乘量" name="third">角色管理</el-tab-pane>
           </el-tabs>
@@ -203,6 +220,7 @@
       </el-col>
     </el-row>
     <!-- content end -->
+    <el-button type="primary" @click="test">test</el-button>
   </div>
 </template>
 
@@ -322,6 +340,9 @@ export default {
     }
   },
   methods: {
+    test () {
+      this.$router.push({name: 'test'})
+    },
     changeDate (val) {
       const item = this.date_option.filter(item => {
         if (item.value === val) {

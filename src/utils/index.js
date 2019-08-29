@@ -59,7 +59,7 @@ export function clearLoginInfo () {
 
 /**
  *
- * @param {*} time 时间戳或者实践对象
+ * @param {*} time 时间戳或者时间对象
  * @param {*} fm 格式 默认是{y}-{m}-{d} {h}:{i}:{s}
  */
 export function parseTime (time, fm) {

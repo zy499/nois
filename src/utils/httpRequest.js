@@ -18,7 +18,6 @@ const http = axios.create({
  */
 http.interceptors.request.use(config => {
   config.headers['token'] = Vue.cookie.get('token') // 请求头带上token
-  config.headers['timestamp'] = new Date()
   return config
 }, error => {
   return Promise.reject(error)
