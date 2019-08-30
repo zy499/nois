@@ -16,7 +16,7 @@ import Router from 'vue-router'
 import http from '@/utils/httpRequest'
 import { isURL } from '@/utils/validate'
 import { clearLoginInfo } from '@/utils'
-
+import store from '@/store/index'
 Vue.use(Router)
 
 // 开发环境不使用懒加载, 因为懒加载页面太多的话会造成webpack热更新太慢, 所以只有生产环境使用懒加载
@@ -25,36 +25,29 @@ const _import = require('./import-' + process.env.NODE_ENV)
 // 全局路由(无需嵌套上左右整体布局)
 const globalRoutes = [
   { path: '/404', component: _import('common/404'), name: '404', meta: { title: '404未找到' } },
-  { path: '/login', component: _import('common/login'), name: 'login', meta: { title: '登录' } }
+  { path: '/login', component: _import('common/login'), name: 'login', meta: { title: '登录' } },
+  // 不嵌套左右布局 内链跳转路由
+  {
+    path: '/noSiderBar',
+    name: 'noSiderBar',
+    component: _import('layout/noSiderBar'),
+    children: [
+      {
+        path: '/test',
+        name: 'test',
+        component: _import('layout/test'),
+        meta: { tilte: '测试' }
+      },
+      // 地铁车站详情
+      {
+        path: '/stationDetails',
+        name: 'stationDetails',
+        component: _import('passengerFlow/station/stationDetails'),
+        meta: { tilte: '车站详情' }
+      }
+    ]
+  }
 ]
-// const mainBox = {
-//   path: '/',
-//   component: _import('layout/main'),
-//   name: 'main',
-//   redirect: { name: 'home' },
-//   meta: { title: '主入口整体布局' },
-//   children: [
-//     // 通过meta对象设置路由展示方式
-//     // 1. isTab: 是否通过tab展示内容, true: 是, false: 否
-//     // 2. iframeUrl: 是否通过iframe嵌套展示内容, '以http[s]://开头': 是, '': 否
-//     // 提示: 如需要通过iframe嵌套展示内容, 但不通过tab打开, 请自行创建组件使用iframe处理!
-//     { path: '/home', component: _import('common/home'), name: 'home', meta: { title: '首页' } },
-//     { path: '/theme', component: _import('common/theme'), name: 'theme', meta: { title: '主题' } },
-//     { path: '/demo-echarts', component: _import('demo/echarts'), name: 'demo-echarts', meta: { title: 'demo-echarts', isTab: true } },
-//     { path: '/demo-ueditor', component: _import('demo/ueditor'), name: 'demo-ueditor', meta: { title: 'demo-ueditor', isTab: true } },
-//     { path: '/demo-d3', component: _import('demo/d3'), name: 'demo-d3', meta: { title: 'demo-d3', isTab: true } },
-//     { path: '/passengerFlowWaring', component: _import('passengerFlow/passengerFlowWaring/index'), name: 'passengerFlowWaring', meta: { title: '客流监测与预警', isTab: true } }
-//   ],
-//   beforeEnter (to, from, next) {
-//     let token = Vue.cookie.get('token')
-//     if (!token || !/\S/.test(token)) {
-//       clearLoginInfo()
-//       next({ name: 'login' })
-//     }
-//     next()
-//   }
-// }
-// 主入口路由(需嵌套上左右整体布局)
 const mainRoutes = {
   path: '/',
   component: _import('layout/main'),
@@ -62,30 +55,16 @@ const mainRoutes = {
   redirect: { name: 'home' },
   meta: { title: '主入口整体布局' },
   children: [
-    {
-      path: '/mainCont',
-      component: _import('layout/mainSidebarCont'),
-      name: 'mainCont',
-      meta: { title: '整体' },
-      children: [
-        // 通过meta对象设置路由展示方式
-        // 1. isTab: 是否通过tab展示内容, true: 是, false: 否
-        // 2. iframeUrl: 是否通过iframe嵌套展示内容, '以http[s]://开头': 是, '': 否
-        // 提示: 如需要通过iframe嵌套展示内容, 但不通过tab打开, 请自行创建组件使用iframe处理!
-        { path: '/home', component: _import('common/home'), name: 'home', meta: { title: '首页' } },
-        { path: '/theme', component: _import('common/theme'), name: 'theme', meta: { title: '主题' } },
-        { path: '/demo-echarts', component: _import('demo/echarts'), name: 'demo-echarts', meta: { title: 'demo-echarts', isTab: true } },
-        { path: '/demo-ueditor', component: _import('demo/ueditor'), name: 'demo-ueditor', meta: { title: 'demo-ueditor', isTab: true } },
-        { path: '/demo-d3', component: _import('demo/d3'), name: 'demo-d3', meta: { title: 'demo-d3', isTab: true } },
-        { path: '/passengerFlowWaring', component: _import('passengerFlow/passengerFlowWaring/index'), name: 'passengerFlowWaring', meta: { title: '客流监测与预警', isTab: true } }
-      ]
-    },
-    {
-      path: '/test',
-      component: _import('layout/test'),
-      name: 'test',
-      meta: { title: 'test' }
-    }
+    // 通过meta对象设置路由展示方式
+    // 1. isTab: 是否通过tab展示内容, true: 是, false: 否
+    // 2. iframeUrl: 是否通过iframe嵌套展示内容, '以http[s]://开头': 是, '': 否
+    // 提示: 如需要通过iframe嵌套展示内容, 但不通过tab打开, 请自行创建组件使用iframe处理!
+    { path: '/home', component: _import('common/home'), name: 'home', meta: { title: '首页' } },
+    { path: '/theme', component: _import('common/theme'), name: 'theme', meta: { title: '主题' } },
+    { path: '/demo-echarts', component: _import('demo/echarts'), name: 'demo-echarts', meta: { title: 'demo-echarts', isTab: true } },
+    { path: '/demo-ueditor', component: _import('demo/ueditor'), name: 'demo-ueditor', meta: { title: 'demo-ueditor', isTab: true } },
+    { path: '/demo-d3', component: _import('demo/d3'), name: 'demo-d3', meta: { title: 'demo-d3', isTab: true } },
+    { path: '/passengerFlowWaring', component: _import('passengerFlow/passengerFlowWaring/index'), name: 'passengerFlowWaring', meta: { title: '客流监测与预警', isTab: true } }
   ],
   beforeEnter (to, from, next) {
     let token = Vue.cookie.get('token')
@@ -96,6 +75,48 @@ const mainRoutes = {
     next()
   }
 }
+// 主入口路由(需嵌套上左右整体布局)
+// const mainRoutes = {
+//   path: '/',
+//   component: _import('layout/main'),
+//   name: 'main',
+//   redirect: { name: 'home' },
+//   meta: { title: '主入口整体布局' },
+//   children: [
+//     {
+//       path: '/mainCont',
+//       component: _import('layout/mainSidebarCont'),
+//       name: 'mainCont',
+//       meta: { title: '整体' },
+//       children: [
+//         // 通过meta对象设置路由展示方式
+//         // 1. isTab: 是否通过tab展示内容, true: 是, false: 否
+//         // 2. iframeUrl: 是否通过iframe嵌套展示内容, '以http[s]://开头': 是, '': 否
+//         // 提示: 如需要通过iframe嵌套展示内容, 但不通过tab打开, 请自行创建组件使用iframe处理!
+//         { path: '/home', component: _import('common/home'), name: 'home', meta: { title: '首页' } },
+//         { path: '/theme', component: _import('common/theme'), name: 'theme', meta: { title: '主题' } },
+//         { path: '/demo-echarts', component: _import('demo/echarts'), name: 'demo-echarts', meta: { title: 'demo-echarts', isTab: true } },
+//         { path: '/demo-ueditor', component: _import('demo/ueditor'), name: 'demo-ueditor', meta: { title: 'demo-ueditor', isTab: true } },
+//         { path: '/demo-d3', component: _import('demo/d3'), name: 'demo-d3', meta: { title: 'demo-d3', isTab: true } },
+//         { path: '/passengerFlowWaring', component: _import('passengerFlow/passengerFlowWaring/index'), name: 'passengerFlowWaring', meta: { title: '客流监测与预警', isTab: true } }
+//       ]
+//     },
+//     {
+//       path: '/test',
+//       component: _import('layout/test'),
+//       name: 'test',
+//       meta: { title: 'test' }
+//     }
+//   ],
+//   beforeEnter (to, from, next) {
+//     let token = Vue.cookie.get('token')
+//     if (!token || !/\S/.test(token)) {
+//       clearLoginInfo()
+//       next({ name: 'login' })
+//     }
+//     next()
+//   }
+// }
 const router = new Router({
   mode: 'hash',
   scrollBehavior: () => ({ y: 0 }),
@@ -103,6 +124,17 @@ const router = new Router({
   routes: globalRoutes.concat(mainRoutes)
 })
 router.beforeEach((to, from, next) => {
+  // console.log(from)
+  // 由于业务场景不同 路由跳转前设置menuActiveName使菜单栏高亮
+  try {
+    if (!to.name) {
+      throw new Error('请为该路由添加name标识')
+    }
+    store.commit('common/updateMenuActiveName', to.name)
+  } catch (error) {
+    console.error(error)
+  }
+
   // 添加动态(菜单)路由
   // 1. 已经添加 or 全局路由, 直接访问
   // 2. 获取菜单列表, 添加并保存本地存储
@@ -142,8 +174,7 @@ function fnCurrentRouteType (route, globalRoutes = []) {
     if (route.path === globalRoutes[i].path) {
       return 'global'
     } else if (globalRoutes[i].children && globalRoutes[i].children.length >= 1) {
-      // debugger
-      temp = temp.concat(globalRoutes[i].children[0].children)
+      temp = temp.concat(globalRoutes[i].children)
     }
   }
   return temp.length >= 1 ? fnCurrentRouteType(route, temp) : 'main'
@@ -190,16 +221,15 @@ function fnAddDynamicMenuRoutes (menuList = [], routes = []) {
     fnAddDynamicMenuRoutes(temp, routes)
   } else {
     mainRoutes.name = 'main-dynamic'
-    mainRoutes.children[0].children = routes
+    mainRoutes.children = routes
     router.addRoutes([
       mainRoutes,
       { path: '*', redirect: { name: '404' } }
     ])
-    console.log(mainRoutes.children[0].children)
-    sessionStorage.setItem('dynamicMenuRoutes', JSON.stringify(mainRoutes.children[0].children || '[]'))
+    sessionStorage.setItem('dynamicMenuRoutes', JSON.stringify(mainRoutes.children || '[]'))
     console.log('\n')
     console.log('%c!<-------------------- 动态(菜单)路由 s -------------------->', 'color:blue')
-    console.log(mainRoutes.children[0].children)
+    console.log(mainRoutes.children)
     console.log('%c!<-------------------- 动态(菜单)路由 e -------------------->', 'color:blue')
   }
 }

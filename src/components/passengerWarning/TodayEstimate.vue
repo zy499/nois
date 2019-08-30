@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="dialogBox">
     <el-dialog title="预计今日" :visible.sync="dialogVisible" @close="closeDialog" width="60%">
       <div class="dialog-top">
         <el-row :gutter="20">
-          <el-col :span="6">
+          <el-col :span="4">
             <p class="goOn margin-none">线网出行量</p>
             <h4 class="num margin-none">3,024,162</h4>
           </el-col>
@@ -24,7 +24,7 @@
       <div style="border: 0.5px solid gray;marginTop:30px"></div>
       <div class="dialog-main">
         <div>
-          <span>维度</span>
+          <span class="margin_right_20">维度</span>
           <el-select v-model="xianwang_val" placeholder="请选择">
             <el-option
               v-for="item in xianwang_option"
@@ -120,22 +120,27 @@ export default {
     font-size: 16px;
   }
 }
-.dialog-main {
-  margin: 20px 0px;
-  span {
-    font-size: 12px;
+.dialogBox {
+  /deep/ .el-dialog__header {
+    text-align: center;
   }
-  /deep/ .el-input__inner {
-    height: 24px;
-    font-size: 8px;
-    line-height: 24px;
-  }
-  .charts {
-    .chart-box {
-      min-height: 400px;
-    }
-    p {
+  .dialog-main {
+    margin: 20px 0px;
+    span {
       font-size: 12px;
+    }
+    /deep/ .el-input__inner {
+      height: 24px;
+      font-size: 8px;
+      line-height: 24px;
+    }
+    .charts {
+      .chart-box {
+        min-height: 400px;
+      }
+      p {
+        font-size: 12px;
+      }
     }
   }
 }

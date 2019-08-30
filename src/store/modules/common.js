@@ -16,7 +16,9 @@ export default {
     contentIsNeedRefresh: false,
     // 主入口标签页
     mainTabs: [],
-    mainTabsActiveName: ''
+    mainTabsActiveName: '',
+    // 面包屑集合
+    breadcrumbs: []
   },
   mutations: {
     updateDocumentClientHeight (state, height) {
@@ -45,6 +47,9 @@ export default {
     },
     updateMainTabsActiveName (state, name) {
       state.mainTabsActiveName = name
+    },
+    upaateBreadcrumbs (state, list) {
+      state.upaateBreadcrumbs = list
     }
   }
 }

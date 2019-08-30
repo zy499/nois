@@ -97,9 +97,16 @@
           <el-tabs v-model="activeName" class="xianwang_keliu_cont">
             <el-tab-pane label="进站量" name="first">
               <ul>
-                <li v-for="item in xianlukeliu_options" :key="item.id" class="flexStart justify-content-space-between">
+                <li
+                  v-for="item in xianlukeliu_options"
+                  :key="item.id"
+                  class="flexStart justify-content-space-between"
+                >
                   <div class="flexStart">
-                    <el-tag type="info" class="margin_right_10">{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
+                    <el-tag
+                      type="info"
+                      class="margin_right_10"
+                    >{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
                     <div>
                       <p class="font-size12 font_weight_bold padding-bottom2">{{item.name}}</p>
                       <div class="flexStart font-size12 corol_909399">
@@ -109,15 +116,25 @@
                       </div>
                     </div>
                   </div>
-                  <el-tag type="info" style="min-width: 80px;font-size: 16px;text-align: center;background-color:#ccc">{{item.name}}</el-tag>
+                  <el-tag
+                    type="info"
+                    style="min-width: 80px;font-size: 16px;text-align: center;background-color:#ccc"
+                  >{{item.name}}</el-tag>
                 </li>
               </ul>
             </el-tab-pane>
             <el-tab-pane label="出站量" name="second">
               <ul>
-                <li v-for="item in xianlukeliu_options" :key="item.id" class="flexStart justify-content-space-between">
+                <li
+                  v-for="item in xianlukeliu_options"
+                  :key="item.id"
+                  class="flexStart justify-content-space-between"
+                >
                   <div class="flexStart">
-                    <el-tag type="info" class="margin_right_10">{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
+                    <el-tag
+                      type="info"
+                      class="margin_right_10"
+                    >{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
                     <div>
                       <p class="font-size12 font_weight_bold padding-bottom2">{{item.name}}</p>
                       <div class="flexStart font-size12 corol_909399">
@@ -127,15 +144,25 @@
                       </div>
                     </div>
                   </div>
-                  <el-tag type="info" style="min-width: 80px;font-size: 16px;text-align: center;background-color:#ccc">{{item.name}}</el-tag>
+                  <el-tag
+                    type="info"
+                    style="min-width: 80px;font-size: 16px;text-align: center;background-color:#ccc"
+                  >{{item.name}}</el-tag>
                 </li>
               </ul>
             </el-tab-pane>
             <el-tab-pane label="换乘量" name="third">
               <ul>
-                <li v-for="item in xianlukeliu_options" :key="item.id" class="flexStart justify-content-space-between">
+                <li
+                  v-for="item in xianlukeliu_options"
+                  :key="item.id"
+                  class="flexStart justify-content-space-between"
+                >
                   <div class="flexStart">
-                    <el-tag type="info" class="margin_right_10">{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
+                    <el-tag
+                      type="info"
+                      class="margin_right_10"
+                    >{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
                     <div>
                       <p class="font-size12 font_weight_bold padding-bottom2">{{item.name}}</p>
                       <div class="flexStart font-size12 corol_909399">
@@ -145,15 +172,25 @@
                       </div>
                     </div>
                   </div>
-                  <el-tag type="info" style="min-width: 80px;font-size: 16px;text-align: center;background-color:#ccc">{{item.name}}</el-tag>
+                  <el-tag
+                    type="info"
+                    style="min-width: 80px;font-size: 16px;text-align: center;background-color:#ccc"
+                  >{{item.name}}</el-tag>
                 </li>
               </ul>
             </el-tab-pane>
             <el-tab-pane label="换乘量" name="fourth">
               <ul>
-                <li v-for="item in xianlukeliu_options" :key="item.id" class="flexStart justify-content-space-between">
+                <li
+                  v-for="item in xianlukeliu_options"
+                  :key="item.id"
+                  class="flexStart justify-content-space-between"
+                >
                   <div class="flexStart">
-                    <el-tag type="info" class="margin_right_10">{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
+                    <el-tag
+                      type="info"
+                      class="margin_right_10"
+                    >{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
                     <div>
                       <p class="font-size12 font_weight_bold padding-bottom2">{{item.name}}</p>
                       <div class="flexStart font-size12 corol_909399">
@@ -163,7 +200,10 @@
                       </div>
                     </div>
                   </div>
-                  <el-tag type="info" style="min-width: 80px;font-size: 16px;text-align: center;background-color:#ccc">{{item.name}}</el-tag>
+                  <el-tag
+                    type="info"
+                    style="min-width: 80px;font-size: 16px;text-align: center;background-color:#ccc"
+                  >{{item.name}}</el-tag>
                 </li>
               </ul>
             </el-tab-pane>
@@ -179,26 +219,57 @@
             <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
           </div>
           <el-tabs v-model="activeName">
-            <el-tab-pane label="进站量" name="first">
-                  <ul>
-                <li v-for="item in xianlukeliu_options" :key="item.id" class="flexStart justify-content-space-between">
+            <el-tab-pane label="进站量" name="first" class="chezhan_keliu_cont">
+              <ul>
+                <li
+                  v-for="(item,index) in chezhankeliu_options"
+                  :key="index"
+                  class="flexStart justify-content-space-between"
+                >
                   <div class="flexStart">
-                    <el-tag type="info" class="margin_right_10">{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
+                    <el-tag type="info" class="margin_right_10">{{index+1}}</el-tag>
                     <div>
-                      <p class="font-size12 font_weight_bold padding-bottom2">{{item.name}}</p>
-                      <div class="flexStart font-size12 corol_909399">
-                        <span class="margin_right_10">客运量：{{item.keyunliang}}</span>
-                        <span>⬆️</span>
-                        <span>{{item.shangshen}}</span>
-                      </div>
+                      <p class="font-size14 font_weight_bold">{{item.name}}</p>
                     </div>
                   </div>
-                  <el-tag type="info" style="min-width: 80px;font-size: 16px;text-align: center;background-color:#ccc">{{item.name}}</el-tag>
+                  <div class="margin_right_10 font-size10">客运量：{{item.keyunliang}}</div>
                 </li>
               </ul>
             </el-tab-pane>
-            <el-tab-pane label="出站量" name="second">配置管理</el-tab-pane>
-            <el-tab-pane label="换乘量" name="third">角色管理</el-tab-pane>
+            <el-tab-pane label="出站量" name="second" class="chezhan_keliu_cont">
+              <ul>
+                <li
+                  v-for="(item,index) in chezhankeliu_options"
+                  :key="index"
+                  class="flexStart justify-content-space-between"
+                >
+                  <div class="flexStart">
+                    <el-tag type="info" class="margin_right_10">{{index+1}}</el-tag>
+                    <div>
+                      <p class="font-size14 font_weight_bold">{{item.name}}</p>
+                    </div>
+                  </div>
+                  <div class="margin_right_10 font-size10">客运量：{{item.keyunliang}}</div>
+                </li>
+              </ul>
+            </el-tab-pane>
+            <el-tab-pane label="换乘量" name="third" class="chezhan_keliu_cont">
+              <ul>
+                <li
+                  v-for="(item,index) in chezhankeliu_options"
+                  :key="index"
+                  class="flexStart justify-content-space-between"
+                >
+                  <div class="flexStart">
+                    <el-tag type="info" class="margin_right_10">{{index+1}}</el-tag>
+                    <div>
+                      <p class="font-size14 font_weight_bold">{{item.name}}</p>
+                    </div>
+                  </div>
+                  <div class="margin_right_10 font-size10">客运量：{{item.keyunliang}}</div>
+                </li>
+              </ul>
+            </el-tab-pane>
           </el-tabs>
         </el-card>
       </el-col>
@@ -208,6 +279,17 @@
             <span class="yj_biaoge_title">{{yj_biaoge_title}}断面最大拥挤度</span>
             <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
           </div>
+          <div class="border"></div>
+          <div class="chezhan_keliu_cont">
+            <ul>
+              <li v-for="(item,index) in zuidayongji_options" :key="index">
+                <div>
+                  <p class="font-size14">{{item.start}}  →  {{item.end}} &nbsp; ({{item.satus}})</p>
+                </div>
+                <div class="font_weight_bold">{{item.shangshen}}</div>
+              </li>
+            </ul>
+          </div>
         </el-card>
       </el-col>
       <el-col :span="8">
@@ -216,11 +298,22 @@
             <span class="yj_biaoge_title">{{yj_biaoge_title}}断面客流量排名</span>
             <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
           </div>
+          <div class="border"></div>
+          <div class="chezhan_keliu_cont">
+            <ul>
+              <li v-for="(item,index) in zuidayongji_options" :key="index">
+                <div>
+                  <p class="font-size14">{{item.start}}  →  {{item.end}} &nbsp; ({{item.satus}})</p>
+                </div>
+                <div class="font_weight_bold">{{item.shangshen}}</div>
+              </li>
+            </ul>
+          </div>
         </el-card>
       </el-col>
     </el-row>
     <!-- content end -->
-    <el-button type="primary" @click="test">test</el-button>
+    <el-button type="primary" @click="$router.push({name:'stationDetails'})">车站详情</el-button>
   </div>
 </template>
 
@@ -320,6 +413,58 @@ export default {
           shangshen: '3.7%'
         }
       ],
+      chezhankeliu_options: [
+        {
+          name: '火车南站',
+          keyunliang: '9,19,233'
+        },
+        {
+          name: '高新',
+          keyunliang: '9,19,233'
+        },
+        {
+          name: '天府广场',
+          keyunliang: '9,19,233'
+        },
+        {
+          name: '火车南站',
+          keyunliang: '9,19,233'
+        },
+        {
+          name: '高新',
+          keyunliang: '9,19,233'
+        },
+        {
+          name: '天府广场',
+          keyunliang: '9,19,233'
+        }
+      ],
+      zuidayongji_options: [
+        {
+          start: '高新',
+          end: '火车南站',
+          satus: '下行',
+          shangshen: '45.84%'
+        },
+        {
+          start: '孵化园',
+          end: '金融城',
+          satus: '下行',
+          shangshen: '45.84%'
+        },
+        {
+          start: '桐梓林',
+          end: '火车南站',
+          satus: '上行',
+          shangshen: '45.84%'
+        },
+        {
+          start: '高新',
+          end: '火车南站',
+          satus: '上行',
+          shangshen: '45.84%'
+        }
+      ],
       xianwang_val: '1',
       date_val: '1',
       yj_biaoge_date: '',
@@ -341,7 +486,7 @@ export default {
   },
   methods: {
     test () {
-      this.$router.push({name: 'test'})
+      this.$router.push({ name: 'test' })
     },
     changeDate (val) {
       const item = this.date_option.filter(item => {
@@ -436,6 +581,21 @@ export default {
     ul {
       padding: 0;
       li {
+        list-style: none;
+        margin-bottom: 20px;
+      }
+    }
+  }
+  .border{
+    margin-top: 34px;
+    border: 1px solid #e4e7ed
+  }
+  .chezhan_keliu_cont {
+    ul {
+      padding: 0;
+
+      li {
+        line-height: 30px;
         list-style: none;
         margin-bottom: 20px;
       }

@@ -55,6 +55,9 @@ export function clearLoginInfo () {
   Vue.cookie.delete('token')
   store.commit('resetStore')
   router.options.isAddDynamicMenuRoutes = false
+  sessionStorage.removeItem('menuList')
+  sessionStorage.removeItem('dynamicMenuRoutes')
+  sessionStorage.removeItem('permissions')
 }
 
 /**

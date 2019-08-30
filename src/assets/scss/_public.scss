@@ -2,6 +2,9 @@
 .text_right {
   text-align: right;
 }
+.font-size10{
+  font-size: 10px;
+}
 .font-size14 {
   font-size: 14px;
 }
@@ -63,4 +66,11 @@
 // element 重置样式
 .el-table::before {
   height: 0;
+}
+
+// 不嵌套左菜单 居中样式
+
+.noSidebar_cont {
+  margin: 0 auto;
+  width: 1000px;
 }

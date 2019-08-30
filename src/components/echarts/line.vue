@@ -6,7 +6,7 @@
  * @LastEditTime: 2019-08-25 15:56:16
  -->
 <template>
-  <div id="chartLineBox" class="chart-box"></div>
+  <div id="chartLineBox" class="chart-box" style="height:300px"></div>
 </template>
 
 <script>
@@ -29,9 +29,9 @@ export default {
     // 折线图
     initChartLine () {
       var option = {
-        title: {
-          text: '折线图堆叠'
-        },
+        // title: {
+        //   text: '折线图堆叠'
+        // },
         tooltip: {
           trigger: 'axis'
         },
@@ -104,6 +104,6 @@ export default {
 
 <style lang="scss" scoped>
 .chart-box {
-  min-height: 400px;
+  min-height: 300px;
 }
 </style>
