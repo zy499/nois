@@ -1,3 +1,10 @@
+<!--
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-08-31 01:42:29
+ * @LastEditors: zy
+ * @LastEditTime: 2019-08-31 21:38:44
+ -->
 <template>
   <div class="tp-line-table-box">
     <el-table :data="tableData" style="font-size:14px;text-align:right;width:95%;">
@@ -66,7 +73,7 @@
 </template>
 
 <script>
-import TodayEstimate from '@/components/passengerWarning/TodayEstimate'
+import TodayEstimate from '@/components/passengerFlow/passengerWarning/TodayEstimate'
 export default {
   components: {
     TodayEstimate

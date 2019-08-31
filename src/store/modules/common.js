@@ -1,3 +1,10 @@
+/*
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-08-31 01:42:29
+ * @LastEditors: zy
+ * @LastEditTime: 2019-08-31 02:26:19
+ */
 export default {
   namespaced: true,
   state: {
@@ -49,7 +56,7 @@ export default {
       state.mainTabsActiveName = name
     },
     upaateBreadcrumbs (state, list) {
-      state.upaateBreadcrumbs = list
+      state.breadcrumbs = list
     }
   }
 }

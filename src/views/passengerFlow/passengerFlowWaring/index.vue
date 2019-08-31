@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 17:01:27
  * @LastEditors: zy
- * @LastEditTime: 2019-08-26 23:51:20
+ * @LastEditTime: 2019-08-31 22:14:40
  -->
 <template>
   <div class="passengerFlowWaringBody">
@@ -313,13 +313,13 @@
       </el-col>
     </el-row>
     <!-- content end -->
-    <el-button type="primary" @click="$router.push({name:'stationDetails'})">车站详情</el-button>
+    <el-button type="primary" @click="$router.push({name:'stationDetails',params:{stationName:'火车南站',routeObj:$route}})">车站详情</el-button>
   </div>
 </template>
 
 <script>
 import { parseTime } from '@/utils'
-import LintTable from '@/components/passengerWarning/LineTable'
+import LintTable from '@/components/passengerFlow/passengerWarning/LineTable'
 export default {
   components: {
     LintTable

@@ -1,56 +1,75 @@
+<!--
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-08-31 01:42:29
+ * @LastEditors: zy
+ * @LastEditTime: 2019-08-31 22:15:40
+ -->
 <template>
   <div>
-    <div class="stationDetails_title" style="padding-top:40px;">
-      <el-breadcrumb class="breadcrumb-container" separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item
-          v-for="item in levelList"
-          :key="item.path"
-          :to="item.path"
-        >{{item.meta.title}}</el-breadcrumb-item>
-      </el-breadcrumb>
+    <div class="stationDetails_title" style="padding-top:40px;border-bottom:1px solid #ccc">
+      <div style="margin:0 auto;width:1000px;padding:20px 0">
+        <StationBreadcrumb />
+      </div>
     </div>
-    <div class="noSidebar_cont"></div>
+    <div class="noSidebar_cont">
+      <StationeTable />
+    </div>
   </div>
 </template>
 
 <script>
-import store from '@/store'
+import StationBreadcrumb from '@/components/passengerFlow/station/StationBreadcrumb'
+import StationeTable from '@/components/passengerFlow/station/StationeTable'
 export default {
-  name: 'stationDetails',
-  data () {
+  provide () {
     return {
-      firstRoute: null,
-      levelList: []
+      stationName: this.$route.params.stationName,
+      routeObj: this.$route.params.routeObj
     }
   },
-  beforeRouteEnter (to, from, next) {
-    console.log(from)
-    console.log(to)
-    // console.log(store)
-    // store.commit('upaateBreadcrumbs',)
-    next((vm) => {
-      // console.log(vm)
-      // vm.firstRoute = from
-    })
+  components: {
+    StationBreadcrumb,
+    StationeTable
   },
-  watch: {
-    // $route () {
-      // this.getBreadcrumb()
-    // }
-  },
-  created () {
-    // this.getBreadcrumb()
-  },
-  methods: {
-    // getBreadcrumb () {
-    //   debugger
-    //   let matched = this.$route.matched.filter(item => item.name && item.path)
-    //   matched = [this.firstRoute].concat(
-    //       matched
-    //   )
-    //   this.levelList = matched
-    // }
+  data () {
+    return {
+      levelList: []
+    }
   }
+  // beforeRouteEnter (to, from, next) {
+  //   // ...
+  //   next(vm => {
+  //     console.log(vm)
+  //     to.meta.title = vm.$route.params.stationName
+  //     vm.levelList = [from, to]
+  //   })
+  // },
+  // watch: {
+  //   $route () {
+  //     this.getBreadcrumb()
+  //   }
+  // },
+  // created () {
+  //   this.getBreadcrumb()
+  // },
+  // methods: {
+  //   getBreadcrumb () {
+  //     // console.log(this.$route)
+  //     let matched = this.$route.matched.filter(item => item.name)
+  //     const first = matched[0]
+  //     if (
+  //       first &&
+  //       first.name.trim().toLocaleLowerCase() !==
+  //         'Dashboard'.toLocaleLowerCase()
+  //     ) {
+  //       matched = [{ path: '/dashboard', meta: { title: 'dashboard' } }].concat(
+  //         matched
+  //       )
+  //     }
+  //     this.levelList = matched
+  //   }
+  // }
 }
 </script>
 
