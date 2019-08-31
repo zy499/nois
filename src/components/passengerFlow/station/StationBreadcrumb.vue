@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-08-31 22:18:26
+ * @LastEditTime: 2019-09-01 01:17:14
  -->
 <template>
   <div>
@@ -24,35 +24,19 @@
 <script>
 // import store from '@/store'
 export default {
-  inject: ['stationName', 'routeObj'],
-  data () {
-    return {
-      levelList: []
+  inject: ['stationName'],
+  computed: {
+    levelList: {
+      get () {
+        let arr = this.$store.state.common.breadcrumbs
+        arr[1].meta.title = this.stationName
+        return arr
+      }
     }
-  },
-  created () {
-    this.getBreadcrumb()
-  },
-  methods: {
-    getBreadcrumb () {
-      // let routeObj = this.$route
-      // if (routeObj.params && routeObj.params.stationName) {
-      //   routeObj.meta.title = routeObj.params.stationName
-      // }
-      console.log(this)
-      // let matched = this.$route.matched.filter(item => item.name)
-      // const first = matched[0]
-      // if (
-      //   first &&
-      //   first.name.trim().toLocaleLowerCase() !==
-      //     'Dashboard'.toLocaleLowerCase()
-      // ) {
-      //   matched = [{ path: '/dashboard', meta: { title: 'dashboard' } }].concat(
-      //     matched
-      //   )
-      // }
-      // this.levelList = matched
-    }
+    // 直接当做普通属性调用不加括号
+    // 任何data中数据变化立即重新计算
+    // 计算属性会缓存
+
   }
   // props: {
   //   levelList: {

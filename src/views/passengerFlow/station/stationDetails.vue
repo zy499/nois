@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-08-31 22:15:40
+ * @LastEditTime: 2019-09-01 01:02:31
  -->
 <template>
   <div>
@@ -24,8 +24,8 @@ import StationeTable from '@/components/passengerFlow/station/StationeTable'
 export default {
   provide () {
     return {
-      stationName: this.$route.params.stationName,
-      routeObj: this.$route.params.routeObj
+      stationName: this.$route.params.stationName
+      // routeObj: this.$route.params.routeObj
     }
   },
   components: {
@@ -34,7 +34,7 @@ export default {
   },
   data () {
     return {
-      levelList: []
+      // levelList: []
     }
   }
   // beforeRouteEnter (to, from, next) {

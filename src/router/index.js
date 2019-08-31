@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-22 21:28:23
  * @LastEditors: zy
- * @LastEditTime: 2019-08-25 22:20:43
+ * @LastEditTime: 2019-09-01 01:07:13
  */
 /**
  * 全站路由配置
@@ -31,6 +31,7 @@ const globalRoutes = [
     path: '/noSiderBar',
     name: 'noSiderBar',
     component: _import('layout/noSiderBar'),
+    meta: { tilte: '主体' },
     children: [
       {
         path: '/test',
@@ -134,7 +135,7 @@ router.beforeEach((to, from, next) => {
   } catch (error) {
     console.error(error)
   }
-
+  store.commit('common/upaateBreadcrumbs', [from, to])
   // 添加动态(菜单)路由
   // 1. 已经添加 or 全局路由, 直接访问
   // 2. 获取菜单列表, 添加并保存本地存储
