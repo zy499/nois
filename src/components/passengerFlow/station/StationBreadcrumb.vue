@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-09-01 01:17:14
+ * @LastEditTime: 2019-09-01 01:38:34
  -->
 <template>
   <div>
@@ -49,11 +49,11 @@ export default {
 <style lang="scss" scoped>
 .breadcrumb-container {
   .el-breadcrumb__inner .is-link {
-    color: #9d9ea0;
+    // color: #9d9ea0;
     font-weight: 600;
   }
   /deep/ .el-breadcrumb__item:last-child .el-breadcrumb__inner {
-    color: black !important;
+    color: rgb(214, 214, 214) !important;
     font-weight: 600;
   }
 }

@@ -3,10 +3,10 @@
  * @Author: zy
  * @Date: 2019-08-24 21:21:06
  * @LastEditors: zy
- * @LastEditTime: 2019-08-25 15:56:16
+ * @LastEditTime: 2019-09-01 22:28:37
  -->
 <template>
-  <div id="chartLineBox" class="chart-box" style="height:300px"></div>
+  <div class="chart-box chartLineBox" style="height:300px"></div>
 </template>
 
 <script>
@@ -91,7 +91,7 @@ export default {
         ]
       }
       this.$nextTick(() => {
-        this.chartLine = echarts.init(document.getElementById('chartLineBox'))
+        this.chartLine = echarts.init(document.querySelector('.chartLineBox'))
         this.chartLine.setOption(option)
         window.addEventListener('resize', () => {
           this.chartLine.resize()

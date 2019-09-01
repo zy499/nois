@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 12:04:28
  * @LastEditors: zy
- * @LastEditTime: 2019-08-25 16:43:45
+ * @LastEditTime: 2019-09-01 21:09:41
  -->
 <template>
   <nav class="site-navbar" :class="'site-navbar--' + navbarLayoutType">
