@@ -1,8 +1,13 @@
+/*
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-09-02 21:09:07
+ * @LastEditors: zy
+ * @LastEditTime: 2019-09-03 00:17:31
+ */
 const getters = {
-  xianwang_val: state => state.passengerFlowWaring.xianwang_val,
-  date_val: state => state.passengerFlowWaring.date_val,
-  xianwang_option: state => state.passengerFlowWaring.xianwang_option,
-  date_option: state => state.passengerFlowWaring.date_option
+  // test
+  getCont: state => state.test.count * 2
 }
 
 export default getters

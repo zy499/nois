@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 17:01:27
  * @LastEditors: zy
- * @LastEditTime: 2019-09-02 23:36:32
+ * @LastEditTime: 2019-09-02 23:41:29
  -->
 <template>
   <div class="passengerFlowWaringBody">
@@ -291,6 +291,7 @@
     </el-row>
     <!-- content end -->
     <el-button type="primary" @click="$router.push({name:'stationDetails',params:{stationName:'火车南站',routeObj:$route}})">车站详情</el-button>
+    <el-button type="primary" @click="test">test</el-button>
   </div>
 </template>
 
