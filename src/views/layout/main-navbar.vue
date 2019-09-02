@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 12:04:28
  * @LastEditors: zy
- * @LastEditTime: 2019-09-01 21:09:41
+ * @LastEditTime: 2019-09-02 23:38:20
  -->
 <template>
   <nav class="site-navbar" :class="'site-navbar--' + navbarLayoutType">
@@ -33,7 +33,7 @@
       <div v-if="keliu_isShowSelect">
         <el-menu class="site-navbar__menu select_box" mode="horizontal">
           <el-menu-item style="padding-left:0;padding-right:10px;width: 120px;">
-            <el-select v-model="xianwang_val" @change="changeTitle" placeholder="请选择">
+            <el-select v-model="xianwang_val" @change="changeTitle"  placeholder="请选择">
               <el-option
                 v-for="item in xianwang_option"
                 :label="item.label"
@@ -82,13 +82,14 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
 import UpdatePassword from './main-navbar-update-password'
 import { clearLoginInfo } from '@/utils'
 export default {
   data () {
     return {
-      updatePassowrdVisible: false
+      updatePassowrdVisible: false,
+      xianwang_option: this.$store.state.passengerFlowWaring.xianwang_option,
+      date_option: this.$store.state.passengerFlowWaring.date_option
     }
   },
   components: {
@@ -131,24 +132,41 @@ export default {
         return this.$store.state.common.keliu_isSideBarFold
       }
     },
-    ...mapGetters([
-      'xianwang_option',
-      'date_option',
-      'xianwang_val',
-      'date_val'
-    ])
+    xianwang_val: {
+      get () {
+        return this.$store.state.passengerFlowWaring.xianwang_val
+      },
+      set (val) {
+        this.$store.commit('passengerFlowWaring/update_xianwang_val', val)
+      }
+    },
+    date_val: {
+      get () {
+        return this.$store.state.passengerFlowWaring.date_val
+      },
+      set (val) {
+        this.$store.commit('passengerFlowWaring/update_date_val', val)
+      }
+    },
+    yj_biaoge_title: {
+      get () {
+        return this.$store.state.passengerFlowWaring.yj_biaoge_title
+      },
+      set (val) {}
+    },
+    yj_biaoge_tag: {
+      get () {
+        return this.$store.state.passengerFlowWaring.yj_biaoge_tag
+      },
+      set (val) {}
+    }
   },
   methods: {
-    // ...mapMutations({
-    //   // 将changeNews与mutations中的SET_NEWS关联
-    //   newChangeDate: 'XIANWANG_SELECT_VAL',
-    //   newChangeTitle: 'DATE_SELECT_VAL'
-    // }),
     changeDate (val) {
-      this.$store.dispatch('passengerFlowWaring/XIANWANG_SELECT_VAL')
+      this.$store.commit('passengerFlowWaring/update_yj_biaoge_tag', val)
     },
     changeTitle (val) {
-      this.$store.dispatch('passengerFlowWaring/DATE_SELECT_VAL')
+      this.$store.commit('passengerFlowWaring/update_yj_biaoge_title', val)
     },
     // 修改密码
     updatePasswordHandle () {

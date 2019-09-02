@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 17:01:27
  * @LastEditors: zy
- * @LastEditTime: 2019-08-31 22:14:40
+ * @LastEditTime: 2019-09-02 23:36:32
  -->
 <template>
   <div class="passengerFlowWaringBody">
@@ -394,9 +394,19 @@ export default {
           shangshen: '45.84%'
         }
       ],
-      yj_biaoge_date: '',
-      yj_biaoge_tag: '实时',
-      yj_biaoge_title: '线网指标'
+      yj_biaoge_date: ''
+    }
+  },
+  computed: {
+    yj_biaoge_title: {
+      get () {
+        return this.$store.state.passengerFlowWaring.yj_biaoge_title
+      }
+    },
+    yj_biaoge_tag: {
+      get () {
+        return this.$store.state.passengerFlowWaring.yj_biaoge_tag
+      }
     }
   },
   mounted () {
