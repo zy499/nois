@@ -25,7 +25,11 @@ export default {
     mainTabs: [],
     mainTabsActiveName: '',
     // 面包屑集合
-    breadcrumbs: []
+    breadcrumbs: [],
+    // navbar在客流预警路由下显示下拉
+    keliu_isShowSelect: false,
+    // navbar里 SideBar缩放开关在客流预警路由下显示下拉
+    keliu_isSideBarFold: true
   },
   mutations: {
     updateDocumentClientHeight (state, height) {
@@ -57,6 +61,12 @@ export default {
     },
     upaateBreadcrumbs (state, list) {
       state.breadcrumbs = list
+    },
+    updateKeliu_isShowSelect (state, status) {
+      state.keliu_isShowSelect = status
+    },
+    updateKeliu_isSideBarFold (state, status) {
+      state.keliu_isSideBarFold = status
     }
   }
 }

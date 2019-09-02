@@ -13,30 +13,7 @@
         <el-row type="flex" justify="space-between">
           <el-col :span="8">
             <p class="title">客流监测与预警</p>
-            <el-row>
-              <el-col :span="12">
-                <span class="keliu-title-Font">维度：</span>
-                <el-select v-model="xianwang_val" @change="changeTitle" placeholder="请选择">
-                  <el-option
-                    v-for="item in xianwang_option"
-                    :label="item.label"
-                    :value="item.value"
-                    :key="item.value"
-                  ></el-option>
-                </el-select>
-              </el-col>
-              <el-col :span="12">
-                <span class="keliu-title-Font">时间：</span>
-                <el-select v-model="date_val" @change="changeDate" placeholder="请选择">
-                  <el-option
-                    v-for="item in date_option"
-                    :label="item.label"
-                    :value="item.value"
-                    :key="item.value"
-                  ></el-option>
-                </el-select>
-              </el-col>
-            </el-row>
+            
           </el-col>
           <el-col :span="8" class="text_right margin-top3 flexStart flex-flow-reverse">
             <div style="width:36px;height:36px;background:rgba(0,0,0,0.05);margin-left:10px;"></div>
@@ -327,54 +304,6 @@ export default {
   data () {
     return {
       activeName: 'first',
-      xianwang_option: [
-        {
-          label: '线网',
-          value: '1'
-        },
-        {
-          label: '1号线',
-          value: '2'
-        },
-        {
-          label: '2号线',
-          value: '3'
-        },
-        {
-          label: '3号线',
-          value: '4'
-        },
-        {
-          label: '4号线',
-          value: '5'
-        },
-        {
-          label: '7号线',
-          value: '6'
-        },
-        {
-          label: '10号线',
-          value: '7'
-        }
-      ],
-      date_option: [
-        {
-          label: '实时',
-          value: '1'
-        },
-        {
-          label: '未来15分钟',
-          value: '2'
-        },
-        {
-          label: '未来30分钟',
-          value: '3'
-        },
-        {
-          label: '未来60分钟',
-          value: '4'
-        }
-      ],
       xianlukeliu_options: [
         {
           id: '1',
@@ -465,8 +394,6 @@ export default {
           shangshen: '45.84%'
         }
       ],
-      xianwang_val: '1',
-      date_val: '1',
       yj_biaoge_date: '',
       yj_biaoge_tag: '实时',
       yj_biaoge_title: '线网指标'
@@ -487,21 +414,6 @@ export default {
   methods: {
     test () {
       this.$router.push({ name: 'test' })
-    },
-    changeDate (val) {
-      const item = this.date_option.filter(item => {
-        if (item.value === val) {
-          return item
-        }
-      })
-      this.yj_biaoge_tag = item[0]['label']
-    },
-    changeTitle (val) {
-      this.xianwang_option.forEach(item => {
-        if (item['value'] === val) {
-          this.yj_biaoge_title = item['label']
-        }
-      })
     }
   }
 }
@@ -518,29 +430,6 @@ export default {
         color: #101010;
         font-size: 20px;
         margin-bottom: 10px;
-      }
-      /deep/ .el-select--medium {
-        // width: 80px;
-        // margin-left: -8px;
-        .el-input--medium,
-        .el-input--suffix {
-          background: #fff;
-          .el-input__inner {
-            background: #fff;
-            border: none;
-            height: 12px;
-            line-height: 12px;
-            text-align: center;
-            padding-left: 0px;
-            color: #101010;
-          }
-          .el-input__suffix {
-            right: 12px;
-            .el-input__icon {
-              font-size: 10px;
-            }
-          }
-        }
       }
     }
   }

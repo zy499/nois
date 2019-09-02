@@ -10,7 +10,11 @@
     <div class="site-navbar__header">
       <h1 class="site-navbar__brand" @click="$router.push({ name: 'home' })">
         <a class="site-navbar__brand-lg" href="javascript:;">
-          <img src="../../assets/img/logo1@1x.png" style="margin-left: 20px;margin-right: 10px;" alt />
+          <img
+            src="../../assets/img/logo1@1x.png"
+            style="margin-left: 20px;margin-right: 10px;"
+            alt
+          />
           <img src="../../assets/img/logo2@1x.png" alt />
         </a>
         <a class="site-navbar__brand-mini" href="javascript:;">
@@ -19,11 +23,37 @@
       </h1>
     </div>
     <div class="site-navbar__body clearfix">
-      <el-menu class="site-navbar__menu" mode="horizontal">
-        <el-menu-item class="site-navbar__switch"  index="0" @click="sidebarFold = !sidebarFold" >
-          <icon-svg name="zhedie" :class="{'is-toggle':sidebarFold}"></icon-svg>
-        </el-menu-item>
-      </el-menu>
+      <div v-if="keliu_isSideBarFold">
+        <el-menu class="site-navbar__menu" mode="horizontal">
+          <el-menu-item class="site-navbar__switch" index="0" @click="sidebarFold = !sidebarFold">
+            <icon-svg name="zhedie" :class="{'is-toggle':sidebarFold}"></icon-svg>
+          </el-menu-item>
+        </el-menu>
+      </div>
+      <div v-if="keliu_isShowSelect">
+        <el-menu class="site-navbar__menu select_box" mode="horizontal">
+          <el-menu-item style="padding-left:0;padding-right:10px;width: 120px;">
+            <el-select v-model="xianwang_val" @change="changeTitle" placeholder="请选择">
+              <el-option
+                v-for="item in xianwang_option"
+                :label="item.label"
+                :value="item.value"
+                :key="item.value"
+              ></el-option>
+            </el-select>
+          </el-menu-item>
+          <el-menu-item style="padding-left:0;padding-right:0;width: 120px;">
+            <el-select v-model="date_val" @change="changeDate" placeholder="请选择">
+              <el-option
+                v-for="item in date_option"
+                :label="item.label"
+                :value="item.value"
+                :key="item.value"
+              ></el-option>
+            </el-select>
+          </el-menu-item>
+        </el-menu>
+      </div>
       <el-menu class="site-navbar__menu site-navbar__menu--right" mode="horizontal">
         <!-- <el-menu-item index="1" @click="$router.push({ name: 'theme' })">
           <template slot="title">
@@ -52,6 +82,7 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 import UpdatePassword from './main-navbar-update-password'
 import { clearLoginInfo } from '@/utils'
 export default {
@@ -89,9 +120,36 @@ export default {
       get () {
         return this.$store.state.user.name
       }
-    }
+    },
+    keliu_isShowSelect: {
+      get () {
+        return this.$store.state.common.keliu_isShowSelect
+      }
+    },
+    keliu_isSideBarFold: {
+      get () {
+        return this.$store.state.common.keliu_isSideBarFold
+      }
+    },
+    ...mapGetters([
+      'xianwang_option',
+      'date_option',
+      'xianwang_val',
+      'date_val'
+    ])
   },
   methods: {
+    // ...mapMutations({
+    //   // 将changeNews与mutations中的SET_NEWS关联
+    //   newChangeDate: 'XIANWANG_SELECT_VAL',
+    //   newChangeTitle: 'DATE_SELECT_VAL'
+    // }),
+    changeDate (val) {
+      this.$store.dispatch('passengerFlowWaring/XIANWANG_SELECT_VAL')
+    },
+    changeTitle (val) {
+      this.$store.dispatch('passengerFlowWaring/DATE_SELECT_VAL')
+    },
     // 修改密码
     updatePasswordHandle () {
       this.updatePassowrdVisible = true
@@ -124,8 +182,26 @@ export default {
 }
 </script>
 <style scoped>
-
 .is-toggle {
   transform: rotate(180deg);
+}
+/* .site-navbar__body > .select_Box /deep/ input {
+  border: none !important;
+  text-align: center !important;
+} */
+</style>
+<style lang="scss" scoped>
+.site-navbar {
+  .site-navbar__body {
+    .select_box {
+      /deep/ .el-input__inner {
+        border: none;
+        text-align: center;
+      }
+    }
+    /deep/ .el-menu--horizontal > .el-menu-item.is-active {
+      border-bottom: none;
+    }
+  }
 }
 </style>

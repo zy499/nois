@@ -445,6 +445,7 @@
 
 <style lang="scss">
   .mod-demo-echarts {
+    padding: 30px;
     > .el-alert {
       margin-bottom: 10px;
     }

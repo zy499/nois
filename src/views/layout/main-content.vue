@@ -25,7 +25,7 @@
         </el-dropdown-menu>
       </el-dropdown>
       <el-tab-pane v-for="item in mainTabs" :key="item.name" :label="item.title" :name="item.name">
-        <el-card :body-style="siteContentViewHeight">
+        <div :body-style="siteContentViewHeight" :style="siteContentViewHeight">
           <iframe
             v-if="item.type === 'iframe'"
             :src="item.iframeUrl"
@@ -37,15 +37,15 @@
           <keep-alive v-else>
             <router-view v-if="item.name === mainTabsActiveName" />
           </keep-alive>
-        </el-card>
+        </div>
       </el-tab-pane>
     </el-tabs>
     <!-- 主入口标签页 e -->
-    <el-card v-else :body-style="siteContentViewHeight">
+    <div v-else :body-style="siteContentViewHeight" :style="siteContentViewHeight">
       <keep-alive>
         <router-view />
       </keep-alive>
-    </el-card>
+    </div>
   </main>
 </template>
 

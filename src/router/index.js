@@ -17,8 +17,11 @@ import http from '@/utils/httpRequest'
 import { isURL } from '@/utils/validate'
 import { clearLoginInfo } from '@/utils'
 import store from '@/store/index'
+import NProgress from 'nprogress' // progress bar
+import 'nprogress/nprogress.css' // progress bar style
 Vue.use(Router)
-
+NProgress.configure({ showSpinner: false, ease: 'ease', speed: 500 })
+NProgress.set(0.4)
 // 开发环境不使用懒加载, 因为懒加载页面太多的话会造成webpack热更新太慢, 所以只有生产环境使用懒加载
 const _import = require('./import-' + process.env.NODE_ENV)
 
@@ -125,13 +128,26 @@ const router = new Router({
   routes: globalRoutes.concat(mainRoutes)
 })
 router.beforeEach((to, from, next) => {
-  // console.log(from)
+  NProgress.start()
   // 由于业务场景不同 路由跳转前设置menuActiveName使菜单栏高亮
   try {
     if (!to.name) {
       throw new Error('请为该路由添加name标识')
     }
     store.commit('common/updateMenuActiveName', to.name)
+    console.log(to)
+    if (to.name === 'passengerFlowWaring') {
+      store.commit('common/updateKeliu_isShowSelect', true)
+      store.commit('common/updateKeliu_isSideBarFold', false)
+    } else {
+      store.commit('common/updateKeliu_isShowSelect', false)
+      store.commit('common/updateKeliu_isSideBarFold', true)
+    }
+    if (to.name === 'stationDetails') {
+      store.commit('common/updateKeliu_isSideBarFold', false)
+    } else {
+      store.commit('common/updateKeliu_isSideBarFold', true)
+    }
   } catch (error) {
     console.error(error)
   }
@@ -153,6 +169,7 @@ router.beforeEach((to, from, next) => {
         sessionStorage.setItem('menuList', JSON.stringify(data.menuList || '[]'))
         sessionStorage.setItem('permissions', JSON.stringify(data.permissions || '[]'))
         next({ ...to, replace: true })
+        NProgress.done()
       } else {
         sessionStorage.setItem('menuList', '[]')
         sessionStorage.setItem('permissions', '[]')
@@ -161,6 +178,7 @@ router.beforeEach((to, from, next) => {
     }).catch((e) => {
       console.log(`%c${e} 请求菜单列表和权限失败，跳转至登录页！！`, 'color:blue')
       router.push({ name: 'login' })
+      NProgress.done()
     })
   }
 })
@@ -234,5 +252,8 @@ function fnAddDynamicMenuRoutes (menuList = [], routes = []) {
     console.log('%c!<-------------------- 动态(菜单)路由 e -------------------->', 'color:blue')
   }
 }
-
+router.afterEach(() => {
+  // finish progress bar
+  NProgress.done()
+})
 export default router

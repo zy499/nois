@@ -330,7 +330,7 @@ img {
     background: $content--background-color;
   }
   &--tabs {
-    padding: 55px 0 0;
+    padding: 70px 0 0;
   }
   > .el-tabs {
     > .el-tabs__header {
@@ -350,7 +350,7 @@ img {
       }
     }
     > .el-tabs__content {
-      padding: 0 15px 15px 15px;
+      padding: 0 30px 30px 30px;
       > .site-tabs__tools {
         position: fixed;
         top: 50px;
