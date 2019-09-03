@@ -146,7 +146,10 @@ export default {
 <style lang="scss" scoped>
 .tp-line-table-box {
   /deep/ .el-table {
-    td,
+    td {
+      text-align: right;
+    }
+    td ,
     th.is-leaf {
       border-bottom: none !important;
     }
