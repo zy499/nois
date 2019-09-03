@@ -12,37 +12,15 @@
       separator-class="el-icon-arrow-right"
       style="font-size:20px"
     >
-      <el-breadcrumb-item
-        v-for="item in levelList"
-        :key="item.path"
-        :to="item.path"
-      >{{item.meta.title}}</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ name: 'passengerFlowWaring' }">客流监测与预警</el-breadcrumb-item>
+      <el-breadcrumb-item :to="$route.name">{{$route.meta.title}}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
 
 <script>
-// import store from '@/store'
 export default {
-  inject: ['stationName'],
-  computed: {
-    levelList: {
-      get () {
-        let arr = this.$store.state.common.breadcrumbs
-        arr[1].meta.title = this.stationName
-        return arr
-      }
-    }
-    // 直接当做普通属性调用不加括号
-    // 任何data中数据变化立即重新计算
-    // 计算属性会缓存
 
-  }
-  // props: {
-  //   levelList: {
-  //     type: Array
-  //   }
-  // }
 }
 </script>
 

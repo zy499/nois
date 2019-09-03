@@ -146,7 +146,7 @@ img {
       }
       > .el-menu-item.is-active,
       > .el-submenu.is-active > .el-submenu__title {
-        border-bottom-color: mix(rgba(63,81,181,1), $navbar--background-color, 85%);
+        border-bottom-color: mix(#00A6FF, $navbar--background-color, 85%);
       }
       .el-menu-item i,
       .el-submenu__title i,
@@ -182,10 +182,10 @@ img {
     &-lg,
     &-mini {
       // margin: 0 5px;
-      color: rgb(69, 27, 122);
+      color: #00A6FF;
       &:focus,
       &:hover {
-        color: rgb(69, 27, 122);
+        color: #00A6FF;
         text-decoration: none;
       }
     }
@@ -289,10 +289,10 @@ img {
       }
       .el-menu-item.is-active,
       .el-submenu.is-active > .el-submenu__title {
-        // color: mix(rgba(63,81,181,1), $sidebar--color-text-dark, 80%);
-        border-radius: 20px;
-        color: #fff;
-        background-color: slateblue;
+        color: mix(#00A6FF, $sidebar--color-text-dark, 80%);
+        // border-radius: 20px;
+        // color: #fff;
+        // background-color: slateblue;
         
       }
     }

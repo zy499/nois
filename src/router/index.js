@@ -13,8 +13,8 @@
  */
 import Vue from 'vue'
 import Router from 'vue-router'
-import http from '@/utils/httpRequest'
-import { isURL } from '@/utils/validate'
+// import http from '@/utils/httpRequest'
+// import { isURL } from '@/utils/validate'
 import { clearLoginInfo } from '@/utils'
 import store from '@/store/index'
 import NProgress from 'nprogress' // progress bar
@@ -34,20 +34,20 @@ const globalRoutes = [
     path: '/noSiderBar',
     name: 'noSiderBar',
     component: _import('layout/noSiderBar'),
-    meta: { tilte: '主体' },
+    meta: { title: '主体' },
     children: [
       {
         path: '/test',
         name: 'test',
         component: _import('layout/test'),
-        meta: { tilte: '测试' }
+        meta: { title: '测试' }
       },
       // 地铁车站详情
       {
         path: '/stationDetails',
         name: 'stationDetails',
         component: _import('passengerFlow/station/stationDetails'),
-        meta: { tilte: '车站详情' }
+        meta: { title: '车站详情' }
       }
     ]
   }
@@ -56,7 +56,7 @@ const mainRoutes = {
   path: '/',
   component: _import('layout/main'),
   name: 'main',
-  redirect: { name: 'home' },
+  redirect: { name: 'passengerFlowWaring' },
   meta: { title: '主入口整体布局' },
   children: [
     // 通过meta对象设置路由展示方式
@@ -66,9 +66,12 @@ const mainRoutes = {
     { path: '/home', component: _import('common/home'), name: 'home', meta: { title: '首页' } },
     { path: '/theme', component: _import('common/theme'), name: 'theme', meta: { title: '主题' } },
     { path: '/demo-echarts', component: _import('demo/echarts'), name: 'demo-echarts', meta: { title: 'demo-echarts', isTab: true } },
-    { path: '/demo-ueditor', component: _import('demo/ueditor'), name: 'demo-ueditor', meta: { title: 'demo-ueditor', isTab: true } },
+    // { path: '/demo-ueditor', component: _import('demo/ueditor'), name: 'demo-ueditor', meta: { title: 'demo-ueditor', isTab: true } },
     { path: '/demo-d3', component: _import('demo/d3'), name: 'demo-d3', meta: { title: 'demo-d3', isTab: true } },
-    { path: '/passengerFlowWaring', component: _import('passengerFlow/passengerFlowWaring/index'), name: 'passengerFlowWaring', meta: { title: '客流监测与预警', isTab: true } }
+    { path: '/passengerFlowWaring', component: _import('passengerFlow/passengerFlowWaring/index'), name: 'passengerFlowWaring', meta: { title: '客流监测与预警', isTab: true } },
+    { path: '/network', component: _import('passengerFlow/passengerFlowType/network/index'), name: 'network', meta: { title: '线网分布', isTab: true } },
+    { path: '/od', component: _import('passengerFlow/passengerFlowType/od/index'), name: 'od', meta: { title: 'OD分布', isTab: true } },
+    { path: '/networkComparison', component: _import('passengerFlow/networkComparison/index'), name: 'networkComparison', meta: { title: '线网运力运量对比分析', isTab: true } }
   ],
   beforeEnter (to, from, next) {
     let token = Vue.cookie.get('token')
@@ -135,7 +138,6 @@ router.beforeEach((to, from, next) => {
       throw new Error('请为该路由添加name标识')
     }
     store.commit('common/updateMenuActiveName', to.name)
-    console.log(to)
     if (to.name === 'passengerFlowWaring') {
       store.commit('common/updateKeliu_isShowSelect', true)
       store.commit('common/updateKeliu_isSideBarFold', false)
@@ -152,106 +154,108 @@ router.beforeEach((to, from, next) => {
     console.error(error)
   }
   store.commit('common/upaateBreadcrumbs', [from, to])
+  next()
+  NProgress.done()
   // 添加动态(菜单)路由
   // 1. 已经添加 or 全局路由, 直接访问
   // 2. 获取菜单列表, 添加并保存本地存储
-  if (router.options.isAddDynamicMenuRoutes || fnCurrentRouteType(to, globalRoutes) === 'global') {
-    next()
-  } else {
-    http({
-      url: http.adornUrl('/sys/menu/nav'),
-      method: 'get',
-      params: http.adornParams()
-    }).then(({ data }) => {
-      if (data && data.code === 0) {
-        fnAddDynamicMenuRoutes(data.menuList)
-        router.options.isAddDynamicMenuRoutes = true
-        sessionStorage.setItem('menuList', JSON.stringify(data.menuList || '[]'))
-        sessionStorage.setItem('permissions', JSON.stringify(data.permissions || '[]'))
-        next({ ...to, replace: true })
-        NProgress.done()
-      } else {
-        sessionStorage.setItem('menuList', '[]')
-        sessionStorage.setItem('permissions', '[]')
-        next()
-      }
-    }).catch((e) => {
-      console.log(`%c${e} 请求菜单列表和权限失败，跳转至登录页！！`, 'color:blue')
-      router.push({ name: 'login' })
-      NProgress.done()
-    })
-  }
+  // if (router.options.isAddDynamicMenuRoutes || fnCurrentRouteType(to, globalRoutes) === 'global') {
+  //   next()
+  // } else {
+  //   http({
+  //     url: http.adornUrl('/sys/menu/nav'),
+  //     method: 'get',
+  //     params: http.adornParams()
+  //   }).then(({ data }) => {
+  //     if (data && data.code === 0) {
+  //       fnAddDynamicMenuRoutes(data.menuList)
+  //       router.options.isAddDynamicMenuRoutes = true
+  //       sessionStorage.setItem('menuList', JSON.stringify(data.menuList || '[]'))
+  //       sessionStorage.setItem('permissions', JSON.stringify(data.permissions || '[]'))
+  //       next({ ...to, replace: true })
+  //       NProgress.done()
+  //     } else {
+  //       sessionStorage.setItem('menuList', '[]')
+  //       sessionStorage.setItem('permissions', '[]')
+  //       next()
+  //     }
+  //   }).catch((e) => {
+  //     console.log(`%c${e} 请求菜单列表和权限失败，跳转至登录页！！`, 'color:blue')
+  //     router.push({ name: 'login' })
+  //     NProgress.done()
+  //   })
+  // }
 })
 
 /**
  * 判断当前路由类型, global: 全局路由, main: 主入口路由
  * @param {*} route 当前路由
  */
-function fnCurrentRouteType (route, globalRoutes = []) {
-  var temp = []
-  for (var i = 0; i < globalRoutes.length; i++) {
-    if (route.path === globalRoutes[i].path) {
-      return 'global'
-    } else if (globalRoutes[i].children && globalRoutes[i].children.length >= 1) {
-      temp = temp.concat(globalRoutes[i].children)
-    }
-  }
-  return temp.length >= 1 ? fnCurrentRouteType(route, temp) : 'main'
-}
+// function fnCurrentRouteType (route, globalRoutes = []) {
+//   var temp = []
+//   for (var i = 0; i < globalRoutes.length; i++) {
+//     if (route.path === globalRoutes[i].path) {
+//       return 'global'
+//     } else if (globalRoutes[i].children && globalRoutes[i].children.length >= 1) {
+//       temp = temp.concat(globalRoutes[i].children)
+//     }
+//   }
+//   return temp.length >= 1 ? fnCurrentRouteType(route, temp) : 'main'
+// }
 
 /**
  * 添加动态(菜单)路由
  * @param {*} menuList 菜单列表
  * @param {*} routes 递归创建的动态(菜单)路由
  */
-function fnAddDynamicMenuRoutes (menuList = [], routes = []) {
-  var temp = []
-  for (var i = 0; i < menuList.length; i++) {
-    if (menuList[i].list && menuList[i].list.length >= 1) {
-      temp = temp.concat(menuList[i].list)
-    } else if (menuList[i].url && /\S/.test(menuList[i].url)) {
-      menuList[i].url = menuList[i].url.replace(/^\//, '')
-      var route = {
-        path: menuList[i].url.replace(/\//g, '-'),
-        component: null,
-        name: menuList[i].url.replace(/\//g, '-'),
-        meta: {
-          menuId: menuList[i].menuId,
-          title: menuList[i].name,
-          isDynamic: true,
-          isTab: true,
-          iframeUrl: ''
-        }
-      }
-      // url以http[s]://开头, 通过iframe展示
-      if (isURL(menuList[i].url)) {
-        route['path'] = `i-${menuList[i].menuId}`
-        route['name'] = `i-${menuList[i].menuId}`
-        route['meta']['iframeUrl'] = menuList[i].url
-      } else {
-        try {
-          route['component'] = _import(`${menuList[i].url}`) || null
-        } catch (e) { }
-      }
-      routes.push(route)
-    }
-  }
-  if (temp.length >= 1) {
-    fnAddDynamicMenuRoutes(temp, routes)
-  } else {
-    mainRoutes.name = 'main-dynamic'
-    mainRoutes.children = routes
-    router.addRoutes([
-      mainRoutes,
-      { path: '*', redirect: { name: '404' } }
-    ])
-    sessionStorage.setItem('dynamicMenuRoutes', JSON.stringify(mainRoutes.children || '[]'))
-    console.log('\n')
-    console.log('%c!<-------------------- 动态(菜单)路由 s -------------------->', 'color:blue')
-    console.log(mainRoutes.children)
-    console.log('%c!<-------------------- 动态(菜单)路由 e -------------------->', 'color:blue')
-  }
-}
+// function fnAddDynamicMenuRoutes (menuList = [], routes = []) {
+//   var temp = []
+//   for (var i = 0; i < menuList.length; i++) {
+//     if (menuList[i].list && menuList[i].list.length >= 1) {
+//       temp = temp.concat(menuList[i].list)
+//     } else if (menuList[i].url && /\S/.test(menuList[i].url)) {
+//       menuList[i].url = menuList[i].url.replace(/^\//, '')
+//       var route = {
+//         path: menuList[i].url.replace(/\//g, '-'),
+//         component: null,
+//         name: menuList[i].url.replace(/\//g, '-'),
+//         meta: {
+//           menuId: menuList[i].menuId,
+//           title: menuList[i].name,
+//           isDynamic: true,
+//           isTab: true,
+//           iframeUrl: ''
+//         }
+//       }
+//       // url以http[s]://开头, 通过iframe展示
+//       if (isURL(menuList[i].url)) {
+//         route['path'] = `i-${menuList[i].menuId}`
+//         route['name'] = `i-${menuList[i].menuId}`
+//         route['meta']['iframeUrl'] = menuList[i].url
+//       } else {
+//         try {
+//           route['component'] = _import(`${menuList[i].url}`) || null
+//         } catch (e) { }
+//       }
+//       routes.push(route)
+//     }
+//   }
+//   if (temp.length >= 1) {
+//     fnAddDynamicMenuRoutes(temp, routes)
+//   } else {
+//     mainRoutes.name = 'main-dynamic'
+//     mainRoutes.children = routes
+//     router.addRoutes([
+//       mainRoutes,
+//       { path: '*', redirect: { name: '404' } }
+//     ])
+//     sessionStorage.setItem('dynamicMenuRoutes', JSON.stringify(mainRoutes.children || '[]'))
+//     console.log('\n')
+//     console.log('%c!<-------------------- 动态(菜单)路由 s -------------------->', 'color:blue')
+//     console.log(mainRoutes.children)
+//     console.log('%c!<-------------------- 动态(菜单)路由 e -------------------->', 'color:blue')
+//   }
+// }
 router.afterEach(() => {
   // finish progress bar
   NProgress.done()

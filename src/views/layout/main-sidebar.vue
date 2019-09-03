@@ -13,11 +13,11 @@
         :collapse="sidebarFold"
         :collapseTransition="false"
         class="site-sidebar__menu">
-        <el-menu-item index="home" @click="$router.push({ name: 'home' })">
+        <!-- <el-menu-item index="home" @click="$router.push({ name: 'home' })">
           <icon-svg name="shouye" class="site-sidebar__menu-icon"></icon-svg>
           <span slot="title">首页</span>
-        </el-menu-item>
-        <el-submenu index="demo">
+        </el-menu-item> -->
+        <!-- <el-submenu index="demo">
           <template slot="title">
             <icon-svg name="shoucang" class="site-sidebar__menu-icon"></icon-svg>
             <span>demo</span>
@@ -26,18 +26,36 @@
             <icon-svg name="tubiao" class="site-sidebar__menu-icon"></icon-svg>
             <span slot="title">echarts</span>
           </el-menu-item>
-          <!-- <el-menu-item index="demo-ueditor" @click="$router.push({ name: 'demo-ueditor' })">
+          <el-menu-item index="demo-ueditor" @click="$router.push({ name: 'demo-ueditor' })">
             <icon-svg name="tubiao" class="site-sidebar__menu-icon"></icon-svg>
             <span slot="title">ueditor</span>
-          </el-menu-item> -->
+          </el-menu-item>
           <el-menu-item index="demo-d3" @click="$router.push({ name: 'demo-d3' })">
             <icon-svg name="tubiao" class="site-sidebar__menu-icon"></icon-svg>
             <span slot="title">d3</span>
           </el-menu-item>
-        </el-submenu>
+        </el-submenu> -->
         <el-menu-item index="passengerFlowWaring" @click="$router.push({ name: 'passengerFlowWaring' })">
           <icon-svg name="shouye" class="site-sidebar__menu-icon"></icon-svg>
           <span slot="title">客流监测与预警</span>
+        </el-menu-item>
+        <el-submenu index="passengerFlowType">
+          <template slot="title">
+            <icon-svg name="shoucang" class="site-sidebar__menu-icon"></icon-svg>
+            <span>客流时空状态分布</span>
+          </template>
+          <el-menu-item index="network" @click="$router.push({ name: 'network' })">
+            <icon-svg name="tubiao" class="site-sidebar__menu-icon"></icon-svg>
+            <span slot="title">线网分布</span>
+          </el-menu-item>
+          <el-menu-item index="od" @click="$router.push({ name: 'od' })">
+            <icon-svg name="tubiao" class="site-sidebar__menu-icon"></icon-svg>
+            <span slot="title">OD分布</span>
+          </el-menu-item>
+        </el-submenu>
+        <el-menu-item index="networkComparison" @click="$router.push({ name: 'networkComparison' })">
+          <icon-svg name="shouye" class="site-sidebar__menu-icon"></icon-svg>
+          <span slot="title">线网运力运量对比分析</span>
         </el-menu-item>
         <sub-menu
           v-for="menu in menuList"
