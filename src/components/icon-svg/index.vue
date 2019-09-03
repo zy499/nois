@@ -1,8 +1,16 @@
+<!--
+ * @Description: svgicon
+ * @Author: zy
+ * @Date: 2019-09-03 20:45:11
+ * @LastEditors: zy
+ * @LastEditTime: 2019-09-03 23:09:35
+ -->
 <template>
   <svg
     :class="getClassName"
     :width="width"
     :height="height"
+    :style="{'width': width || '1em','height': height || '1em'}"
     aria-hidden="true">
     <use :xlink:href="getName"></use>
   </svg>
@@ -43,8 +51,6 @@
 
 <style>
   .icon-svg {
-    width: 1em;
-    height: 1em;
     fill: currentColor;
     overflow: hidden;
     border-left: none;

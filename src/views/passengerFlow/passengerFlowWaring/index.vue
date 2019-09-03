@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 17:01:27
  * @LastEditors: zy
- * @LastEditTime: 2019-09-03 20:50:57
+ * @LastEditTime: 2019-09-03 23:18:55
  -->
 <template>
   <div class="passengerFlowWaringBody">
@@ -13,7 +13,11 @@
         <el-row type="flex" justify="space-between">
           <el-col :span="8">
             <p class="title">客流监测与预警</p>
-            
+            <p class="font-size12 color_556270">
+              <span
+                class="yj_biaoge_date"
+              >{{yj_biaoge_date}}&emsp;{{"星期"+"日一二三四五六".charAt(new Date().getDay())}}</span>
+            </p>
           </el-col>
           <el-col :span="8" class="text_right margin-top3 flexStart flex-flow-reverse">
             <div style="width:36px;height:36px;background:rgba(0,0,0,0.05);margin-left:10px;"></div>
@@ -47,9 +51,13 @@
     </el-row>
     <el-card class="yujingbiaoge margin-bottom30">
       <div slot="header">
-        <span class="yj_biaoge_title">{{yj_biaoge_title}}指标</span>
-        <span class="yj_biaoge_date">{{yj_biaoge_date}}&emsp;{{"星期"+"日一二三四五六".charAt(new Date().getDay())}}</span>
-        <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
+        <template>
+          <div class="flexStart align-items-center padding_left_20">
+            <span class="yj_biaoge_title">{{yj_biaoge_title}}指标</span>
+            <icon-svg name="wenhao" width="12px" height="12px"></icon-svg>
+          </div>
+        </template>
+        <!-- <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag> -->
       </div>
       <div class="cont">
         <LintTable />
@@ -86,7 +94,7 @@
                     >{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
                     <div>
                       <p class="font-size12 font_weight_bold padding-bottom2">{{item.name}}</p>
-                      <div class="flexStart font-size12 corol_909399">
+                      <div class="flexStart font-size12 color_909399">
                         <span class="margin_right_10">客运量：{{item.keyunliang}}</span>
                         <span>⬆️</span>
                         <span>{{item.shangshen}}</span>
@@ -114,7 +122,7 @@
                     >{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
                     <div>
                       <p class="font-size12 font_weight_bold padding-bottom2">{{item.name}}</p>
-                      <div class="flexStart font-size12 corol_909399">
+                      <div class="flexStart font-size12 color_909399">
                         <span class="margin_right_10">客运量：{{item.keyunliang}}</span>
                         <span>⬆️</span>
                         <span>{{item.shangshen}}</span>
@@ -142,7 +150,7 @@
                     >{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
                     <div>
                       <p class="font-size12 font_weight_bold padding-bottom2">{{item.name}}</p>
-                      <div class="flexStart font-size12 corol_909399">
+                      <div class="flexStart font-size12 color_909399">
                         <span class="margin_right_10">客运量：{{item.keyunliang}}</span>
                         <span>⬆️</span>
                         <span>{{item.shangshen}}</span>
@@ -170,7 +178,7 @@
                     >{{item.name.split('号')[0].length !== 2 ? '0'+item.name.split('号')[0] : item.name.split('号')[0]}}</el-tag>
                     <div>
                       <p class="font-size12 font_weight_bold padding-bottom2">{{item.name}}</p>
-                      <div class="flexStart font-size12 corol_909399">
+                      <div class="flexStart font-size12 color_909399">
                         <span class="margin_right_10">客运量：{{item.keyunliang}}</span>
                         <span>⬆️</span>
                         <span>{{item.shangshen}}</span>
@@ -261,7 +269,7 @@
             <ul>
               <li v-for="(item,index) in zuidayongji_options" :key="index">
                 <div>
-                  <p class="font-size14">{{item.start}}  →  {{item.end}} &nbsp; ({{item.satus}})</p>
+                  <p class="font-size14">{{item.start}} → {{item.end}} &nbsp; ({{item.satus}})</p>
                 </div>
                 <div class="font_weight_bold">{{item.shangshen}}</div>
               </li>
@@ -280,7 +288,7 @@
             <ul>
               <li v-for="(item,index) in zuidayongji_options" :key="index">
                 <div>
-                  <p class="font-size14">{{item.start}}  →  {{item.end}} &nbsp; ({{item.satus}})</p>
+                  <p class="font-size14">{{item.start}} → {{item.end}} &nbsp; ({{item.satus}})</p>
                 </div>
                 <div class="font_weight_bold">{{item.shangshen}}</div>
               </li>
@@ -290,7 +298,10 @@
       </el-col>
     </el-row>
     <!-- content end -->
-    <el-button type="primary" @click="$router.push({name:'stationDetails',params:{stationName:'火车南站',routeObj:$route}})">车站详情</el-button>
+    <el-button
+      type="primary"
+      @click="$router.push({name:'stationDetails',params:{stationName:'火车南站',routeObj:$route}})"
+    >车站详情</el-button>
     <el-button type="primary" @click="test">test</el-button>
   </div>
 </template>
@@ -413,7 +424,10 @@ export default {
   mounted () {
     var _this = this // 声明一个变量指向Vue实例this，保证作用域一致
     this.timer = setInterval(function () {
-      _this.yj_biaoge_date = parseTime(new Date(), '{y}年{m}月{d}日 {h}:{i}:{s}') // 修改数据date
+      _this.yj_biaoge_date = parseTime(
+        new Date(),
+        '{y}年{m}月{d}日 {h}:{i}:{s}'
+      ) // 修改数据date
     }, 1000)
   },
   // 实例销毁之前调用。主要解绑一些使用addEventListener监听的事件等
@@ -441,6 +455,7 @@ export default {
         color: #101010;
         font-size: 20px;
         margin-bottom: 10px;
+        font-weight: 600;
       }
     }
   }
@@ -452,15 +467,19 @@ export default {
     border-left: none;
   }
   .yujingbiaoge {
+    /deep/ .el-card__body {
+      padding: 10px 30px 30px 30px;
+    }
     min-height: 272px;
     .yj_biaoge_title {
-      color: rgba(16, 16, 16, 1);
-      font-size: 16px;
+      color: #202e3d;
+      font-size: 14px;
       text-align: left;
-      margin-right: 30px;
+      margin-right: 4px;
+      font-weight: 600;
     }
     .yj_biaoge_date {
-      color: rgba(16, 16, 16, 0.5);
+      color: #202e3d;
       font-size: 12px;
       text-align: left;
       margin-right: 10px;
@@ -474,7 +493,7 @@ export default {
     height: 600px;
     .xianwang_map_cont {
       height: 500px;
-      background-color: #f1f4f5;
+      background-color: #f5f6f7;
     }
   }
   .xianwang_keliu_cont {
@@ -486,9 +505,9 @@ export default {
       }
     }
   }
-  .border{
+  .border {
     margin-top: 34px;
-    border: 1px solid #e4e7ed
+    border: 1px solid #e4e7ed;
   }
   .chezhan_keliu_cont {
     ul {

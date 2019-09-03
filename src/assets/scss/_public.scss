@@ -20,9 +20,13 @@
 .font-size20 {
   font-size: 20px !important;
 }
-.corol_909399 {
+//color
+.color_909399 {
   color: #909399;
   
+}
+.color_556270 {
+  color: #556270;
 }
 .font_weight_bold {
   font-weight: bold
@@ -33,6 +37,9 @@
 }
 .margin_right_10 {
   margin-right: 10px;
+}
+.margin_right_4 {
+  margin-right: 4px;
 }
 .margin_right_20 {
   margin-right: 10px;
@@ -49,6 +56,9 @@
 //padding
 .padding-bottom2 {
   padding-bottom: 2px;
+}
+.padding_left_20 {
+  padding-left: 20px;
 }
 // flex
 .flexStart {
@@ -70,7 +80,9 @@
 .el-table::before {
   height: 0;
 }
-
+.el-card.is-always-shadow {
+  box-shadow: 0 2px 12px 0 rgba(0, 122, 255, 0.08);
+}
 // 不嵌套左菜单 居中样式
 
 .noSidebar_cont {

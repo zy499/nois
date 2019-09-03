@@ -3,71 +3,67 @@
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-08-31 21:38:44
+ * @LastEditTime: 2019-09-03 23:16:04
  -->
 <template>
   <div class="tp-line-table-box">
     <el-table :data="tableData" style="font-size:14px;text-align:right;width:95%;">
-      <el-table-column prop="name" label width="70px">
+      <el-table-column prop="name" label width="100px">
         <template slot-scope="scope">
-          <div v-if="scope.row.name == '今日预计'" @click="openJryj">
-            <span class="text-decoration">{{scope.row.name}}</span>
+          <div class="flexStart align-items-center" v-if="scope.row.name == '预计今日'" @click="openJryj">
+            <span class="text-decoration margin_right_4">{{scope.row.name}}</span>
+            <icon-svg name="columnar"></icon-svg>
           </div>
           <div v-else>{{scope.row.name}}</div>
         </template>
       </el-table-column>
       <el-table-column prop="xwcxl" label="线路出行量" width="200px">
         <template slot-scope="scope">
-          <div v-if="scope.row.name == '今日预计'">
-            <span
-              :style="{'color': parseInt(scope.row.xwcxl.replace(/,/g,'')) > 1000000 ? 'red':'green'}"
-            >{{scope.row.xwcxl}}</span>
+          <div v-if="scope.row.name == '预计今日'" class="font_weight_bold">
+            <span v-if="parseInt(scope.row.xwcxl.replace(/,/g,'')) > 1000000" style="color:red;">{{scope.row.xwcxl}}&nbsp;↑</span>
+            <span v-else style="color:green;">{{scope.row.xwcxl}}&nbsp;↓</span>
           </div>
           <div v-else>{{scope.row.xwcxl}}</div>
         </template>
       </el-table-column>
       <el-table-column prop="xwczl" label="线路出站量">
         <template slot-scope="scope">
-          <div v-if="scope.row.name == '今日预计'">
-            <span
-              :style="{'color': parseInt(scope.row.xwczl.replace(/,/g,'')) > 1000000 ? 'red':'green'}"
-            >{{scope.row.xwczl}}</span>
+          <div v-if="scope.row.name == '预计今日'" class="font_weight_bold">
+            <span v-if="parseInt(scope.row.xwczl.replace(/,/g,'')) > 1000000" style="color:red;">{{scope.row.xwczl}}&nbsp;↑</span>
+            <span v-else style="color:green;">{{scope.row.xwczl}}&nbsp;↓</span>
           </div>
           <div v-else>{{scope.row.xwczl}}</div>
         </template>
       </el-table-column>
       <el-table-column prop="xwhxl" label="线路换行量">
         <template slot-scope="scope">
-          <div v-if="scope.row.name == '今日预计'">
-            <span
-              :style="{'color': parseInt(scope.row.xwhxl.replace(/,/g,'')) > 2000000 ? 'red':'green'}"
-            >{{scope.row.xwhxl}}</span>
+          <div v-if="scope.row.name == '预计今日'" class="font_weight_bold">
+            <span v-if="parseInt(scope.row.xwhxl.replace(/,/g,'')) > 2000000" style="color:red;">{{scope.row.xwhxl}}&nbsp;↑</span>
+            <span v-else style="color:green;">{{scope.row.xwhxl}}&nbsp;↓</span>
           </div>
           <div v-else>{{scope.row.xwhxl}}</div>
         </template>
       </el-table-column>
       <el-table-column prop="xwkyl" label="线路客运量">
         <template slot-scope="scope">
-          <div v-if="scope.row.name == '今日预计'">
-            <span
-              :style="{'color': parseInt(scope.row.xwkyl.replace(/,/g,'')) > 2000000 ? 'red':'green'}"
-            >{{scope.row.xwkyl}}</span>
+          <div v-if="scope.row.name == '预计今日'" class="font_weight_bold">
+            <span v-if="parseInt(scope.row.xwkyl.replace(/,/g,'')) > 2000000" style="color:red;">{{scope.row.xwkyl}}&nbsp;↑</span>
+            <span v-else style="color:green;">{{scope.row.xwkyl}}&nbsp;↓</span>
           </div>
           <div v-else>{{scope.row.xwkyl}}</div>
         </template>
       </el-table-column>
       <el-table-column prop="xwzxrs" label="线路在网人数">
         <template slot-scope="scope">
-          <div v-if="scope.row.name == '今日预计'">
-            <span
-              :style="{'color': parseInt(scope.row.xwzxrs.replace(/,/g,'')) > 1000000 ? 'red':'green'}"
-            >{{scope.row.xwzxrs}}</span>
+          <div v-if="scope.row.name == '预计今日'" class="font_weight_bold">
+            <span v-if="parseInt(scope.row.xwzxrs.replace(/,/g,'')) > 1000000" style="color:red;">{{scope.row.xwzxrs}}&nbsp;↑</span>
+            <span v-else style="color:green;">{{scope.row.xwzxrs}}&nbsp;↓</span>
           </div>
           <div v-else>{{scope.row.xwzxrs}}</div>
         </template>
       </el-table-column>
     </el-table>
-    <!-- 今日预计弹窗 -->
+    <!-- 预计今日弹窗 -->
     <TodayEstimate :isShow="isShow" @closeDialogFather="getSonCancel" />
   </div>
 </template>
@@ -89,7 +85,7 @@ export default {
           xwzxrs: '12,808'
         },
         {
-          name: '今日预计',
+          name: '预计今日',
           xwcxl: '1,491,781',
           xwczl: '1,491,781',
           xwhxl: '1,491,781',
@@ -146,6 +142,9 @@ export default {
 <style lang="scss" scoped>
 .tp-line-table-box {
   /deep/ .el-table {
+    font-size: 14px;
+    color: #949EA8;
+    font-weight: 600;
     td {
       text-align: right;
     }
@@ -155,21 +154,17 @@ export default {
     }
     th {
       text-align: right;
-      color: rgba(16, 16, 16, 0.5);
-      font-size: 12px;
     }
     .el-table__body-wrapper {
       .el-table__body {
         .el-table__row {
           td:first-child {
             text-align: left;
-            color: rgba(16, 16, 16, 0.5);
-            font-size: 12px;
           }
         }
         .el-table__row:nth-child(1) {
-          color: rgba(16, 16, 16, 1);
           font-size: 24px;
+          color: #202E3D;
         }
       }
     }
