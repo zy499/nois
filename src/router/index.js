@@ -1,9 +1,9 @@
 /*
- * @Description: file content
+ * @Description: 全局路由入口
  * @Author: zy
  * @Date: 2019-08-22 21:28:23
  * @LastEditors: zy
- * @LastEditTime: 2019-09-01 21:09:26
+ * @LastEditTime: 2019-09-03 21:24:18
  */
 /**
  * 全站路由配置
@@ -82,48 +82,6 @@ const mainRoutes = {
     next()
   }
 }
-// 主入口路由(需嵌套上左右整体布局)
-// const mainRoutes = {
-//   path: '/',
-//   component: _import('layout/main'),
-//   name: 'main',
-//   redirect: { name: 'home' },
-//   meta: { title: '主入口整体布局' },
-//   children: [
-//     {
-//       path: '/mainCont',
-//       component: _import('layout/mainSidebarCont'),
-//       name: 'mainCont',
-//       meta: { title: '整体' },
-//       children: [
-//         // 通过meta对象设置路由展示方式
-//         // 1. isTab: 是否通过tab展示内容, true: 是, false: 否
-//         // 2. iframeUrl: 是否通过iframe嵌套展示内容, '以http[s]://开头': 是, '': 否
-//         // 提示: 如需要通过iframe嵌套展示内容, 但不通过tab打开, 请自行创建组件使用iframe处理!
-//         { path: '/home', component: _import('common/home'), name: 'home', meta: { title: '首页' } },
-//         { path: '/theme', component: _import('common/theme'), name: 'theme', meta: { title: '主题' } },
-//         { path: '/demo-echarts', component: _import('demo/echarts'), name: 'demo-echarts', meta: { title: 'demo-echarts', isTab: true } },
-//         { path: '/demo-ueditor', component: _import('demo/ueditor'), name: 'demo-ueditor', meta: { title: 'demo-ueditor', isTab: true } },
-//         { path: '/demo-d3', component: _import('demo/d3'), name: 'demo-d3', meta: { title: 'demo-d3', isTab: true } },
-//         { path: '/passengerFlowWaring', component: _import('passengerFlow/passengerFlowWaring/index'), name: 'passengerFlowWaring', meta: { title: '客流监测与预警', isTab: true } }
-//       ]
-//     },
-//     {
-//       path: '/test',
-//       component: _import('layout/test'),
-//       name: 'test',
-//       meta: { title: 'test' }
-//     }
-//   ],
-//   beforeEnter (to, from, next) {
-//     let token = Vue.cookie.get('token')
-//     if (!token || !/\S/.test(token)) {
-//       clearLoginInfo()
-//       next({ name: 'login' })
-//     }
-//     next()
-//   }
-// }
 const router = new Router({
   mode: 'hash',
   scrollBehavior: () => ({ y: 0 }),

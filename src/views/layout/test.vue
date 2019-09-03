@@ -3,13 +3,13 @@
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-09-03 00:48:16
+ * @LastEditTime: 2019-09-03 21:24:39
  -->
 <template>
   <div>
     <h1>test</h1>
     <!-- <router-link to="/home">home</router-link> -->
-    <el-button type="primary" @click="$router.push({name:'home'})">home</el-button>
+    <el-button type="primary" @click="$router.push({name:'passengerFlowWaring'})">passengerFlowWaring</el-button>
     <div>mapState:{{count}}</div>
     <div>mapGetters:{{getCount}}</div>
     <p>name:{{paerson.name}}</p>

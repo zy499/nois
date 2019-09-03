@@ -1,3 +1,10 @@
+<!--
+ * @Description: 预计今日
+ * @Author: zy
+ * @Date: 2019-08-31 01:42:29
+ * @LastEditors: zy
+ * @LastEditTime: 2019-09-03 21:04:41
+ -->
 <template>
   <div class="dialogBox">
     <el-dialog title="预计今日" :visible.sync="dialogVisible" @close="closeDialog" width="60%">
@@ -128,11 +135,6 @@ export default {
     margin: 20px 0px;
     span {
       font-size: 12px;
-    }
-    /deep/ .el-input__inner {
-      height: 24px;
-      font-size: 8px;
-      line-height: 24px;
     }
     .charts {
       .chart-box {
