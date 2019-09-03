@@ -3,15 +3,11 @@
  * @Author: zy
  * @Date: 2019-09-02 21:09:11
  * @LastEditors: zy
- * @LastEditTime: 2019-09-03 00:24:48
+ * @LastEditTime: 2019-09-03 21:44:03
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
 import cloneDeep from 'lodash/cloneDeep'
-// import common from './modules/common'
-// import user from './modules/user'
-// import passengerFlowWaring from './modules/passengerFlowWaring'
-// import test from './test'
 Vue.use(Vuex)
 const modulesFiles = require.context('./modules', true, /\.js$/)
 
