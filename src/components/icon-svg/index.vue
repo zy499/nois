@@ -47,5 +47,6 @@
     height: 1em;
     fill: currentColor;
     overflow: hidden;
+    border-left: none;
   }
 </style>

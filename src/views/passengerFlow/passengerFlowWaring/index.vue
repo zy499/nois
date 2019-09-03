@@ -48,7 +48,7 @@
     <el-card class="yujingbiaoge margin-bottom30">
       <div slot="header">
         <span class="yj_biaoge_title">{{yj_biaoge_title}}指标</span>
-        <span class="yj_biaoge_date">{{yj_biaoge_date}}</span>
+        <span class="yj_biaoge_date">{{yj_biaoge_date}}&emsp;{{"星期"+"日一二三四五六".charAt(new Date().getDay())}}</span>
         <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
       </div>
       <div class="cont">
@@ -413,7 +413,7 @@ export default {
   mounted () {
     var _this = this // 声明一个变量指向Vue实例this，保证作用域一致
     this.timer = setInterval(function () {
-      _this.yj_biaoge_date = parseTime(new Date(), '{y}/{m}/{d} {h}:{i}:{s}') // 修改数据date
+      _this.yj_biaoge_date = parseTime(new Date(), '{y}年{m}月{d}日 {h}:{i}:{s}') // 修改数据date
     }, 1000)
   },
   // 实例销毁之前调用。主要解绑一些使用addEventListener监听的事件等

@@ -8,7 +8,7 @@
 <template>
   <nav class="site-navbar" :class="'site-navbar--' + navbarLayoutType">
     <div class="site-navbar__header">
-      <h1 class="site-navbar__brand" @click="$router.push({ name: 'home' })">
+      <h1 class="site-navbar__brand" @click="$router.push({ name: 'passengerFlowWaring' })">
         <a class="site-navbar__brand-lg" href="javascript:;">
           <img
             src="../../assets/img/logo1@1x.png"

@@ -36,16 +36,16 @@
           </el-menu-item>
         </el-submenu> -->
         <el-menu-item index="passengerFlowWaring" @click="$router.push({ name: 'passengerFlowWaring' })">
-          <icon-svg name="shouye" class="site-sidebar__menu-icon"></icon-svg>
+          <icon-svg name="monitor" class="site-sidebar__menu-icon"></icon-svg>
           <span slot="title">客流监测与预警</span>
         </el-menu-item>
         <el-submenu index="passengerFlowType">
           <template slot="title">
-            <icon-svg name="shoucang" class="site-sidebar__menu-icon"></icon-svg>
+            <icon-svg name="map" class="site-sidebar__menu-icon"></icon-svg>
             <span>客流时空状态分布</span>
           </template>
           <el-menu-item index="network" @click="$router.push({ name: 'network' })">
-            <icon-svg name="tubiao" class="site-sidebar__menu-icon"></icon-svg>
+            <icon-svg name="wireNetwork" class="site-sidebar__menu-icon"></icon-svg>
             <span slot="title">线网分布</span>
           </el-menu-item>
           <el-menu-item index="od" @click="$router.push({ name: 'od' })">
@@ -54,7 +54,7 @@
           </el-menu-item>
         </el-submenu>
         <el-menu-item index="networkComparison" @click="$router.push({ name: 'networkComparison' })">
-          <icon-svg name="shouye" class="site-sidebar__menu-icon"></icon-svg>
+          <icon-svg name="analysis" class="site-sidebar__menu-icon"></icon-svg>
           <span slot="title">线网运力运量对比分析</span>
         </el-menu-item>
         <sub-menu
