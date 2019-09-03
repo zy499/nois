@@ -1,9 +1,9 @@
 <!--
- * @Description: file content
+ * @Description: 客流监测与预警  主页
  * @Author: zy
  * @Date: 2019-08-24 17:01:27
  * @LastEditors: zy
- * @LastEditTime: 2019-09-02 23:41:29
+ * @LastEditTime: 2019-09-03 20:50:57
  -->
 <template>
   <div class="passengerFlowWaringBody">

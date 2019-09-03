@@ -1,9 +1,9 @@
 <!--
- * @Description: file content
+ * @Description: 车站详情
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-09-01 22:34:26
+ * @LastEditTime: 2019-09-03 20:50:20
  -->
 <template>
   <div>
