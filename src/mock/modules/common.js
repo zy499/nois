@@ -1,3 +1,10 @@
+/*
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-08-22 21:28:23
+ * @LastEditors: zy
+ * @LastEditTime: 2019-09-05 22:23:03
+ */
 import Mock from 'mockjs'
 
 // 登录
@@ -8,9 +15,11 @@ export function login () {
     type: 'post',
     data: {
       'msg': 'success',
-      'code': 0,
-      'expire': Mock.Random.natural(60 * 60 * 1, 60 * 60 * 12),
-      'token': Mock.Random.string('abcdefghijklmnopqrstuvwxyz0123456789', 32)
+      'code': '00000000',
+      'data': {
+        'expire': Mock.Random.natural(60 * 60 * 1, 60 * 60 * 12),
+        'token': Mock.Random.string('abcdefghijklmnopqrstuvwxyz0123456789', 32)
+      }
     }
   }
 }
@@ -23,7 +32,7 @@ export function logout () {
     type: 'post',
     data: {
       'msg': 'success',
-      'code': 0
+      'code': '00000000'
     }
   }
 }

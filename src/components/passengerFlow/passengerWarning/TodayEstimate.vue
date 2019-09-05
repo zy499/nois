@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-09-05 14:19:59
+ * @LastEditTime: 2019-09-05 23:58:42
  -->
 <template>
   <div class="dialogBox">
@@ -43,7 +43,7 @@
         </div>
         <div class="charts">
           <p>09.24之后为测试数据</p>
-          <div class="chart-container">
+          <div>
             <BarChart id="testBar" height="400px" width="100%" />
           </div>
           
@@ -54,7 +54,8 @@
 </template>
 
 <script>
-import BarChart from '@/components/echarts/bar'
+// import BarChart from '@/components/echarts/bar'
+import BarChart from '@/components/vcharts/bar'
 export default {
   props: {
     isShow: {

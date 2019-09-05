@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-29 10:26:04
  * @LastEditors: zy
- * @LastEditTime: 2019-09-05 16:00:57
+ * @LastEditTime: 2019-09-05 22:09:15
  */
 import Mock from 'mockjs'
 import * as common from './modules/common'
@@ -18,21 +18,21 @@ import * as sysUser from './modules/sys-user'
 // tips
 // 1. 开启/关闭[业务模块]拦截, 通过调用fnCreate方法[isOpen参数]设置.
 // 2. 开启/关闭[业务模块中某个请求]拦截, 通过函数返回对象中的[isOpen属性]设置.
-fnCreate(common, false)
-fnCreate(jobSchedule, false)
-fnCreate(oss, false)
-fnCreate(sysConfig, false)
-fnCreate(sysLog, false)
-fnCreate(sysMenu, false)
-fnCreate(sysRole, false)
-fnCreate(sysUser, false)
+fnCreate(common, true)
+fnCreate(jobSchedule, true)
+fnCreate(oss, true)
+fnCreate(sysConfig, true)
+fnCreate(sysLog, true)
+fnCreate(sysMenu, true)
+fnCreate(sysRole, true)
+fnCreate(sysUser, true)
 
 /**
  * 创建mock模拟数据
  * @param {*} mod 模块
  * @param {*} isOpen 是否开启?
  */
-function fnCreate (mod, isOpen = false) {
+function fnCreate (mod, isOpen = true) {
   if (isOpen) {
     for (var key in mod) {
       ((res) => {

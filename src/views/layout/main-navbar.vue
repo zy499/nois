@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 12:04:28
  * @LastEditors: zy
- * @LastEditTime: 2019-09-02 23:38:20
+ * @LastEditTime: 2019-09-05 22:41:50
  -->
 <template>
   <nav class="site-navbar" :class="'site-navbar--' + navbarLayoutType">
@@ -188,7 +188,7 @@ export default {
             method: 'post',
             data: this.$http.adornData()
           }).then(({ data }) => {
-            if (data && data.code === 0) {
+            if (data && data.code === '00000000') {
               clearLoginInfo()
               this.$router.push({ name: 'login' })
             }

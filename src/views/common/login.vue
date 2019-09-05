@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-22 21:28:23
  * @LastEditors: zy
- * @LastEditTime: 2019-09-05 17:14:01
+ * @LastEditTime: 2019-09-05 22:42:59
  -->
 <template>
   <div class="site-wrapper site-page--login">
@@ -75,12 +75,13 @@ export default {
       this.$refs['dataForm'].validate(valid => {
         if (valid) {
           login({
-            account: this.dataForm.userName,
+            userName: this.dataForm.userName,
             password: Base64.encode(
               md5(this.dataForm.password) + ';' + new Date()
             )
+            // password: this.dataForm.password
           }).then(({ data }) => {
-            this.$cookie.set('token', data.token)
+            this.$cookie.set('token', data.data.token)
             this.$router.replace({ name: 'passengerFlowWaring' })
           })
           // this.$http({

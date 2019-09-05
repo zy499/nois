@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-29 10:26:16
  * @LastEditors: zy
- * @LastEditTime: 2019-09-05 17:28:53
+ * @LastEditTime: 2019-09-05 22:29:52
  */
 import Vue from 'vue'
 import axios from 'axios'
@@ -53,7 +53,7 @@ http.interceptors.response.use(response => {
       })
       return Promise.reject(response)
     } else {
-      return Promise.resolve(response.data)
+      return Promise.resolve(response)
     }
   } else {
     return Promise.reject(response)

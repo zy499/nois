@@ -1,3 +1,10 @@
+/*
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-08-22 21:28:23
+ * @LastEditors: zy
+ * @LastEditTime: 2019-09-05 22:23:39
+ */
 import Mock from 'mockjs'
 
 // 生成数据列表
@@ -43,8 +50,10 @@ export function info () {
     type: 'get',
     data: {
       'msg': 'success',
-      'code': 0,
-      'user': dataList[0]
+      'code': '00000000',
+      'data': {
+        'user': dataList[0]
+      }
     }
   }
 }

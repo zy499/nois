@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-29 13:34:05
  * @LastEditors: zy
- * @LastEditTime: 2019-09-05 17:24:11
+ * @LastEditTime: 2019-09-05 22:40:57
  -->
 <template>
   <div
@@ -68,8 +68,8 @@ import { getUserInfo } from '@/api/user'
     created () {
       getUserInfo().then(({ data }) => {
         this.loading = false
-        this.userId = data.user.userId
-        this.userName = data.user.username
+        this.userId = data.data.user.userId
+        this.userName = data.data.user.username
       })
     },
     mounted () {
