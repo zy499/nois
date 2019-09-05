@@ -78,7 +78,11 @@
 .align-items-center {
   align-items: center;
 }
-
+.chart-container{
+  position: relative;
+  width: 100%;
+  height: calc(50vh - 84px);
+}
 // element 重置样式
 .el-table::before {
   height: 0;

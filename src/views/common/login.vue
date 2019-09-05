@@ -3,44 +3,44 @@
  * @Author: zy
  * @Date: 2019-08-22 21:28:23
  * @LastEditors: zy
- * @LastEditTime: 2019-08-22 23:10:10
+ * @LastEditTime: 2019-09-05 17:14:01
  -->
 <template>
-  <div class='site-wrapper site-page--login'>
-    <div class='site-content__wrapper'>
-      <div class='site-content'>
-        <img class='ncccLogo' src='../../assets/img/nccclogo.png' alt />
-        <img class='CDmetroLogo' src='../../assets/img/CDmetrologo.png' alt />
-        <div class='login-main'>
-          <p class='login-title'>登录</p>
-          <p class='login-title-blck'>Hi，欢迎回来</p>
+  <div class="site-wrapper site-page--login">
+    <div class="site-content__wrapper">
+      <div class="site-content">
+        <img class="ncccLogo" src="../../assets/img/nccclogo.png" alt />
+        <img class="CDmetroLogo" src="../../assets/img/CDmetrologo.png" alt />
+        <div class="login-main">
+          <p class="login-title">登录</p>
+          <p class="login-title-blck">Hi，欢迎回来</p>
           <el-form
-            :model='dataForm'
-            :rules='dataRule'
-            ref='dataForm'
-            @keyup.enter.native='dataFormSubmit()'
+            :model="dataForm"
+            :rules="dataRule"
+            ref="dataForm"
+            @keyup.enter.native="dataFormSubmit()"
             status-icon
           >
             <template>
-              <p class='style-uaerName'>账号</p>
+              <p class="style-uaerName">账号</p>
             </template>
-            <el-form-item prop='userName'>
-              <el-input v-model='dataForm.userName'></el-input>
+            <el-form-item prop="userName">
+              <el-input v-model="dataForm.userName"></el-input>
             </el-form-item>
             <template>
-              <p class='style-password'>密码</p>
+              <p class="style-password">密码</p>
             </template>
-            <el-form-item prop='password'>
-              <el-input v-model='dataForm.password' ref="password" :type='passwordType'></el-input>
-              <span class='show-pwd' @click="showPwd">
-                <img src='../../assets/img/show.png' />
+            <el-form-item prop="password">
+              <el-input v-model="dataForm.password" ref="password" :type="passwordType"></el-input>
+              <span class="show-pwd" @click="showPwd">
+                <img src="../../assets/img/show.png" />
               </span>
             </el-form-item>
             <template>
-              <p class='forget_password'>忘记密码?</p>
+              <p class="forget_password">忘记密码?</p>
             </template>
             <el-form-item>
-              <el-button class='login-btn-submit' type='primary' @click='dataFormSubmit()'>登录</el-button>
+              <el-button class="login-btn-submit" type="primary" @click="dataFormSubmit()">登录</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -50,8 +50,9 @@
 </template>
 
 <script>
-// import md5 from 'js-md5'
-// import { Base64 } from 'js-base64'
+import md5 from 'js-md5'
+import { Base64 } from 'js-base64'
+import { login } from '@/api/user'
 export default {
   data () {
     return {
@@ -73,22 +74,31 @@ export default {
     dataFormSubmit () {
       this.$refs['dataForm'].validate(valid => {
         if (valid) {
-          this.$http({
-            url: this.$http.adornUrl('sys/login'),
-            method: 'post',
-            data: this.$http.adornData({
-              username: this.dataForm.userName,
-              // password: Base64.encode(md5(this.dataForm.password) + ';' + new Date())
-              password: this.dataForm.password
-            })
+          login({
+            account: this.dataForm.userName,
+            password: Base64.encode(
+              md5(this.dataForm.password) + ';' + new Date()
+            )
           }).then(({ data }) => {
-            if (data && data.code === 0) {
-              this.$cookie.set('token', data.token)
-              this.$router.replace({ name: 'home' })
-            } else {
-              this.$message.error(data.msg)
-            }
+            this.$cookie.set('token', data.token)
+            this.$router.replace({ name: 'passengerFlowWaring' })
           })
+          // this.$http({
+          //   url: this.$http.adornUrl('account/login'),
+          //   method: 'post',
+          //   data: this.$http.adornData({
+          //     // password: this.dataForm.password
+          //   })
+          // }).then(({ data }) => {
+          //   console.log(data)
+          //   // debugger
+          //   if (data && data.code === 0) {
+          //     this.$cookie.set('token', data.token)
+          //     this.$router.replace({ name: 'home' })
+          //   } else {
+          //     this.$message.error(data.msg)
+          //   }
+          // })
         }
       })
     },
@@ -123,7 +133,7 @@ export default {
     z-index: -1;
     width: 100%;
     height: 100%;
-    content: '';
+    content: "";
     background-image: url(~@/assets/img/rightimg@2x.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;

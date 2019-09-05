@@ -1,3 +1,10 @@
+/*
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-08-02 10:24:11
+ * @LastEditors: zy
+ * @LastEditTime: 2019-09-05 14:10:21
+ */
 import Vue from 'vue'
 import App from '@/App'
 import router from '@/router'                 // api: https://github.com/vuejs/vue-router
@@ -7,12 +14,14 @@ import '@/element-ui'                         // api: https://github.com/ElemeFE
 import '@/icons'                              // api: http://www.iconfont.cn/
 import '@/element-ui-theme'
 import '@/assets/scss/index.scss'
+import VCharts from 'v-charts'
 import Echarts from 'echarts'
 import httpRequest from '@/utils/httpRequest' // api: https://github.com/axios/axios
 import { isAuth } from '@/utils'
 import cloneDeep from 'lodash/cloneDeep'
 
 Vue.use(VueCookie)
+Vue.use(VCharts)
 Vue.use(Echarts)
 Vue.config.productionTip = false
 

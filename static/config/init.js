@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-25 19:40:48
  * @LastEditors: zy
- * @LastEditTime: 2019-08-25 20:41:42
+ * @LastEditTime: 2019-09-05 11:07:17
  */
 /**
  * 动态加载初始资源
@@ -17,7 +17,7 @@
     js: [
       // 插件, 放置业务之前加载, 以免业务需求依赖插件时, 还未加载出错
       // 插件 - echarts
-      window.SITE_CONFIG.cdnUrl + '/static/plugins/echarts-3.8.5/echarts.common.min.js',
+      // window.SITE_CONFIG.cdnUrl + '/static/plugins/echarts-3.8.5/echarts.common.min.js',
       // 插件 - ueditor
       // window.SITE_CONFIG.cdnUrl + '/static/plugins/ueditor-1.4.3.3/ueditor.config.js',
       // window.SITE_CONFIG.cdnUrl + '/static/plugins/ueditor-1.4.3.3/ueditor.all.min.js',

@@ -1,3 +1,10 @@
+/*
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-08-26 09:09:21
+ * @LastEditors: zy
+ * @LastEditTime: 2019-09-05 15:58:55
+ */
 'use strict'
 // Template version: 1.2.5
 // see http://vuejs-templates.github.io/webpack for documentation.
@@ -14,7 +21,7 @@ module.exports = {
     // 代理列表, 是否开启代理通过[./dev.env.js]配置
     proxyTable: devEnv.OPEN_PROXY === false ? {} : {
       '/proxyApi': {
-        target: 'http://2603426c6s.wicp.vip/renren-fast',
+        target: 'http://192.168.1.119:8081/',
         changeOrigin: true,
         pathRewrite: {
           '^/proxyApi': '/'

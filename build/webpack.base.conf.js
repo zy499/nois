@@ -1,3 +1,10 @@
+/*
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-08-02 10:24:11
+ * @LastEditors: zy
+ * @LastEditTime: 2019-09-05 11:07:31
+ */
 'use strict'
 const path = require('path')
 const utils = require('./utils')
@@ -98,6 +105,6 @@ module.exports = {
   // 引入外部库, 无需webpack打包处理
   externals: {
     mockjs: 'Mock',
-    echarts: 'echarts'
+    // echarts: 'echarts'
   }
 }

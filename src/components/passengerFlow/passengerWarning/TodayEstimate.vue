@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-09-03 21:04:41
+ * @LastEditTime: 2019-09-05 14:19:59
  -->
 <template>
   <div class="dialogBox">
@@ -43,7 +43,10 @@
         </div>
         <div class="charts">
           <p>09.24之后为测试数据</p>
-          <LineEchart />
+          <div class="chart-container">
+            <BarChart id="testBar" height="400px" width="100%" />
+          </div>
+          
         </div>
       </div>
     </el-dialog>
@@ -51,7 +54,7 @@
 </template>
 
 <script>
-import LineEchart from '@/components/echarts/line'
+import BarChart from '@/components/echarts/bar'
 export default {
   props: {
     isShow: {
@@ -60,7 +63,7 @@ export default {
     }
   },
   components: {
-    LineEchart
+    BarChart
   },
   data () {
     return {
