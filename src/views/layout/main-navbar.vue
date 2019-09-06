@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 12:04:28
  * @LastEditors: zy
- * @LastEditTime: 2019-09-05 22:41:50
+ * @LastEditTime: 2019-09-06 13:57:20
  -->
 <template>
   <nav class="site-navbar" :class="'site-navbar--' + navbarLayoutType">
@@ -33,9 +33,9 @@
       <div v-if="keliu_isShowSelect">
         <el-menu class="site-navbar__menu select_box" mode="horizontal">
           <el-menu-item style="padding-left:0;padding-right:10px;width: 120px;">
-            <el-select v-model="xianwang_val" @change="changeTitle"  placeholder="请选择">
+            <el-select v-model="xianlu_val" @change="changeTitle"  placeholder="请选择">
               <el-option
-                v-for="item in xianwang_option"
+                v-for="item in xianlu_option"
                 :label="item.label"
                 :value="item.value"
                 :key="item.value"
@@ -84,18 +84,30 @@
 <script>
 import UpdatePassword from './main-navbar-update-password'
 import { clearLoginInfo } from '@/utils'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapMutations } = createNamespacedHelpers('passengerFlowWaring')
 export default {
   data () {
     return {
       updatePassowrdVisible: false,
-      xianwang_option: this.$store.state.passengerFlowWaring.xianwang_option,
-      date_option: this.$store.state.passengerFlowWaring.date_option
+      xianlu_val: '',
+      date_val: ''
     }
   },
   components: {
     UpdatePassword
   },
+  created () {
+    this.xianlu_val = this.newXianlu_val
+    this.date_val = this.newDate_val
+  },
   computed: {
+    ...mapState({
+      xianlu_option: 'xianlu_option',
+      date_option: 'date_option',
+      newXianlu_val: 'xianlu_val',
+      newDate_val: 'date_val'
+    }),
     navbarLayoutType: {
       get () {
         return this.$store.state.common.navbarLayoutType
@@ -131,42 +143,22 @@ export default {
       get () {
         return this.$store.state.common.keliu_isSideBarFold
       }
-    },
-    xianwang_val: {
-      get () {
-        return this.$store.state.passengerFlowWaring.xianwang_val
-      },
-      set (val) {
-        this.$store.commit('passengerFlowWaring/update_xianwang_val', val)
-      }
-    },
-    date_val: {
-      get () {
-        return this.$store.state.passengerFlowWaring.date_val
-      },
-      set (val) {
-        this.$store.commit('passengerFlowWaring/update_date_val', val)
-      }
-    },
-    yj_biaoge_title: {
-      get () {
-        return this.$store.state.passengerFlowWaring.yj_biaoge_title
-      },
-      set (val) {}
-    },
-    yj_biaoge_tag: {
-      get () {
-        return this.$store.state.passengerFlowWaring.yj_biaoge_tag
-      },
-      set (val) {}
     }
   },
   methods: {
+    ...mapMutations({
+      xianluVal: 'UPDATE_XIANLU_VAL',
+      dateVal: 'UPDATE_DATE_VAL'
+      // xianluType: 'XIANLU_TYPE',
+      // dateType: 'DATE_TYPE'
+    }),
     changeDate (val) {
-      this.$store.commit('passengerFlowWaring/update_yj_biaoge_tag', val)
+      this.dateVal(val)
+      // this.$store.commit('passengerFlowWaring/update_yj_biaoge_tag', val)
     },
     changeTitle (val) {
-      this.$store.commit('passengerFlowWaring/update_yj_biaoge_title', val)
+      this.xianluVal(val)
+      // this.$store.commit('passengerFlowWaring/update_yj_biaoge_title', val)
     },
     // 修改密码
     updatePasswordHandle () {

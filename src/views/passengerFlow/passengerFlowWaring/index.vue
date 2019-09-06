@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 17:01:27
  * @LastEditors: zy
- * @LastEditTime: 2019-09-04 16:54:32
+ * @LastEditTime: 2019-09-06 14:28:00
  -->
 <template>
   <div class="passengerFlowWaringBody">
@@ -50,28 +50,7 @@
       </el-col>
     </el-row>
     <!-- 指标表格 start -->
-    <el-card class="yujingbiaoge margin-bottom30">
-      <div slot="header">
-        <template>
-          <div class="flexStart align-items-center padding_left_20">
-            <el-tooltip placement="right">
-              <div slot="content">
-                多行信息
-                <br />第二行信息
-              </div>
-              <div>
-                <span class="yj_biaoge_title">{{yj_biaoge_title}}指标</span>
-                <icon-svg name="wenhao" width="12px" height="12px"></icon-svg>
-              </div>
-            </el-tooltip>
-          </div>
-        </template>
-        <!-- <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag> -->
-      </div>
-      <div class="cont">
-        <LintTable />
-      </div>
-    </el-card>
+    <LineNetworkIndexTable />
     <!-- 指标表格 end -->
     <!-- 线网地图/客流排名 start -->
     <el-row class="xianwang_map_box margin-bottom30" type="flex" justify="space-between">
@@ -465,10 +444,12 @@
 
 <script>
 import { parseTime } from '@/utils'
-import LintTable from '@/components/passengerFlow/passengerWarning/LineTable'
+import {createNamespacedHelpers} from 'vuex'
+import LineNetworkIndexTable from '@/components/passengerFlow/passengerWarning/LineNetworkIndexTable'
+const { mapState } = createNamespacedHelpers('passengerFlowWaring')
 export default {
   components: {
-    LintTable
+    LineNetworkIndexTable
   },
   data () {
     return {
@@ -594,16 +575,10 @@ export default {
     }
   },
   computed: {
-    yj_biaoge_title: {
-      get () {
-        return this.$store.state.passengerFlowWaring.yj_biaoge_title
-      }
-    },
-    yj_biaoge_tag: {
-      get () {
-        return this.$store.state.passengerFlowWaring.yj_biaoge_tag
-      }
-    },
+    ...mapState({
+      yj_biaoge_title: 'xianlu_type',
+      yj_biaoge_tag: 'date_type'
+    }),
     // 格式化 线路颜色
     frm_backgrounds_and_corols () {
       let self = this
@@ -662,29 +637,6 @@ export default {
   }
   /deep/ .el-tabs__header {
     border-left: none;
-  }
-  .yujingbiaoge {
-    /deep/ .el-card__body {
-      padding: 10px 30px 30px 30px;
-    }
-    min-height: 272px;
-    .yj_biaoge_title {
-      color: #202e3d;
-      font-size: 14px;
-      text-align: left;
-      margin-right: 4px;
-      font-weight: 600;
-    }
-    .yj_biaoge_date {
-      color: #202e3d;
-      font-size: 12px;
-      text-align: left;
-      margin-right: 10px;
-    }
-    .yj_biaoge_tag {
-      min-width: 70px;
-      text-align: center;
-    }
   }
   .xianwang_map_box {
     height: 600px;

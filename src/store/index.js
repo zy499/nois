@@ -3,19 +3,24 @@
  * @Author: zy
  * @Date: 2019-09-02 21:09:11
  * @LastEditors: zy
- * @LastEditTime: 2019-09-03 21:44:03
+ * @LastEditTime: 2019-09-06 12:44:08
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
 import cloneDeep from 'lodash/cloneDeep'
 Vue.use(Vuex)
-const modulesFiles = require.context('./modules', true, /\.js$/)
-
 // 用此方法请把文件创建在modules下
+const modulesFiles = require.context('./modules', true, /\.js$/)
 const modules = modulesFiles.keys().reduce((modules, modulePath) => {
-  const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
-  const value = modulesFiles(modulePath)
-  modules[moduleName] = value.default
+  let moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
+  if (moduleName.indexOf('/') !== -1) {
+    moduleName = moduleName.split('/')[0]
+    const value = modulesFiles('./' + moduleName + '/index.js')
+    modules[moduleName] = value.default
+  } else {
+    const value = modulesFiles(modulePath)
+    modules[moduleName] = value.default
+  }
   return modules
 }, {})
 
