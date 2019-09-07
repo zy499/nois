@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 12:04:28
  * @LastEditors: zy
- * @LastEditTime: 2019-09-06 13:57:20
+ * @LastEditTime: 2019-09-07 20:49:35
  -->
 <template>
   <nav class="site-navbar" :class="'site-navbar--' + navbarLayoutType">
@@ -192,9 +192,6 @@ export default {
 }
 </script>
 <style scoped>
-.is-toggle {
-  transform: rotate(180deg);
-}
 /* .site-navbar__body > .select_Box /deep/ input {
   border: none !important;
   text-align: center !important;

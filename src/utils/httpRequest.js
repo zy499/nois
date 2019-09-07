@@ -3,15 +3,19 @@
  * @Author: zy
  * @Date: 2019-08-29 10:26:16
  * @LastEditors: zy
- * @LastEditTime: 2019-09-05 22:29:52
+ * @LastEditTime: 2019-09-07 21:09:04
  */
 import Vue from 'vue'
 import axios from 'axios'
 import router from '@/router'
 import qs from 'qs'
 import merge from 'lodash/merge'
+import NProgress from 'nprogress' // progress bar
+import 'nprogress/nprogress.css'
 import { clearLoginInfo } from '@/utils'
 import { Message } from 'element-ui'
+NProgress.configure({ showSpinner: false, ease: 'ease', speed: 500 })
+NProgress.set(0.4)
 const http = axios.create({
   timeout: 1000 * 30,
   withCredentials: true,
@@ -24,6 +28,7 @@ const http = axios.create({
  * 请求拦截
  */
 http.interceptors.request.use(config => {
+  NProgress.start()
   config.headers['token'] = Vue.cookie.get('token') // 请求头带上token
   return config
 }, error => {
@@ -34,6 +39,7 @@ http.interceptors.request.use(config => {
  * 响应拦截
  */
 http.interceptors.response.use(response => {
+  NProgress.done()
   if (response.status === 200) {
     if (response.data && response.data.code === '00000002') { // 00000002 token失效
       clearLoginInfo()

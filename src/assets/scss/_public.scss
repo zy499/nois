@@ -102,6 +102,10 @@
   width: 100%;
   height: calc(50vh - 84px);
 }
+//旋转
+.is-toggle {
+  transform: rotate(180deg);
+}
 // element 重置样式
 .el-table::before {
   height: 0;

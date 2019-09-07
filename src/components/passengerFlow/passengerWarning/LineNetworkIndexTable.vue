@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-09-06 17:36:58
+ * @LastEditTime: 2019-09-07 20:53:26
  -->
 <template>
   <div class="yujingbiaoge">
@@ -53,7 +53,7 @@
     cursor: pointer;"
           @click="taggleTable"
         >
-          <icon-svg name="shangxiajiantou"></icon-svg>
+          <icon-svg name="shangxiajiantou" :class="{'is-toggle':mark}"></icon-svg>
         </div>
         <el-table
           id="lineNetWorkTable"
@@ -218,7 +218,8 @@ export default {
           num: '12,808'
         }
       ],
-      isShow: false
+      isShow: false,
+      mark: true
     }
   },
   computed: {
@@ -235,25 +236,27 @@ export default {
     },
     taggleTable () {
       let parentNode = document.querySelector('#lineNetWorkTable')
-      let childNode = parentNode.getElementsByClassName('el-table__body-wrapper')[0]
+      let childNode = parentNode.getElementsByClassName(
+        'el-table__body-wrapper'
+      )[0]
       let trs = childNode.getElementsByTagName('tr')
-      console.log(trs)
-      for (let i = 0; i < trs.length; i++) {
-        let item = trs[i]
-        if (i > 0) {
-          item.style.display = 'none'
-          console.log()
+      if (this.mark) {
+        for (let i = 0; i < trs.length; i++) {
+          let item = trs[i]
+          if (i > 0) {
+            item.style.visibility = 'collapse'
+          }
         }
+        this.mark = false
+      } else {
+        for (let i = 0; i < trs.length; i++) {
+          let item = trs[i]
+          if (i > 0) {
+            item.style.visibility = 'visible'
+          }
+        }
+        this.mark = true
       }
-      // let nodeList = this.$refs.lineNetWorkTable.$el.children[1].children[0]
-      //   .childNodes[1].childNodes
-      // // console.log(nodeList)
-
-      // nodeList.forEach((item, index) => {
-      //   if (index > 0) {
-      //     item.style.display = 'none'
-      //   }
-      // })
     }
   }
 }
@@ -301,10 +304,12 @@ export default {
 }
 .tp-line-table-box {
   .tableCont {
+    border: 1px solid #ebeef5;
     background-color: #e8ecef;
-    padding: 0 30px 30px 30px;
+    padding: 0 30px 0 30px;
     border-bottom-right-radius: 2px;
     border-bottom-left-radius: 2px;
+    box-shadow: 0 2px 12px 0 rgba(0, 122, 255, 0.08)
   }
   /deep/ .el-table {
     width: 87%;
@@ -329,10 +334,6 @@ export default {
           td:first-child {
             text-align: left;
           }
-        }
-        .el-table__row:nth-child(1) {
-          // font-size: 24px;
-          // color: #202e3d;
         }
       }
     }

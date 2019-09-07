@@ -1,3 +1,10 @@
+<!--
+ * @Description: file content
+ * @Author: zy
+ * @Date: 2019-08-31 01:42:29
+ * @LastEditors: zy
+ * @LastEditTime: 2019-09-07 21:06:13
+ -->
 <template>
   <div
     class="site-wrapper"
@@ -14,6 +21,7 @@
 
 <script>
   import MainNavbar from './main-navbar'
+  import { getUserInfo } from '@/api/user'
   export default {
     data () {
       return {
@@ -34,26 +42,30 @@
       }
     },
     created () {
-      this.getUserInfo()
+      getUserInfo().then(({ data }) => {
+        this.loading = false
+        this.userId = data.data.user.userId
+        this.userName = data.data.user.username
+      })
     },
     mounted () {
       // this.resetDocumentClientHeight()
     },
     methods: {
       // 获取当前管理员信息
-      getUserInfo () {
-        this.$http({
-          url: this.$http.adornUrl('/sys/user/info'),
-          method: 'get',
-          params: this.$http.adornParams()
-        }).then(({data}) => {
-          if (data && data.code === 0) {
-            this.loading = false
-            this.userId = data.user.userId
-            this.userName = data.user.username
-          }
-        })
-      }
+      // getUserInfo () {
+      //   this.$http({
+      //     url: this.$http.adornUrl('/sys/user/info'),
+      //     method: 'get',
+      //     params: this.$http.adornParams()
+      //   }).then(({data}) => {
+      //     if (data && data.code === 0) {
+      //       this.loading = false
+      //       this.userId = data.user.userId
+      //       this.userName = data.user.username
+      //     }
+      //   })
+      // }
     }
   }
 </script>
