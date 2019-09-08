@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 17:01:27
  * @LastEditors: zy
- * @LastEditTime: 2019-09-06 14:28:00
+ * @LastEditTime: 2019-09-08 22:35:30
  -->
 <template>
   <div class="passengerFlowWaringBody">
@@ -52,11 +52,11 @@
     <!-- 指标表格 start -->
     <LineNetworkIndexTable />
     <!-- 指标表格 end -->
-    <!-- 线网地图/客流排名 start -->
-    <el-row class="xianwang_map_box margin-bottom30" type="flex" justify="space-between">
+    <!-- 线网地图 start -->
+    <el-row class="xianwang_map_box margin-bottom30">
       <!-- 线网地图 start -->
-      <el-col :span="15" style="width:65.5%">
-        <el-card style="min-height:600px">
+      <el-col :span="24">
+        <el-card  style="height:650px">
           <div slot="header">
             <span class="yj_biaoge_title">线网地图</span>
             <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
@@ -65,9 +65,13 @@
         </el-card>
       </el-col>
       <!-- 线网地图 end -->
+    </el-row>
+    <!-- 线网地图 end -->
+    <!-- 线路客流排名/线网断面客流量排名 start -->
+    <el-row type="flex" justify="space-between" class="margin-bottom30">
       <!-- 线路客流排名 start -->
-      <el-col :span="8">
-        <el-card style="min-height:600px">
+      <el-col :span="8" style="width:32.16667%">
+        <el-card style="height:495px">
           <div slot="header">
             <span class="yj_biaoge_title">线路客流排名</span>
             <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
@@ -265,12 +269,23 @@
         </el-card>
       </el-col>
       <!-- 线路客流排名 end -->
+      <!-- 线网断面客流量排名 start -->
+      <el-col :span="16">
+         <el-card  style="height:495px">
+          <div slot="header">
+            <span class="yj_biaoge_title">线网断面客流量排名</span>
+            <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
+          </div>
+          <XianwangDuanMianKeliu />
+        </el-card>
+      </el-col>
+      <!-- 线网断面客流量排名 end -->
     </el-row>
-    <!-- 线网地图/客流排名 end -->
+    <!-- 线路客流排名/线网断面客流量排名 end -->
     <!-- 车站客流排名/线网断面最大拥挤度/线网断面客流量排名 start -->
     <el-row type="flex" justify="space-between">
       <!-- 车站客流排名 start -->
-      <el-col :span="7" style="width:32.16667%">
+      <el-col :span="8" style="width:32.16667%">
         <el-card style="min-height:577px">
           <div slot="header">
             <span class="yj_biaoge_title">{{yj_biaoge_title}}车站客流排名</span>
@@ -390,47 +405,17 @@
       </el-col>
       <!-- 车站客流排名 end -->
       <!-- 线网断面最大拥挤度 start -->
-      <el-col :span="7" style="width:32.16667%">
+      <el-col :span="16">
         <el-card style="min-height:577px">
           <div slot="header">
             <span class="yj_biaoge_title">{{yj_biaoge_title}}断面最大拥挤度</span>
             <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
           </div>
-          <div class="border"></div>
           <div class="chezhan_keliu_cont">
-            <ul>
-              <li v-for="(item,index) in zuidayongji_options" :key="index">
-                <div>
-                  <p class="font-size14">{{item.start}} → {{item.end}} &nbsp; ({{item.satus}})</p>
-                </div>
-                <div class="font_weight_bold">{{item.shangshen}}</div>
-              </li>
-            </ul>
           </div>
         </el-card>
       </el-col>
       <!-- 线网断面最大拥挤度 end -->
-      <!-- 线网断面客流量排名 start -->
-      <el-col :span="8">
-        <el-card style="min-height:577px">
-          <div slot="header">
-            <span class="yj_biaoge_title">{{yj_biaoge_title}}断面客流量排名</span>
-            <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
-          </div>
-          <div class="border"></div>
-          <div class="chezhan_keliu_cont">
-            <ul>
-              <li v-for="(item,index) in zuidayongji_options" :key="index">
-                <div>
-                  <p class="font-size14">{{item.start}} → {{item.end}} &nbsp; ({{item.satus}})</p>
-                </div>
-                <div class="font_weight_bold">{{item.shangshen}}</div>
-              </li>
-            </ul>
-          </div>
-        </el-card>
-      </el-col>
-      <!-- 线网断面客流量排名 end -->
     </el-row>
     <!-- 车站客流排名/线网断面最大拥挤度/线网断面客流量排名 end -->
     <!-- content end -->
@@ -444,12 +429,14 @@
 
 <script>
 import { parseTime } from '@/utils'
-import {createNamespacedHelpers} from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
 import LineNetworkIndexTable from '@/components/passengerFlow/passengerWarning/LineNetworkIndexTable'
+import XianwangDuanMianKeliu from '@/components/vcharts/bar'
 const { mapState } = createNamespacedHelpers('passengerFlowWaring')
 export default {
   components: {
-    LineNetworkIndexTable
+    LineNetworkIndexTable,
+    XianwangDuanMianKeliu
   },
   data () {
     return {
@@ -534,32 +521,6 @@ export default {
           keyunliang: '9,19,233'
         }
       ],
-      zuidayongji_options: [
-        {
-          start: '高新',
-          end: '火车南站',
-          satus: '下行',
-          shangshen: '45.84%'
-        },
-        {
-          start: '孵化园',
-          end: '金融城',
-          satus: '下行',
-          shangshen: '45.84%'
-        },
-        {
-          start: '桐梓林',
-          end: '火车南站',
-          satus: '上行',
-          shangshen: '45.84%'
-        },
-        {
-          start: '高新',
-          end: '火车南站',
-          satus: '上行',
-          shangshen: '45.84%'
-        }
-      ],
       backgrounds_and_corols: [
         { name: '1号线', colour: ['rgba(34,42,140,.1)', 'rgba(34,42,140,1)'] },
         { name: '2号线', colour: ['rgba(235,90,53,.1)', 'rgba(235,90,53,1)'] },
@@ -638,13 +599,13 @@ export default {
   /deep/ .el-tabs__header {
     border-left: none;
   }
-  .xianwang_map_box {
-    height: 600px;
-    .xianwang_map_cont {
-      height: 500px;
-      background-color: #f5f6f7;
-    }
-  }
+  // .xianwang_map_box {
+  //   height: 600px;
+  //   .xianwang_map_cont {
+  //     height: 500px;
+  //     background-color: #f5f6f7;
+  //   }
+  // }
   .xianwang_keliu_cont {
     ul {
       margin: 0;
@@ -666,10 +627,6 @@ export default {
       line-height: 34px;
       text-align: center;
     }
-  }
-  .border {
-    margin-top: 34px;
-    border: 1px solid #e4e7ed;
   }
   .chezhan_keliu_cont {
     ul {
@@ -711,4 +668,23 @@ export default {
     border: none;
   }
 }
+</style>
+<style lang="scss">
+  .yj_biaoge_title {
+    color: #202e3d;
+    font-size: 14px;
+    text-align: left;
+    margin-right: 4px;
+    font-weight: 600;
+  }
+  .yj_biaoge_date {
+    color: #202e3d;
+    font-size: 12px;
+    text-align: left;
+    margin-right: 10px;
+  }
+  .yj_biaoge_tag {
+    min-width: 70px;
+    text-align: center;
+  }
 </style>

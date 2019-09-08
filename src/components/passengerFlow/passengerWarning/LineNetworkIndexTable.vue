@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-09-07 20:53:26
+ * @LastEditTime: 2019-09-08 22:58:48
  -->
 <template>
   <div class="yujingbiaoge">
@@ -19,7 +19,7 @@
                 多行信息
                 <br />第二行信息
               </div>
-              <icon-svg name="wenhao" width="12px" height="12px"></icon-svg>
+              <icon-svg class="curspr_pointer" name="wenhao" width="12px" height="12px"></icon-svg>
             </el-tooltip>
           </div>
         </template>
@@ -34,8 +34,8 @@
               :span="4"
               class="text_center border_right_e8ecef"
             >
-              <p class="font-size12 margin-bottom10 font_weight_400">{{item.name}}</p>
-              <p class="font-size28">{{item.num}}</p>
+              <p class="font-size12 margin-bottom10 font_weight_500">{{item.name}}</p>
+              <p class="font-size28 font_weight_600">{{item.num}}</p>
             </el-col>
           </el-row>
           <!-- 线网指标头部 end -->
@@ -53,7 +53,7 @@
     cursor: pointer;"
           @click="taggleTable"
         >
-          <icon-svg name="shangxiajiantou" :class="{'is-toggle':mark}"></icon-svg>
+          <icon-svg name="shangxiajiantou" style="color: #CED0DA;" :class="{'is-toggle':mark}"></icon-svg>
         </div>
         <el-table
           id="lineNetWorkTable"
@@ -68,20 +68,26 @@
                 v-if="scope.row.name == '预计今日'"
                 @click="openJryj"
               >
-                <span class="text-decoration margin_right_4">{{scope.row.name}}</span>
+                <span class="text-decoration margin_right_4 color_0091F2">{{scope.row.name}}</span>
                 <icon-svg name="columnar"></icon-svg>
               </div>
               <div v-else>{{scope.row.name}}</div>
             </template>
           </el-table-column>
-          <el-table-column prop="xwcxl" width="200px">
+          <el-table-column prop="xwcxl">
             <template slot-scope="scope">
               <div v-if="scope.row.name == '预计今日'" class="font_weight_bold">
                 <span
                   v-if="parseInt(scope.row.xwcxl.replace(/,/g,'')) > 1000000"
-                  style="color:red;"
-                >{{scope.row.xwcxl}}&nbsp;↑</span>
-                <span v-else style="color:green;">{{scope.row.xwcxl}}&nbsp;↓</span>
+                  style="color:#FF2F78;" class="yj_arrow"
+                >
+                  <icon-svg class="margin_right_8" width="20px" height="20px" name="shangjiantou"></icon-svg>
+                  {{scope.row.xwcxl}}
+                </span>
+                <span v-else style="color:#3BD19F;" class="yj_arrow">
+                  <icon-svg class="margin_right_8" width="20px" height="20px" name="xiajiantou"></icon-svg>
+                  {{scope.row.xwcxl}}
+                </span>
               </div>
               <div v-else>{{scope.row.xwcxl}}</div>
             </template>
@@ -91,9 +97,15 @@
               <div v-if="scope.row.name == '预计今日'" class="font_weight_bold">
                 <span
                   v-if="parseInt(scope.row.xwczl.replace(/,/g,'')) > 1000000"
-                  style="color:red;"
-                >{{scope.row.xwczl}}&nbsp;↑</span>
-                <span v-else style="color:green;">{{scope.row.xwczl}}&nbsp;↓</span>
+                  style="color:#FF2F78;" class="yj_arrow"
+                >
+                  <icon-svg class="margin_right_8" width="20px" height="20px" name="shangjiantou"></icon-svg>
+                  {{scope.row.xwczl}}
+                </span>
+                <span v-else style="color:#3BD19F;" class="yj_arrow">
+                  <icon-svg class="margin_right_8" width="20px" height="20px" name="xiajiantou"></icon-svg>
+                  {{scope.row.xwczl}}
+                </span>
               </div>
               <div v-else>{{scope.row.xwczl}}</div>
             </template>
@@ -103,9 +115,15 @@
               <div v-if="scope.row.name == '预计今日'" class="font_weight_bold">
                 <span
                   v-if="parseInt(scope.row.xwhxl.replace(/,/g,'')) > 2000000"
-                  style="color:red;"
-                >{{scope.row.xwhxl}}&nbsp;↑</span>
-                <span v-else style="color:green;">{{scope.row.xwhxl}}&nbsp;↓</span>
+                  style="color:#FF2F78;" class="yj_arrow"
+                >
+                  <icon-svg class="margin_right_8" width="20px" height="20px" name="shangjiantou"></icon-svg>
+                  {{scope.row.xwhxl}}
+                </span>
+                <span v-else style="color:#3BD19F;" class="yj_arrow">
+                  <icon-svg class="margin_right_8" width="20px" height="20px" name="xiajiantou"></icon-svg>
+                  {{scope.row.xwhxl}}
+                </span>
               </div>
               <div v-else>{{scope.row.xwhxl}}</div>
             </template>
@@ -115,9 +133,15 @@
               <div v-if="scope.row.name == '预计今日'" class="font_weight_bold">
                 <span
                   v-if="parseInt(scope.row.xwkyl.replace(/,/g,'')) > 2000000"
-                  style="color:red;"
-                >{{scope.row.xwkyl}}&nbsp;↑</span>
-                <span v-else style="color:green;">{{scope.row.xwkyl}}&nbsp;↓</span>
+                  style="color:#FF2F78;" class="yj_arrow"
+                >
+                  <icon-svg class="margin_right_8" width="20px" height="20px" name="shangjiantou"></icon-svg>
+                  {{scope.row.xwkyl}}
+                </span>
+                <span v-else style="color:#3BD19F;" class="yj_arrow">
+                  <icon-svg class="margin_right_8" width="20px" height="20px" name="xiajiantou"></icon-svg>
+                  {{scope.row.xwkyl}}
+                </span>
               </div>
               <div v-else>{{scope.row.xwkyl}}</div>
             </template>
@@ -125,11 +149,17 @@
           <el-table-column prop="xwzxrs">
             <template slot-scope="scope">
               <div v-if="scope.row.name == '预计今日'" class="font_weight_bold">
-                <span
+                 <span
                   v-if="parseInt(scope.row.xwzxrs.replace(/,/g,'')) > 1000000"
-                  style="color:red;"
-                >{{scope.row.xwzxrs}}&nbsp;↑</span>
-                <span v-else style="color:green;">{{scope.row.xwzxrs}}&nbsp;↓</span>
+                  style="color:#FF2F78;" class="yj_arrow"
+                >
+                  <icon-svg class="margin_right_8" width="20px" height="20px" name="shangjiantou"></icon-svg>
+                  {{scope.row.xwzxrs}}
+                </span>
+                <span v-else style="color:#3BD19F;" class="yj_arrow">
+                  <icon-svg class="margin_right_8" width="20px" height="20px" name="xiajiantou"></icon-svg>
+                  {{scope.row.xwzxrs}}
+                </span>
               </div>
               <div v-else>{{scope.row.xwzxrs}}</div>
             </template>
@@ -275,27 +305,9 @@ export default {
   /deep/ .el-card__body {
     padding: 10px 30px 0 30px;
   }
-  // min-height: 272px;
-  .yj_biaoge_title {
-    color: #202e3d;
-    font-size: 14px;
-    text-align: left;
-    margin-right: 4px;
-    font-weight: 600;
-  }
-  .yj_biaoge_date {
-    color: #202e3d;
-    font-size: 12px;
-    text-align: left;
-    margin-right: 10px;
-  }
-  .yj_biaoge_tag {
-    min-width: 70px;
-    text-align: center;
-  }
   .lineNetworkHeader {
     .border_right_e8ecef {
-      border-right: 1px solid #e8ecef;
+      border-right: 1px solid #E8ECEF;
     }
     .el-col:last-child {
       border-right: none;
@@ -305,7 +317,7 @@ export default {
 .tp-line-table-box {
   .tableCont {
     border: 1px solid #ebeef5;
-    background-color: #e8ecef;
+    background-color: #F8F9FA;
     padding: 0 30px 0 30px;
     border-bottom-right-radius: 2px;
     border-bottom-left-radius: 2px;
@@ -315,18 +327,18 @@ export default {
     width: 87%;
     font-size: 14px;
     color: #949ea8;
-    font-weight: 600;
+    // font-weight: 600;
     td {
       text-align: right;
-      background-color: #e8ecef;
+      background-color: #F8F9FA;
     }
     td,
     th.is-leaf {
       border-bottom: none !important;
     }
     th {
-      background-color: #e8ecef;
-      text-align: right;
+      background-color: #F8F9FA;
+      text-align: center;
     }
     .el-table__body-wrapper {
       .el-table__body {
@@ -340,7 +352,11 @@ export default {
   }
   .text-decoration {
     text-decoration: underline;
-    cursor: pointer;
+  }
+  .yj_arrow {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
 }
 </style>

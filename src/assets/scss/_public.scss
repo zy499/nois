@@ -5,9 +5,20 @@
 .text_center {
   text-align: center;
 }
+//weight
 .font_weight_400 {
   font-weight: 400;
 }
+.font_weight_500 {
+  font-weight: 500;
+}
+.font_weight_600 {
+  font-weight: 600;
+}
+.font_weight_bold {
+  font-weight: bold
+}
+// size
 .font-size10{
   font-size: 10px;
 }
@@ -37,9 +48,10 @@
 .color_556270 {
   color: #556270;
 }
-.font_weight_bold {
-  font-weight: bold
+.color_0091F2 {
+  color: #0091F2;
 }
+
 //position
 .position_relative {
   position: relative;
@@ -53,6 +65,9 @@
 }
 .margin_right_10 {
   margin-right: 10px;
+}
+.margin_right_8 {
+  margin-right: 8px;
 }
 .margin_right_4 {
   margin-right: 4px;
@@ -105,6 +120,10 @@
 //旋转
 .is-toggle {
   transform: rotate(180deg);
+}
+//手势
+.curspr_pointer {
+  cursor: pointer;
 }
 // element 重置样式
 .el-table::before {

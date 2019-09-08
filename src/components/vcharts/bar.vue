@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-07-17 15:01:23
  * @LastEditors: zy
- * @LastEditTime: 2019-09-06 01:05:22
+ * @LastEditTime: 2019-09-08 22:45:41
  -->
 <template>
   <ve-bar :data="chartData" :extend="chartextend"></ve-bar>
@@ -20,10 +20,10 @@ export default {
         show: false
       },
       grid: {
-        left: '5%',
-        top: '5%',
-        bottom: '1%',
-        right: '10%'
+        // left: '5%',
+        top: '1%',
+        bottom: '1%'
+        // right: '10%'
       },
       tooltip: {
         show: false
@@ -165,6 +165,7 @@ export default {
           { 地址: '高新|火车南站', 客流量: 2923, 数据: 2923, 默认: 5000 },
           { 地址: '高新|火车南站', 客流量: 1723, 数据: 1723, 默认: 5000 },
           { 地址: '高新|火车南站', 客流量: 3792, 数据: 3792, 默认: 5000 },
+          { 地址: '高新|火车南站', 客流量: 4593, 数据: 4593, 默认: 5000 },
           { 地址: '高新|火车南站', 客流量: 4593, 数据: 4593, 默认: 5000 }
         ]
       }
