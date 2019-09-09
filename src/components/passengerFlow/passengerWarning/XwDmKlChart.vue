@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-07-17 15:01:23
  * @LastEditors: zy
- * @LastEditTime: 2019-09-09 17:36:43
+ * @LastEditTime: 2019-09-09 16:44:35
  -->
 <template>
   <ve-bar :data="chartData" :extend="chartextend"></ve-bar>
@@ -20,10 +20,10 @@ export default {
         show: false
       },
       grid: {
-        left: '1%',
+        // left: '5%',
         top: '1%',
-        bottom: '1%',
-        right: '1%'
+        bottom: '1%'
+        // right: '10%'
       },
       tooltip: {
         show: false

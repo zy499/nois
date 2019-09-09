@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 12:04:28
  * @LastEditors: zy
- * @LastEditTime: 2019-09-07 20:49:35
+ * @LastEditTime: 2019-09-09 11:23:19
  -->
 <template>
   <nav class="site-navbar" :class="'site-navbar--' + navbarLayoutType">
@@ -62,6 +62,9 @@
             </el-badge>
           </template>
         </el-menu-item>-->
+        <el-menu-item>
+          <span>晴&nbsp;31℃</span>
+        </el-menu-item>
         <el-menu-item class="site-navbar__avatar" index="3">
           <el-dropdown :show-timeout="0" placement="bottom">
             <span class="el-dropdown-link">

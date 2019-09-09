@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-09-08 22:58:48
+ * @LastEditTime: 2019-09-09 14:02:27
  -->
 <template>
   <div class="yujingbiaoge">
@@ -64,7 +64,7 @@
           <el-table-column prop="name" label width="100px">
             <template slot-scope="scope">
               <div
-                class="flexStart align-items-center"
+                class="flexStart align-items-center curspr_pointer"
                 v-if="scope.row.name == '预计今日'"
                 @click="openJryj"
               >

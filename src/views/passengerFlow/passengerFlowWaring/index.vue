@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 17:01:27
  * @LastEditors: zy
- * @LastEditTime: 2019-09-08 22:35:30
+ * @LastEditTime: 2019-09-09 16:57:24
  -->
 <template>
   <div class="passengerFlowWaringBody">
@@ -11,7 +11,7 @@
     <div class="header margin-bottom30">
       <div class="header-body">
         <el-row type="flex" justify="space-between">
-          <el-col :span="8">
+          <el-col :span="8" class="flexStart flex-direction-column justify-content-center">
             <p class="title">客流监测与预警</p>
             <p class="font-size12 color_556270">
               <span
@@ -19,11 +19,57 @@
               >{{yj_biaoge_date}}&emsp;{{"星期"+"日一二三四五六".charAt(new Date().getDay())}}</span>
             </p>
           </el-col>
-          <el-col :span="8" class="text_right margin-top3 flexStart flex-flow-reverse">
-            <div style="width:36px;height:36px;background:rgba(0,0,0,0.05);margin-left:10px;"></div>
-            <div class="tianqiFont">
-              <p class="margin-bottom10">晴31℃</p>
-              <p>降雨概率10%</p>
+          <el-col :span="8" class="flexStart flex-flow-reverse">
+            <div class="rifht flexStart">
+              <div v-if="condition > 0" class="container">
+                <div class="wave solid danger">
+                  <div class="circle"></div>
+                  <div class="content">
+                    <icon-svg name="gaojing"></icon-svg>
+                  </div>
+                </div>
+              </div>
+              <div
+                v-else
+                style="font-size: 40px;
+              width:70px;
+              height: 70px;
+              display: flex;
+              justify-content: center;
+              align-items: center;"
+              >
+                <icon-svg name="gaojing"></icon-svg>
+              </div>
+              <div class="flexStart flex-direction-column justify-content-center">
+                <p class="font-size24">1</p>
+                <p class="font-size12 color color_949EA8">客流告警</p>
+              </div>
+            </div>
+            <div class="left flexStart margin_right_24">
+              <div v-if="condition > 0" class="container">
+                <div class="wave solid warning">
+                  <div class="circle"></div>
+                  <div class="content">
+                    <icon-svg name="yujing"></icon-svg>
+                  </div>
+                </div>
+              </div>
+              <div
+                v-else
+                style="
+              height: 70px;
+              width:70px;
+              font-size: 40px;
+              display: flex;
+              justify-content: center;
+              align-items: center;"
+              >
+                <icon-svg name="yujing"></icon-svg>
+              </div>
+              <div class="flexStart flex-direction-column justify-content-center">
+                <p class="font-size24">26</p>
+                <p class="font-size12 color color_949EA8">客流预警</p>
+              </div>
             </div>
           </el-col>
         </el-row>
@@ -31,22 +77,12 @@
     </div>
     <!-- header end -->
     <!-- content start -->
-    <el-row type="flex" justify="space-between" class="margin-bottom30">
-      <el-col :span="11">
-        <el-card>
-          <div class="flexStart justify-content-space-between align-items-center">
-            <p class="pub-yujing-font">客流预警</p>
-            <p class="pub-yujing-font font-size20">0</p>
-          </div>
-        </el-card>
+    <el-row class="margin-bottom30">
+      <el-col :span="16">
+        <el-card style="height:440px;">客流预警</el-card>
       </el-col>
-      <el-col :span="11">
-        <el-card>
-          <div class="flexStart justify-content-space-between align-items-center">
-            <p class="pub-yujing-font">警告预警</p>
-            <p class="pub-yujing-font font-size20">0</p>
-          </div>
-        </el-card>
+      <el-col :span="8">
+        <el-card style="height:440px;">客流告警</el-card>
       </el-col>
     </el-row>
     <!-- 指标表格 start -->
@@ -56,7 +92,7 @@
     <el-row class="xianwang_map_box margin-bottom30">
       <!-- 线网地图 start -->
       <el-col :span="24">
-        <el-card  style="height:650px">
+        <el-card style="height:650px">
           <div slot="header">
             <span class="yj_biaoge_title">线网地图</span>
             <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
@@ -271,7 +307,7 @@
       <!-- 线路客流排名 end -->
       <!-- 线网断面客流量排名 start -->
       <el-col :span="16">
-         <el-card  style="height:495px">
+        <el-card style="height:495px">
           <div slot="header">
             <span class="yj_biaoge_title">线网断面客流量排名</span>
             <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
@@ -293,112 +329,13 @@
           </div>
           <el-tabs v-model="activeName">
             <el-tab-pane label="进站量" name="first" class="chezhan_keliu_cont">
-              <ul>
-                <li
-                  v-for="(item,index) in chezhankeliu_options"
-                  :key="index"
-                  class="flexStart justify-content-space-between"
-                >
-                  <div class="flexStart">
-                    <el-tag
-                      v-if="index === 0"
-                      style="background-color:#00A6FF;color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else-if="index === 1"
-                      style="background-color:rgba(0, 166, 255, 0.75);color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else-if="index === 2"
-                      style="background-color:rgba(0, 166, 255, 0.5);color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else
-                      style="background-color:#F5F6F7;color:#949EA8;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <div>
-                      <p class="font-size14 font_weight_bold">{{item.name}}</p>
-                    </div>
-                  </div>
-                  <div class="margin_right_10 font-size10">{{item.keyunliang}}</div>
-                </li>
-              </ul>
+              <CzKlchart />
             </el-tab-pane>
             <el-tab-pane label="出站量" name="second" class="chezhan_keliu_cont">
-              <ul>
-                <li
-                  v-for="(item,index) in chezhankeliu_options"
-                  :key="index"
-                  class="flexStart justify-content-space-between"
-                >
-                  <div class="flexStart">
-                    <el-tag
-                      v-if="index === 0"
-                      style="background-color:#00A6FF;color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else-if="index === 1"
-                      style="background-color:rgba(0, 166, 255, 0.75);color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else-if="index === 2"
-                      style="background-color:rgba(0, 166, 255, 0.5);color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else
-                      style="background-color:#F5F6F7;color:#949EA8;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <div>
-                      <p class="font-size14 font_weight_bold">{{item.name}}</p>
-                    </div>
-                  </div>
-                  <div class="margin_right_10 font-size10">{{item.keyunliang}}</div>
-                </li>
-              </ul>
+              <!-- <CzKlchart /> -->
             </el-tab-pane>
             <el-tab-pane label="换乘量" name="third" class="chezhan_keliu_cont">
-              <ul>
-                <li
-                  v-for="(item,index) in chezhankeliu_options"
-                  :key="index"
-                  class="flexStart justify-content-space-between"
-                >
-                  <div class="flexStart">
-                    <el-tag
-                      v-if="index === 0"
-                      style="background-color:#00A6FF;color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else-if="index === 1"
-                      style="background-color:rgba(0, 166, 255, 0.75);color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else-if="index === 2"
-                      style="background-color:rgba(0, 166, 255, 0.5);color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else
-                      style="background-color:#F5F6F7;color:#949EA8;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <div>
-                      <p class="font-size14 font_weight_bold">{{item.name}}</p>
-                    </div>
-                  </div>
-                  <div class="margin_right_10 font-size10">{{item.keyunliang}}</div>
-                </li>
-              </ul>
+              <!-- <CzKlchart /> -->
             </el-tab-pane>
           </el-tabs>
         </el-card>
@@ -411,8 +348,7 @@
             <span class="yj_biaoge_title">{{yj_biaoge_title}}断面最大拥挤度</span>
             <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
           </div>
-          <div class="chezhan_keliu_cont">
-          </div>
+          <div class="chezhan_keliu_cont"></div>
         </el-card>
       </el-col>
       <!-- 线网断面最大拥挤度 end -->
@@ -431,15 +367,18 @@
 import { parseTime } from '@/utils'
 import { createNamespacedHelpers } from 'vuex'
 import LineNetworkIndexTable from '@/components/passengerFlow/passengerWarning/LineNetworkIndexTable'
-import XianwangDuanMianKeliu from '@/components/vcharts/bar'
+import XianwangDuanMianKeliu from '@/components/passengerFlow/passengerWarning/XwDmKlChart'
+import CzKlchart from '@/components/passengerFlow/passengerWarning/CzKlchart'
 const { mapState } = createNamespacedHelpers('passengerFlowWaring')
 export default {
   components: {
     LineNetworkIndexTable,
-    XianwangDuanMianKeliu
+    XianwangDuanMianKeliu,
+    CzKlchart
   },
   data () {
     return {
+      condition: 1,
       activeName: 'first',
       xianlukeliu_options: [
         {
@@ -670,21 +609,118 @@ export default {
 }
 </style>
 <style lang="scss">
-  .yj_biaoge_title {
-    color: #202e3d;
-    font-size: 14px;
-    text-align: left;
-    margin-right: 4px;
-    font-weight: 600;
+.yj_biaoge_title {
+  color: #202e3d;
+  font-size: 14px;
+  text-align: left;
+  margin-right: 4px;
+  font-weight: 600;
+}
+.yj_biaoge_date {
+  color: #202e3d;
+  font-size: 12px;
+  text-align: left;
+  margin-right: 10px;
+}
+.yj_biaoge_tag {
+  min-width: 70px;
+  text-align: center;
+}
+
+/************预警波纹************/
+
+.wave {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  // line-height: 50px;
+  font-size: 40px;
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: 70px;
   }
-  .yj_biaoge_date {
-    color: #202e3d;
-    font-size: 12px;
-    text-align: left;
-    margin-right: 10px;
+}
+
+.wave .circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+}
+/* 波纹效果 */
+// .wave.ripple .circle {
+//   width: calc(100% - 6px); /* 减去边框的大小 */
+//   height: calc(100% - 6px); /* 减去边框的大小 */
+//   border: 3px solid #fff;
+// }
+
+// .wave.ripple .circle:first-child {
+//   animation: circle-opacity 2s infinite;
+// }
+
+// .wave.ripple .circle:nth-child(2) {
+//   animation: circle-opacity 2s infinite;
+//   animation-delay: 0.3s;
+// }
+
+// .wave.ripple .circle:nth-child(3) {
+//   animation: circle-opacity 2s infinite;
+//   animation-delay: 0.6s;
+// }
+
+// .wave.ripple.danger {
+//   color: red;
+// }
+
+// .wave.ripple.danger .circle {
+//   border-color: red;
+// }
+
+// .wave.ripple.warning {
+//   color: orange;
+// }
+
+// .wave.ripple.warning .circle {
+//   border-color: orange;
+// }
+/* 波动效果 */
+.wave.solid .circle {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+.wave.solid .circle:first-child {
+  animation: circle-opacity 2s infinite;
+}
+
+.wave.solid.danger {
+  color: red;
+}
+
+.wave.solid.danger .circle {
+  background: red;
+}
+
+.wave.solid.warning {
+  color: orange;
+}
+
+.wave.solid.warning .circle {
+  background: orange;
+}
+
+@keyframes circle-opacity {
+  from {
+    opacity: 1;
+    transform: scale(0);
   }
-  .yj_biaoge_tag {
-    min-width: 70px;
-    text-align: center;
+  to {
+    opacity: 0;
+    transform: scale(1);
   }
+}
 </style>
