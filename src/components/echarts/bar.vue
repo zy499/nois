@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-09-05 14:05:56
  * @LastEditors: zy
- * @LastEditTime: 2019-09-05 15:53:42
+ * @LastEditTime: 2019-09-10 00:57:54
  -->
 <template>
   <div :id="id" :class="className" :style="{height:height,width:width}" />
@@ -11,7 +11,7 @@
 
 <script>
 import echarts from 'echarts'
-import resize from './mixins/resize'
+import resize from '../resize'
 
 export default {
   mixins: [resize],

@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-09-09 22:32:42
  * @LastEditors: zy
- * @LastEditTime: 2019-09-10 00:35:33
+ * @LastEditTime: 2019-09-10 00:59:43
  -->
 <template>
   <!-- <div> -->
@@ -14,6 +14,7 @@
 
 <script>
 import echarts from 'echarts'
+import resize from '../../resize'
 var dataIPSxAxis = [
   '09:00',
   '09:05',
@@ -24,6 +25,7 @@ var dataIPSxAxis = [
 ]
 var dataIPS = [2, 6, 5, 8, 12, 10]
 export default {
+  mixins: [resize],
   props: {
     className: {
       type: String,
