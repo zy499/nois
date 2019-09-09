@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 17:01:27
  * @LastEditors: zy
- * @LastEditTime: 2019-09-09 16:57:24
+ * @LastEditTime: 2019-09-10 00:54:19
  -->
 <template>
   <div class="passengerFlowWaringBody">
@@ -79,7 +79,9 @@
     <!-- content start -->
     <el-row class="margin-bottom30">
       <el-col :span="16">
-        <el-card style="height:440px;">客流预警</el-card>
+        <el-card style="height:440px;">
+          <KlYjChart id="klyjChart" />
+        </el-card>
       </el-col>
       <el-col :span="8">
         <el-card style="height:440px;">客流告警</el-card>
@@ -369,12 +371,14 @@ import { createNamespacedHelpers } from 'vuex'
 import LineNetworkIndexTable from '@/components/passengerFlow/passengerWarning/LineNetworkIndexTable'
 import XianwangDuanMianKeliu from '@/components/passengerFlow/passengerWarning/XwDmKlChart'
 import CzKlchart from '@/components/passengerFlow/passengerWarning/CzKlchart'
+import KlYjChart from '@/components/passengerFlow/passengerWarning/KlYjChart'
 const { mapState } = createNamespacedHelpers('passengerFlowWaring')
 export default {
   components: {
     LineNetworkIndexTable,
     XianwangDuanMianKeliu,
-    CzKlchart
+    CzKlchart,
+    KlYjChart
   },
   data () {
     return {
