@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 17:01:27
  * @LastEditors: zy
- * @LastEditTime: 2019-09-10 00:54:19
+ * @LastEditTime: 2019-09-10 17:39:12
  -->
 <template>
   <div class="passengerFlowWaringBody">
@@ -68,7 +68,7 @@
               </div>
               <div class="flexStart flex-direction-column justify-content-center">
                 <p class="font-size24">26</p>
-                <p class="font-size12 color color_949EA8">客流预警</p>
+                <p class="font-size12 color_949EA8">客流预警</p>
               </div>
             </div>
           </el-col>
@@ -80,11 +80,20 @@
     <el-row class="margin-bottom30">
       <el-col :span="16">
         <el-card style="height:440px;">
-          <KlYjChart id="klyjChart" />
+          <div slot="header" class="flexStart align-items-flex-end">
+            <p class="font-size14 font_weight_600 margin_right_8">客流预警</p>
+            <span class="font-size12 color_949EA8">17:00 后的数据为预测数据</span>
+          </div>
+          <KlYjChart id="klyjChart" height="330px" />
         </el-card>
       </el-col>
       <el-col :span="8">
-        <el-card style="height:440px;">客流告警</el-card>
+        <el-card style="height:440px;">
+          <div slot="header">
+            <p class="font-size14 font_weight_600 margin_right_8">客流预警</p>
+          </div>
+          <KlGjChart id="klgjChart" height="330px" />
+        </el-card>
       </el-col>
     </el-row>
     <!-- 指标表格 start -->
@@ -114,196 +123,7 @@
             <span class="yj_biaoge_title">线路客流排名</span>
             <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
           </div>
-          <el-tabs v-model="activeName" class="xianwang_keliu_cont">
-            <el-tab-pane label="进站量" name="first">
-              <ul>
-                <li
-                  v-for="(item,index) in xianlukeliu_options"
-                  :key="item.id"
-                  class="flexStart justify-content-space-between"
-                >
-                  <div class="flexStart align-items-center">
-                    <el-tag
-                      v-if="index === 0"
-                      style="background-color:#00A6FF;color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else-if="index === 1"
-                      style="background-color:rgba(0, 166, 255, 0.75);color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else-if="index === 2"
-                      style="background-color:rgba(0, 166, 255, 0.5);color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else
-                      style="background-color:#F5F6F7;color:#949EA8;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <div>
-                      <p class="font-size14 font_weight_bold padding-bottom2">{{item.name}}</p>
-                      <div class="flexStart font-size14 color_909399">
-                        <span class="margin_right_10">{{item.keyunliang}}</span>
-                        <div v-if="yj_biaoge_tag !== '实时'">
-                          <span style="color:red;">⬆</span>
-                          <span>{{item.shangshen}}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <el-tag
-                    v-if="item['name'] === frm_backgrounds_and_corols[index]['name']"
-                    class="xianlu_keliu_pm_style"
-                    :style="{ backgroundColor: frm_backgrounds_and_corols[index]['colour'][0], color: frm_backgrounds_and_corols[index]['colour'][1]}"
-                  >{{item.name}}</el-tag>
-                </li>
-              </ul>
-            </el-tab-pane>
-            <el-tab-pane label="出站量" name="second">
-              <ul>
-                <li
-                  v-for="(item,index) in xianlukeliu_options"
-                  :key="item.id"
-                  class="flexStart justify-content-space-between"
-                >
-                  <div class="flexStart align-items-center">
-                    <el-tag
-                      v-if="index === 0"
-                      style="background-color:#00A6FF;color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else-if="index === 1"
-                      style="background-color:rgba(0, 166, 255, 0.75);color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else-if="index === 2"
-                      style="background-color:rgba(0, 166, 255, 0.5);color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else
-                      style="background-color:#F5F6F7;color:#949EA8;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <div>
-                      <p class="font-size14 font_weight_bold padding-bottom2">{{item.name}}</p>
-                      <div class="flexStart font-size14 color_909399">
-                        <span class="margin_right_10">{{item.keyunliang}}</span>
-                        <div v-if="yj_biaoge_tag !== '实时'">
-                          <span style="color:red;">⬆</span>
-                          <span>{{item.shangshen}}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <el-tag
-                    v-if="item['name'] === frm_backgrounds_and_corols[index]['name']"
-                    class="xianlu_keliu_pm_style"
-                    :style="{ backgroundColor: frm_backgrounds_and_corols[index]['colour'][0], color: frm_backgrounds_and_corols[index]['colour'][1]}"
-                  >{{item.name}}</el-tag>
-                </li>
-              </ul>
-            </el-tab-pane>
-            <el-tab-pane label="换乘量" name="third">
-              <ul>
-                <li
-                  v-for="(item,index) in xianlukeliu_options"
-                  :key="item.id"
-                  class="flexStart justify-content-space-between"
-                >
-                  <div class="flexStart align-items-center">
-                    <el-tag
-                      v-if="index === 0"
-                      style="background-color:#00A6FF;color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else-if="index === 1"
-                      style="background-color:rgba(0, 166, 255, 0.75);color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else-if="index === 2"
-                      style="background-color:rgba(0, 166, 255, 0.5);color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else
-                      style="background-color:#F5F6F7;color:#949EA8;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <div>
-                      <p class="font-size14 font_weight_bold padding-bottom2">{{item.name}}</p>
-                      <div class="flexStart font-size14 color_909399">
-                        <span class="margin_right_10">{{item.keyunliang}}</span>
-                        <div v-if="yj_biaoge_tag !== '实时'">
-                          <span style="color:red;">⬆</span>
-                          <span>{{item.shangshen}}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <el-tag
-                    v-if="item['name'] === frm_backgrounds_and_corols[index]['name']"
-                    class="xianlu_keliu_pm_style"
-                    :style="{ backgroundColor: frm_backgrounds_and_corols[index]['colour'][0], color: frm_backgrounds_and_corols[index]['colour'][1]}"
-                  >{{item.name}}</el-tag>
-                </li>
-              </ul>
-            </el-tab-pane>
-            <el-tab-pane label="换乘量" name="fourth">
-              <ul>
-                <li
-                  v-for="(item,index) in xianlukeliu_options"
-                  :key="item.id"
-                  class="flexStart justify-content-space-between"
-                >
-                  <div class="flexStart align-items-center">
-                    <el-tag
-                      v-if="index === 0"
-                      style="background-color:#00A6FF;color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else-if="index === 1"
-                      style="background-color:rgba(0, 166, 255, 0.75);color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else-if="index === 2"
-                      style="background-color:rgba(0, 166, 255, 0.5);color:#fff;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <el-tag
-                      v-else
-                      style="background-color:#F5F6F7;color:#949EA8;border:none;"
-                      class="margin_right_20"
-                    >{{index+1}}</el-tag>
-                    <div>
-                      <p class="font-size14 font_weight_bold padding-bottom2">{{item.name}}</p>
-                      <div class="flexStart font-size14 color_909399">
-                        <span class="margin_right_10">{{item.keyunliang}}</span>
-                        <div v-if="yj_biaoge_tag !== '实时'">
-                          <span style="color:red;">⬆</span>
-                          <span>{{item.shangshen}}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <el-tag
-                    v-if="item['name'] === frm_backgrounds_and_corols[index]['name']"
-                    class="xianlu_keliu_pm_style"
-                    :style="{ backgroundColor: frm_backgrounds_and_corols[index]['colour'][0], color: frm_backgrounds_and_corols[index]['colour'][1]}"
-                  >{{item.name}}</el-tag>
-                </li>
-              </ul>
-            </el-tab-pane>
-          </el-tabs>
+          <XlKlPmTabs />
         </el-card>
       </el-col>
       <!-- 线路客流排名 end -->
@@ -329,16 +149,12 @@
             <span class="yj_biaoge_title">{{yj_biaoge_title}}车站客流排名</span>
             <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
           </div>
-          <el-tabs v-model="activeName">
-            <el-tab-pane label="进站量" name="first" class="chezhan_keliu_cont">
-              <CzKlchart />
+          <el-tabs v-model="aaaa">
+            <el-tab-pane label="进站量" name="first">
+              <div style="width:100%"><CzKlchart id="czklChart" /></div>
             </el-tab-pane>
-            <el-tab-pane label="出站量" name="second" class="chezhan_keliu_cont">
-              <!-- <CzKlchart /> -->
-            </el-tab-pane>
-            <el-tab-pane label="换乘量" name="third" class="chezhan_keliu_cont">
-              <!-- <CzKlchart /> -->
-            </el-tab-pane>
+            <el-tab-pane label="出站量" name="second"></el-tab-pane>
+            <el-tab-pane label="换乘量" name="third"></el-tab-pane>
           </el-tabs>
         </el-card>
       </el-col>
@@ -350,7 +166,29 @@
             <span class="yj_biaoge_title">{{yj_biaoge_title}}断面最大拥挤度</span>
             <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
           </div>
-          <div class="chezhan_keliu_cont"></div>
+          <el-row type="flex" justify="space-between" style="padding-bottom: 20px;
+    border-bottom: 1px solid #E8ECEF">
+            <el-col :span="8" style="border-right: 1px solid #E8ECEF">
+                <LineCharts />
+            </el-col>
+            <el-col :span="8" style="border-right: 1px solid #E8ECEF">
+              <LineCharts />
+            </el-col>
+            <el-col :span="8">
+              <LineCharts />
+            </el-col>
+          </el-row>
+          <el-row type="flex" justify="space-between" style="padding-top: 20px;">
+            <el-col :span="8" style="border-right: 1px solid #E8ECEF">
+                <LineCharts />
+            </el-col>
+            <el-col :span="8" style="border-right: 1px solid #E8ECEF">
+              <LineCharts />
+            </el-col>
+            <el-col :span="8">
+              <LineCharts />
+            </el-col>
+          </el-row>
         </el-card>
       </el-col>
       <!-- 线网断面最大拥挤度 end -->
@@ -372,56 +210,24 @@ import LineNetworkIndexTable from '@/components/passengerFlow/passengerWarning/L
 import XianwangDuanMianKeliu from '@/components/passengerFlow/passengerWarning/XwDmKlChart'
 import CzKlchart from '@/components/passengerFlow/passengerWarning/CzKlchart'
 import KlYjChart from '@/components/passengerFlow/passengerWarning/KlYjChart'
+import KlGjChart from '@/components/passengerFlow/passengerWarning/KlGjChart'
+import XlKlPmTabs from '@/components/passengerFlow/passengerWarning/XlKlPmTabs'
+import LineCharts from '@/components/vcharts/lineCharts'
 const { mapState } = createNamespacedHelpers('passengerFlowWaring')
 export default {
   components: {
     LineNetworkIndexTable,
     XianwangDuanMianKeliu,
     CzKlchart,
-    KlYjChart
+    KlYjChart,
+    KlGjChart,
+    XlKlPmTabs,
+    LineCharts
   },
   data () {
     return {
+      aaaa: 'first',
       condition: 1,
-      activeName: 'first',
-      xianlukeliu_options: [
-        {
-          id: '1',
-          name: '1号线',
-          keyunliang: '9,19,233',
-          shangshen: '3.7%'
-        },
-        {
-          id: '2',
-          name: '2号线',
-          keyunliang: '9,19,233',
-          shangshen: '3.7%'
-        },
-        {
-          id: '3',
-          name: '3号线',
-          keyunliang: '9,19,233',
-          shangshen: '3.7%'
-        },
-        {
-          id: '7',
-          name: '7号线',
-          keyunliang: '9,19,233',
-          shangshen: '3.7%'
-        },
-        {
-          id: '10',
-          name: '10号线',
-          keyunliang: '9,19,233',
-          shangshen: '3.7%'
-        },
-        {
-          id: '4',
-          name: '4号线',
-          keyunliang: '9,19,233',
-          shangshen: '3.7%'
-        }
-      ],
       chezhankeliu_options: [
         {
           name: '火车南站',
@@ -464,17 +270,6 @@ export default {
           keyunliang: '9,19,233'
         }
       ],
-      backgrounds_and_corols: [
-        { name: '1号线', colour: ['rgba(34,42,140,.1)', 'rgba(34,42,140,1)'] },
-        { name: '2号线', colour: ['rgba(235,90,53,.1)', 'rgba(235,90,53,1)'] },
-        { name: '3号线', colour: ['rgba(213,0,106,.1)', 'rgba(213,0,106,1)'] },
-        { name: '4号线', colour: ['rgba(0,170,88,.1)', 'rgba(0,170,88,1)'] },
-        {
-          name: '7号线',
-          colour: ['rgba(109,198,214,.1)', 'rgba(109,198,214,1)']
-        },
-        { name: '10号线', colour: ['rgba(0,80,162,.1)', 'rgba(0,80,162,1)'] }
-      ],
       yj_biaoge_date: ''
     }
   },
@@ -482,20 +277,7 @@ export default {
     ...mapState({
       yj_biaoge_title: 'xianlu_type',
       yj_biaoge_tag: 'date_type'
-    }),
-    // 格式化 线路颜色
-    frm_backgrounds_and_corols () {
-      let self = this
-      const newArr = []
-      self.xianlukeliu_options.forEach(i => {
-        self.backgrounds_and_corols.forEach(n => {
-          if (i['name'] === n['name']) {
-            newArr.push(n)
-          }
-        })
-      })
-      return newArr
-    }
+    })
   },
   mounted () {
     var _this = this // 声明一个变量指向Vue实例this，保证作用域一致
@@ -542,52 +324,6 @@ export default {
   /deep/ .el-tabs__header {
     border-left: none;
   }
-  // .xianwang_map_box {
-  //   height: 600px;
-  //   .xianwang_map_cont {
-  //     height: 500px;
-  //     background-color: #f5f6f7;
-  //   }
-  // }
-  .xianwang_keliu_cont {
-    ul {
-      margin: 0;
-      padding: 0;
-      li {
-        list-style: none;
-        margin-bottom: 40px;
-      }
-      li:last-child {
-        margin-bottom: 0;
-      }
-      li:first-child {
-        margin-top: 20px;
-      }
-    }
-    /deep/ .el-tag--medium {
-      width: 34px;
-      height: 34px;
-      line-height: 34px;
-      text-align: center;
-    }
-  }
-  .chezhan_keliu_cont {
-    ul {
-      margin: 0;
-      padding: 0;
-      li {
-        line-height: 30px;
-        list-style: none;
-        margin-bottom: 15px;
-        /deep/ .el-tag--medium {
-          width: 28px;
-        }
-      }
-      li:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
   .text-decoration {
     text-decoration: underline;
     cursor: pointer;
@@ -603,12 +339,6 @@ export default {
   .pub-yujing-font {
     color: rgba(16, 16, 16, 1);
     font-size: 14px;
-  }
-  .xianlu_keliu_pm_style {
-    min-width: 80px;
-    font-size: 16px;
-    text-align: center;
-    border: none;
   }
 }
 </style>

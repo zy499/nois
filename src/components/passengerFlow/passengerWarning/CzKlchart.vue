@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-09-05 14:05:56
  * @LastEditors: zy
- * @LastEditTime: 2019-09-09 17:27:14
+ * @LastEditTime: 2019-09-10 17:27:34
  -->
 <template>
   <div :id="id" :class="className" :style="{height:height,width:width}" />
@@ -11,24 +11,27 @@
 
 <script>
 import echarts from 'echarts'
-// import resize from './mixins/resize'
+import resize from '../../resize'
 const chartData = {
   dizhi: [
-    '高新/火车南站',
-    '高新/火车南站',
-    '高新/火车南站',
-    '高新/火车南站',
-    '高新/火车南站',
-    '高新/火车南站',
-    '高新/火车南站'
+    '成都东客站',
+    '天府广场',
+    '火车南站',
+    '犀浦',
+    '犀浦',
+    '犀浦',
+    '犀浦',
+    '犀浦',
+    '犀浦',
+    '犀浦'
   ],
   keliu: [
-    1393, 3530, 2923, 1723, 3792, 4593, 2703
+    1393, 3530, 2923, 1723, 3792, 4593, 2703, 3200, 1878, 2655
   ],
-  zuida: [5000, 5000, 5000, 5000, 5000, 5000, 5000]
+  zuida: [5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000]
 }
 export default {
-  // mixins: [resize],
+  mixins: [resize],
   props: {
     className: {
       type: String,
@@ -40,11 +43,11 @@ export default {
     },
     width: {
       type: String,
-      default: '400px'
+      default: '100%'
     },
     height: {
       type: String,
-      default: '400px'
+      default: '430px'
     }
   },
   data () {
@@ -71,7 +74,7 @@ export default {
         grid: {
           top: '1%',
           left: '1%',
-          right: '1%',
+          right: '2%',
           bottom: '1%'
         },
         tooltip: {
@@ -91,7 +94,7 @@ export default {
           splitLine: { show: false }, // 横向的线
           axisTick: { show: false }, // y轴的端点
           axisLine: { show: false }, // y轴的线
-          data: chartData.dizhi
+          data: chartData.dizhi.reverse()
         },
         series: [
           {
@@ -106,18 +109,6 @@ export default {
                       colorStops: [
                         {
                           offset: 0,
-                          color: '#FFCCB0'
-                        },
-                        {
-                          offset: 1,
-                          color: '#FE789D'
-                        }
-                      ]
-                    },
-                    {
-                      colorStops: [
-                        {
-                          offset: 0,
                           color: '#8FD6FF'
                         },
                         {
@@ -127,11 +118,7 @@ export default {
                       ]
                     }
                   ]
-                  if (params.dataIndex < 3) {
-                    return colorList[1]
-                  } else {
-                    return colorList[0]
-                  }
+                  return colorList[0]
                 }
               }
             },
@@ -139,57 +126,16 @@ export default {
               z: 2,
               normal: {
                 show: true,
-                position: [0, '-30px'],
+                position: [0, -20],
                 fontSize: 20,
                 distance: 10,
                 formatter (param) {
-                  if (param.dataIndex < 3) {
-                    return `{yuanquan2| } {a|${
-                      param.name.split(
-                        '/'
-                      )[0]
-                    }} {b|···} {a|${
-                      param.name.split(
-                        '/'
-                      )[1]
-                    }}`
-                  } else {
-                    return `{yuanquan| } {a|${
-                      param.name.split(
-                        '/'
-                      )[0]
-                    }} {b|···} {a|${
-                      param.name.split(
-                        '/'
-                      )[1]
-                    }}`
-                  }
+                  return `{a| ${param.name}}`
                 },
                 rich: {
-                  yuanquan: {
-                    width: 10,
-                    height: 10,
-                    borderWidth: 2,
-                    borderColor: '#FF2F78',
-                    borderType: 'solid',
-                    borderRadius: 5
-                  },
-                  yuanquan2: {
-                    width: 10,
-                    height: 10,
-                    borderWidth: 2,
-                    borderColor: '#0091F2',
-                    borderType: 'solid',
-                    borderRadius: 5
-                  },
                   a: {
                     color: '#354052',
                     fontSize: 14
-                  },
-                  b: {
-                    fontSize: 30,
-                    fontWeight: '800',
-                    color: '#C5CDD6'
                   }
                 }
               }
@@ -213,6 +159,25 @@ export default {
             z: 0,
             barWidth: 8,
             data: chartData.zuida
+          },
+          {
+            name: '数量',
+            type: 'bar',
+            color: 'rgba(0,0,0,0)',
+            z: 2,
+            label: {
+              normal: {
+                show: true,
+                position: [270, -20],
+                textStyle: {
+                  color: '#7F8FA4',
+                  fontSize: '14'
+                }
+              }
+            },
+            barGap: '-100%',
+            barWidth: 8,
+            data: chartData.keliu
           }
         ]
       })

@@ -57,6 +57,9 @@
 .color_0091F2 {
   color: #0091F2;
 }
+.color_FF2F78 {
+  color: #FF2F78;
+}
 
 //position
 .position_relative {
@@ -73,7 +76,7 @@
   margin-right: 10px;
 }
 .margin_right_8 {
-  margin-right: 8px;
+  margin-right: 8px !important;
 }
 .margin_right_4 {
   margin-right: 4px;
@@ -117,7 +120,9 @@
 .justify-content-space-between {
   justify-content: space-between;
 }
-
+.align-items-flex-end {
+  align-items: flex-end;
+}
 .align-items-center {
   align-items: center;
 }

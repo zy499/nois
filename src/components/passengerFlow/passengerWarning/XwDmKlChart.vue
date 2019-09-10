@@ -1,189 +1,241 @@
 <!--
  * @Description: file content
  * @Author: zy
- * @Date: 2019-07-17 15:01:23
+ * @Date: 2019-09-05 14:05:56
  * @LastEditors: zy
- * @LastEditTime: 2019-09-09 16:44:35
+ * @LastEditTime: 2019-09-10 15:40:30
  -->
 <template>
-  <ve-bar :data="chartData" :extend="chartextend"></ve-bar>
+  <div :id="id" :class="className" :style="{height:height,width:width}" />
 </template>
 
 <script>
+import echarts from 'echarts'
+import resize from '../../resize'
+const chartData = {
+  dizhi: [
+    '高新/火车南站',
+    '高新/火车南站',
+    '高新/火车南站',
+    '高新/火车南站',
+    '高新/火车南站',
+    '高新/火车南站',
+    '高新/火车南站'
+  ],
+  keliu: [
+    1393, 3530, 2923, 1723, 3792, 4593, 2703
+  ],
+  zuida: [5000, 5000, 5000, 5000, 5000, 5000, 5000]
+}
 export default {
-  props: {},
-
-  data () {
-    const _self = this
-    this.chartextend = {
-      xAxis: {
-        show: false
-      },
-      grid: {
-        // left: '5%',
-        top: '1%',
-        bottom: '1%'
-        // right: '10%'
-      },
-      tooltip: {
-        show: false
-      },
-      legend: {
-        show: false
-      },
-      yAxis: {
-        axisLabel: {
-          show: false
-        },
-        axisTick: {
-          show: false
-        },
-        axisLine: {
-          show: false
-        }
-      },
-      series (v) {
-        v.forEach((i, index) => {
-          v[0].barWidth = 8
-          v[0].itemStyle = {
-            color (params) {
-              var colorList = [
-                {
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: '#FFCCB0'
-                    },
-                    {
-                      offset: 1,
-                      color: '#FE789D'
-                    }
-                  ]
-                },
-                {
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: '#8FD6FF'
-                    },
-                    {
-                      offset: 1,
-                      color: '#005DFF'
-                    }
-                  ]
-                }
-              ]
-              if (params.dataIndex < 3) {
-                return colorList[1]
-              } else {
-                return colorList[0]
-              }
-            },
-            barBorderRadius: 10
-          }
-          v[0].label = {
-            show: true,
-            fontSize: 20,
-            distance: 10,
-            position: [0, '-100%'],
-            formatter: function (param) {
-              if (param.dataIndex < 3) {
-                return `{yuanquan2| } {a|${
-                          _self.chartData.rows[param.dataIndex]['地址'].split('|')[0]
-                        }} {b|···} {a|${
-                          _self.chartData.rows[param.dataIndex]['地址'].split('|')[1]
-                        }}`
-              } else {
-                return `{yuanquan| } {a|${
-                          _self.chartData.rows[param.dataIndex]['地址'].split('|')[0]
-                        }} {b|···} {a|${
-                          _self.chartData.rows[param.dataIndex]['地址'].split('|')[1]
-                        }}`
-              }
-            },
-            rich: {
-              yuanquan: {
-                width: 10,
-                height: 10,
-                borderWidth: 2,
-                borderColor: '#FF2F78',
-                borderType: 'solid',
-                borderRadius: 5
-              },
-              yuanquan2: {
-                width: 10,
-                height: 10,
-                borderWidth: 2,
-                borderColor: '#0091F2',
-                borderType: 'solid',
-                borderRadius: 5
-              },
-              a: {
-                color: '#354052',
-                fontSize: 14
-              },
-              b: {
-                fontSize: 30,
-                fontWeight: '800',
-                color: '#C5CDD6'
-              }
-            },
-            offset: [0, -20],
-            color: 'black'
-          }
-          v[1].itemStyle = {
-            color: 'rgba(0, 0, 0, 0)'
-          }
-          v[1].label = {
-            show: true,
-            position: ['95%', '-60%'],
-            fontSize: 14,
-            color: '#7F8FA4'
-          }
-          v[2].type = 'bar'
-          v[2].barGap = '-100%'
-          v[2].animation = false
-          v[2].barWidth = 8
-          v[2].z = -1
-          v[2].itemStyle = {
-            color: '#E2E7EE',
-            barBorderRadius: 10,
-            emphasis: {
-              color: '#E2E7EE'
-            }
-          }
-        })
-        return v
-      }
-    }
-    return {
-      chartData: {
-        columns: ['地址', '客流量', '数据', '默认'],
-        rows: [
-          { 地址: '高新|火车南站', 客流量: 1393, 数据: 1393, 默认: 5000 },
-          { 地址: '高新|火车南站', 客流量: 3530, 数据: 3530, 默认: 5000 },
-          { 地址: '高新|火车南站', 客流量: 2923, 数据: 2923, 默认: 5000 },
-          { 地址: '高新|火车南站', 客流量: 1723, 数据: 1723, 默认: 5000 },
-          { 地址: '高新|火车南站', 客流量: 3792, 数据: 3792, 默认: 5000 },
-          { 地址: '高新|火车南站', 客流量: 4593, 数据: 4593, 默认: 5000 },
-          { 地址: '高新|火车南站', 客流量: 2703, 数据: 2703, 默认: 5000 }
-        ]
-      }
+  mixins: [resize],
+  props: {
+    className: {
+      type: String,
+      default: 'chart'
+    },
+    id: {
+      type: String,
+      default: 'chart'
+    },
+    width: {
+      type: String,
+      default: '100%'
+    },
+    height: {
+      type: String,
+      default: '430px'
     }
   },
-  created () {
-    this.sortChartData()
+  data () {
+    return {
+      chart: null
+    }
+  },
+  mounted () {
+    this.initChart()
+  },
+  beforeDestroy () {
+    if (!this.chart) {
+      return
+    }
+    this.chart.dispose()
+    this.chart = null
   },
   methods: {
-    sortChartData () {
-      this.chartData.rows.sort((a, b) => {
-        return a['客流量'] - b['客流量']
+    initChart () {
+      chartData.keliu.sort((a, b) => a - b)
+      this.chart = echarts.init(document.getElementById(this.id))
+
+      this.chart.setOption({
+        grid: {
+          top: '1%',
+          left: '1%',
+          right: '1%',
+          bottom: '1%'
+        },
+        tooltip: {
+          show: false
+        },
+        backgroundColor: '#fff', // 背景色
+        xAxis: {
+          show: false, // 是否显示x轴
+          type: 'value'
+        },
+        yAxis: {
+          type: 'category',
+          inverse: false, // 让y轴数据逆向
+          axisLabel: {
+            show: false
+          },
+          splitLine: { show: false }, // 横向的线
+          axisTick: { show: false }, // y轴的端点
+          axisLine: { show: false }, // y轴的线
+          data: chartData.dizhi
+        },
+        series: [
+          {
+            name: '数据内框',
+            type: 'bar',
+            itemStyle: {
+              normal: {
+                barBorderRadius: 10,
+                color (params) {
+                  var colorList = [
+                    {
+                      colorStops: [
+                        {
+                          offset: 0,
+                          color: '#FFCCB0'
+                        },
+                        {
+                          offset: 1,
+                          color: '#FE789D'
+                        }
+                      ]
+                    },
+                    {
+                      colorStops: [
+                        {
+                          offset: 0,
+                          color: '#8FD6FF'
+                        },
+                        {
+                          offset: 1,
+                          color: '#005DFF'
+                        }
+                      ]
+                    }
+                  ]
+                  if (params.dataIndex < 3) {
+                    return colorList[1]
+                  } else {
+                    return colorList[0]
+                  }
+                }
+              }
+            },
+            label: {
+              z: 2,
+              normal: {
+                show: true,
+                position: [0, '-30px'],
+                fontSize: 20,
+                distance: 10,
+                formatter (param) {
+                  if (param.dataIndex < 3) {
+                    return `{yuanquan2| } {a|${
+                      param.name.split(
+                        '/'
+                      )[0]
+                    }} {b|···} {a|${
+                      param.name.split(
+                        '/'
+                      )[1]
+                    }}`
+                  } else {
+                    return `{yuanquan| } {a|${
+                      param.name.split(
+                        '/'
+                      )[0]
+                    }} {b|···} {a|${
+                      param.name.split(
+                        '/'
+                      )[1]
+                    }}`
+                  }
+                },
+                rich: {
+                  yuanquan: {
+                    width: 10,
+                    height: 10,
+                    borderWidth: 2,
+                    borderColor: '#FF2F78',
+                    borderType: 'solid',
+                    borderRadius: 5
+                  },
+                  yuanquan2: {
+                    width: 10,
+                    height: 10,
+                    borderWidth: 2,
+                    borderColor: '#0091F2',
+                    borderType: 'solid',
+                    borderRadius: 5
+                  },
+                  a: {
+                    color: '#354052',
+                    fontSize: 14
+                  },
+                  b: {
+                    fontSize: 30,
+                    fontWeight: '800',
+                    color: '#C5CDD6'
+                  }
+                }
+              }
+            },
+            barWidth: 8,
+            data: chartData.keliu
+          },
+          {
+            name: '外框',
+            type: 'bar',
+            itemStyle: {
+              normal: {
+                color: '#E2E7EE',
+                barBorderRadius: 10
+              }
+            },
+            emphasis: {
+              itemStyle: {color: '#E2E7EE'}
+            },
+            barGap: '-100%',
+            z: 0,
+            barWidth: 8,
+            data: chartData.zuida
+          },
+          {
+            name: '数量',
+            type: 'bar',
+            color: 'rgba(0,0,0,0)',
+            z: 2,
+            label: {
+              normal: {
+                show: true,
+                position: 'right',
+                textStyle: {
+                  color: '#7F8FA4',
+                  fontSize: '14'
+                }
+              }
+            },
+            barGap: '-100%',
+            barWidth: 8,
+            data: chartData.keliu
+          }
+        ]
       })
-      console.log(this.chartData)
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

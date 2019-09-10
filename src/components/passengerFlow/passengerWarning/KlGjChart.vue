@@ -3,14 +3,14 @@
  * @Author: zy
  * @Date: 2019-09-09 22:32:42
  * @LastEditors: zy
- * @LastEditTime: 2019-09-10 11:24:18
+ * @LastEditTime: 2019-09-10 14:46:43
  -->
 <template>
   <div>
     <div :id="id" :class="className" :style="{height:height,width:width}" />
     <p class="yj_title flexStart align-items-center">
-      <icon-svg name="yujing" class="yj_icon-svg margin_right_8"></icon-svg>
-      <span class="font-size14 margin_right_8">9:05</span><span class="font-size14 color_556270"> 火车南站、高新、火车东站、天府广场、火车北站、犀浦</span>
+      <icon-svg name="gaojing" class="yj_icon-svg margin_right_8"></icon-svg>
+      <span class="font-size14 color_FF2F78">请注意，火车南站正在遭遇大客流</span>
     </p>
   </div>
 </template>
@@ -18,8 +18,10 @@
 <script>
 import echarts from 'echarts'
 import resize from '../../resize'
-var dataIPSxAxis = ['09:00', '09:05', '09:10', '09:15', '09:20', '09:25']
-var dataIPS = [2, 6, 5, 8, 12, 10]
+import bgImg from '@/assets/img/warning_gaoj_zhibiao_bg_icon.png'
+var dataIPSxAxis = [{ name: '火车南站', value: 103.45 }]
+var xAxisData = ['火车南站']
+// var dataIPS = [0, 6, 5, 8, 12, 10]
 export default {
   mixins: [resize],
   props: {
@@ -44,7 +46,6 @@ export default {
     return {
       chart: null,
       showDate: ''
-
     }
   },
   mounted () {
@@ -62,7 +63,7 @@ export default {
       this.chart = echarts.init(document.getElementById(this.id))
       this.chart.setOption({
         title: {
-          text: '数量(条)',
+          text: '拥挤度(%)',
           textStyle: {
             align: 'center',
             color: '#949EA8',
@@ -73,7 +74,7 @@ export default {
         },
         color: '#FF2F78',
         grid: {
-          left: '5%',
+          left: '8%',
           top: '18%',
           bottom: '10%',
           right: '5%',
@@ -85,17 +86,15 @@ export default {
         xAxis: [
           {
             type: 'category',
-            boundaryGap: true,
-            data: dataIPSxAxis,
+            boundaryGap: false,
+            data: xAxisData,
             axisLabel: {
               show: true,
               textStyle: {
                 color: '#6ba1bb',
                 fontSize: 12
-              },
-              formatter: function (value) {
-                return value
               }
+              // formatter: ['{c}'].join(',')
             }
           }
         ],
@@ -132,62 +131,30 @@ export default {
         ],
         series: [
           {
-            name: '预警条数line',
-            type: 'line',
-            smooth: true,
-            //  symbol: "none", //去掉折线点
-            stack: 100, // 线条样式
-            symbolSize: 10, // 折线点的大小
-            areaStyle: {
-              color: {
-                colorStops: [
-                  {
-                    offset: 0,
-                    color: 'rgba(255, 47, 120, .4)'
-                  },
-                  {
-                    offset: 1,
-                    color: 'rgba(255, 47, 120, .1)'
-                  }
-                ]
-              }
-            },
-            data: dataIPS
-          },
-          {
             name: '预警条数bar',
             type: 'bar',
-            barWidth: 2,
-            data: dataIPS,
+            barWidth: 6,
+            data: dataIPSxAxis,
             z: 99,
             label: {
               normal: {
                 show: true,
-                lineHeight: 30,
-                width: 80,
-                height: 30,
-                backgroundColor: '#FA852E',
-                borderRadius: 5,
-                position: ['-41', '-60'],
-                distance: 1,
+                position: 'top',
+                distance: 0,
+                fontSize: 12,
+                backgroundColor: {
+                  image: bgImg
+                },
+                padding: [10, 10, 15, 10],
+                borderRadius: 100,
                 formatter: function (param) {
-                  return `{a|预警 :}{a| ${param.data} 条} \n {b| }`
+                  return `{a|${param.value}%}`
                 },
                 rich: {
-                  d: {
-                    color: '#3CDDCF'
-                  },
                   a: {
                     color: '#fff',
                     align: 'center',
                     fontSize: 12
-                  },
-                  b: {
-                    width: 1,
-                    height: 30,
-                    borderWidth: 1,
-                    borderColor: '#FF2F78',
-                    align: 'center'
                   }
                 }
               }
