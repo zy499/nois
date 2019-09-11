@@ -3,13 +3,14 @@
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-09-07 21:06:13
+ * @LastEditTime: 2019-09-11 17:21:54
  -->
 <template>
   <div
     class="site-wrapper"
     v-loading.fullscreen.lock="loading"
-    element-loading-text="拼命加载中">
+    element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading">
     <template v-if="!loading">
       <main-navbar />
       <div style="padding-top:50px">

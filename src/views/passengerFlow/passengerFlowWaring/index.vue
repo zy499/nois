@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 17:01:27
  * @LastEditors: zy
- * @LastEditTime: 2019-09-11 15:32:43
+ * @LastEditTime: 2019-09-11 17:29:05
  -->
 <template>
   <div class="passengerFlowWaringBody">
@@ -169,18 +169,38 @@
           <el-row type="flex" justify="space-between" style="padding-bottom: 20px;
     border-bottom: 1px solid #E8ECEF">
             <el-col :span="8" style="border-right: 1px solid #E8ECEF">
-                <LineCharts id="lineTestEchart1" height="120px" />
+                <LineCharts id="lineTestEchart1" :dataTitle="{zuida: 116.2,
+        type: '上行',
+        dizhi: {
+          start: '高新',
+          end: '火车南站'
+        }}" height="120px" />
             </el-col>
             <el-col :span="8" style="border-right: 1px solid #E8ECEF">
-              <LineCharts id="lineTestEchart2" height="120px" />
+              <LineCharts id="lineTestEchart2" height="120px" :dataTitle="{zuida: 90.00,
+        type: '下行',
+        dizhi: {
+          start: '桐梓林',
+          end: '火车南站'
+        }}" />
             </el-col>
             <el-col :span="8">
-              <LineCharts id="lineTestEchart3" height="120px" />
+              <LineCharts id="lineTestEchart3" height="120px" :dataTitle="{zuida: 70.00,
+        type: '下行',
+        dizhi: {
+          start: '桐梓林',
+          end: '火车南站'
+        }}" />
             </el-col>
           </el-row>
           <el-row type="flex" justify="space-between" style="padding-top: 20px;">
             <el-col :span="8" style="border-right: 1px solid #E8ECEF">
-                <LineCharts id="lineTestEchart4" height="120px" />
+                <LineCharts id="lineTestEchart4" height="120px" :dataTitle="{zuida: 50.00,
+        type: '下行',
+        dizhi: {
+          start: '桐梓林',
+          end: '火车南站'
+        }}" />
             </el-col>
             <el-col :span="8" style="border-right: 1px solid #E8ECEF">
               <LineCharts id="lineTestEchart5" height="120px" />
@@ -206,12 +226,12 @@
 <script>
 import { parseTime } from '@/utils'
 import { createNamespacedHelpers } from 'vuex'
-import LineNetworkIndexTable from '@/components/passengerFlow/passengerWarning/LineNetworkIndexTable'
-import XianwangDuanMianKeliu from '@/components/passengerFlow/passengerWarning/XwDmKlChart'
-import CzKlchart from '@/components/passengerFlow/passengerWarning/CzKlchart'
-import KlYjChart from '@/components/passengerFlow/passengerWarning/KlYjChart'
-import KlGjChart from '@/components/passengerFlow/passengerWarning/KlGjChart'
-import XlKlPmTabs from '@/components/passengerFlow/passengerWarning/XlKlPmTabs'
+import LineNetworkIndexTable from '@/components/passengerFlow/passengerWarning/LineNetworkIndexTable' // 指标表格
+import XianwangDuanMianKeliu from '@/components/passengerFlow/passengerWarning/XwDmKlChart' // 线网断面客流量排名
+import CzKlchart from '@/components/passengerFlow/passengerWarning/CzKlchart' // 车站客流排名
+import KlYjChart from '@/components/passengerFlow/passengerWarning/KlYjChart' // 客流预警
+import KlGjChart from '@/components/passengerFlow/passengerWarning/KlGjChart' // 客流告警
+import XlKlPmTabs from '@/components/passengerFlow/passengerWarning/XlKlPmTabs' // 线路客流排名
 import LineCharts from '@/components/vcharts/lineCharts'
 const { mapState } = createNamespacedHelpers('passengerFlowWaring')
 export default {

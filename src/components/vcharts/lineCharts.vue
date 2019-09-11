@@ -3,10 +3,10 @@
  * @Author: zy
  * @Date: 2019-09-09 22:32:42
  * @LastEditors: zy
- * @LastEditTime: 2019-09-11 14:16:45
+ * @LastEditTime: 2019-09-11 16:16:47
  -->
 <template>
-  <div style="">
+  <div style>
     <div class="titleBox">
       <p class="title">{{dataTitle.zuida}}%</p>
       <p class="subTitle">{{dataTitle.type}}</p>
@@ -41,20 +41,25 @@ export default {
     height: {
       type: String,
       default: '400px'
+    },
+    dataTitle: {
+      type: Object,
+      default: () => {
+        return {
+          zuida: 116.2,
+          type: '上行',
+          dizhi: {
+            start: '高新',
+            end: '火车南站'
+          }
+        }
+      }
     }
   },
   data () {
     return {
       chart: null,
-      showDate: '',
-      dataTitle: {
-        zuida: 116.2,
-        type: '上行',
-        dizhi: {
-          start: '高新',
-          end: '火车南站'
-        }
-      }
+      showDate: ''
     }
   },
   mounted () {
@@ -69,14 +74,30 @@ export default {
   },
   methods: {
     showChart () {
-      if (this.dataTitle.type === '上行') {
-        if (this.dataTitle.zuida > 100) {
-          this.initChart('rgba(255, 47, 120, 1)', 'rgba(255, 47, 120, .4)', 'rgba(255, 47, 120, .1)')
-        } else {
-          this.initChart('rgba(250, 133, 46, 1)', 'rgba(250, 133, 46, 1)', 'rgba(250, 133, 46, 1)')
-        }
+      if (this.dataTitle.zuida > 100) {
+        this.initChart(
+          'rgba(255, 47, 120, 1)',
+          'rgba(255, 47, 120, .4)',
+          'rgba(255, 47, 120, .1)'
+        )
+      } else if (this.dataTitle.zuida < 100 && this.dataTitle.zuida > 80) {
+        this.initChart(
+          'rgba(250, 133, 46, 1)',
+          'rgba(250, 133, 46, .4)',
+          'rgba(250, 133, 46, .1)'
+        )
+      } else if (this.dataTitle.zuida < 80 && this.dataTitle.zuida > 60) {
+        this.initChart(
+          'rgba(250, 192, 3, 1)',
+          'rgba(250, 192, 3, .4)',
+          'rgba(250, 192, 3, .1)'
+        )
       } else {
-        this.initChart('rgba(59, 209, 159, 1)', 'rgba(59, 209, 159, .4)', 'rgba(59, 209, 159, .1)')
+        this.initChart(
+          'rgba(59, 209, 159, 1)',
+          'rgba(59, 209, 159, .4)',
+          'rgba(59, 209, 159, .1)'
+        )
       }
     },
     initChart (color, colorStops, colorStops2) {

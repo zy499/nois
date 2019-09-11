@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-29 13:34:05
  * @LastEditors: zy
- * @LastEditTime: 2019-09-07 21:06:01
+ * @LastEditTime: 2019-09-11 17:21:33
  -->
 <template>
   <div
@@ -11,6 +11,7 @@
     :class="{ 'site-sidebar--fold': sidebarFold }"
     v-loading.fullscreen.lock="loading"
     element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading"
   >
     <template v-if="!loading">
       <main-navbar />

@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-09-09 22:32:42
  * @LastEditors: zy
- * @LastEditTime: 2019-09-10 14:46:43
+ * @LastEditTime: 2019-09-11 17:19:51
  -->
 <template>
   <div>
@@ -88,6 +88,9 @@ export default {
             type: 'category',
             boundaryGap: false,
             data: xAxisData,
+            axisTick: {
+              show: false
+            },
             axisLabel: {
               show: true,
               textStyle: {

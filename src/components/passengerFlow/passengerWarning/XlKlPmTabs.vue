@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-09-10 14:07:10
  * @LastEditors: zy
- * @LastEditTime: 2019-09-10 15:01:37
+ * @LastEditTime: 2019-09-11 17:32:57
  -->
 <template>
   <el-tabs v-model="activeName" class="xianwang_keliu_cont">
@@ -20,24 +20,24 @@
               class="xianlu_keliu_pm_style margin_right_10"
               :style="{ backgroundColor: frm_jz_colour[index]['colour'][0], color: frm_jz_colour[index]['colour'][1]}"
             >{{item.name}}</el-tag>
-            <p class="margin_right_4 color_949EA8">{{item.typeNum}}</p>
-            <icon-svg v-if="item.type === 'top' " name="kltop"></icon-svg>
-            <icon-svg v-else name="klbottom"></icon-svg>
+            <div v-if="date_type === '实时'" class="flexStart align-items-center">
+              <p class="margin_right_4 color_949EA8">{{item.typeNum}}</p>
+              <icon-svg v-if="item.type === 'top' " name="kltop"></icon-svg>
+              <icon-svg v-else name="klbottom"></icon-svg>
+            </div>
           </div>
           <p class="color_556270">{{item.keyunliang}}</p>
         </li>
       </ul>
     </el-tab-pane>
-    <el-tab-pane label="出站量" name="second">
-    </el-tab-pane>
-    <el-tab-pane label="换乘量" name="third">
-    </el-tab-pane>
-    <el-tab-pane label="客运量" name="fourth">
-    </el-tab-pane>
+    <el-tab-pane label="出站量" name="second"></el-tab-pane>
+    <el-tab-pane label="换乘量" name="third"></el-tab-pane>
+    <el-tab-pane label="客运量" name="fourth"></el-tab-pane>
   </el-tabs>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -91,12 +91,16 @@ export default {
         { name: '2号线', colour: ['rgba(235,90,53,.1)', 'rgba(235,90,53,1)'] },
         { name: '3号线', colour: ['rgba(213,0,106,.1)', 'rgba(213,0,106,1)'] },
         { name: '4号线', colour: ['rgba(0,170,88,.1)', 'rgba(0,170,88,1)'] },
-        { name: '7号线', colour: ['rgba(109,198,214,.1)', 'rgba(109,198,214,1)'] },
+        {
+          name: '7号线',
+          colour: ['rgba(109,198,214,.1)', 'rgba(109,198,214,1)']
+        },
         { name: '10号线', colour: ['rgba(0,80,162,.1)', 'rgba(0,80,162,1)'] }
       ]
     }
   },
   computed: {
+    ...mapState('passengerFlowWaring', ['date_type']),
     // 格式化 线路颜色
     frm_jz_colour () {
       let self = this

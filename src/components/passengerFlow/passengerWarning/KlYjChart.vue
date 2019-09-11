@@ -3,14 +3,15 @@
  * @Author: zy
  * @Date: 2019-09-09 22:32:42
  * @LastEditors: zy
- * @LastEditTime: 2019-09-10 11:24:18
+ * @LastEditTime: 2019-09-11 17:20:02
  -->
 <template>
   <div>
     <div :id="id" :class="className" :style="{height:height,width:width}" />
     <p class="yj_title flexStart align-items-center">
       <icon-svg name="yujing" class="yj_icon-svg margin_right_8"></icon-svg>
-      <span class="font-size14 margin_right_8">9:05</span><span class="font-size14 color_556270"> 火车南站、高新、火车东站、天府广场、火车北站、犀浦</span>
+      <span class="font-size14 margin_right_8">9:05</span>
+      <span class="font-size14 color_556270">火车南站、高新、火车东站、天府广场、火车北站、犀浦</span>
     </p>
   </div>
 </template>
@@ -44,7 +45,6 @@ export default {
     return {
       chart: null,
       showDate: ''
-
     }
   },
   mounted () {
@@ -87,6 +87,9 @@ export default {
             type: 'category',
             boundaryGap: true,
             data: dataIPSxAxis,
+            axisTick: {
+              show: false
+            },
             axisLabel: {
               show: true,
               textStyle: {
