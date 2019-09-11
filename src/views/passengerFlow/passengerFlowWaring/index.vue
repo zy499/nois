@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 17:01:27
  * @LastEditors: zy
- * @LastEditTime: 2019-09-10 17:39:12
+ * @LastEditTime: 2019-09-11 15:32:43
  -->
 <template>
   <div class="passengerFlowWaringBody">
@@ -134,7 +134,7 @@
             <span class="yj_biaoge_title">线网断面客流量排名</span>
             <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
           </div>
-          <XianwangDuanMianKeliu />
+          <XianwangDuanMianKeliu id="xwdmkl" />
         </el-card>
       </el-col>
       <!-- 线网断面客流量排名 end -->
@@ -151,7 +151,7 @@
           </div>
           <el-tabs v-model="aaaa">
             <el-tab-pane label="进站量" name="first">
-              <div style="width:100%"><CzKlchart id="czklChart" /></div>
+              <CzKlchart id="czklChart" />
             </el-tab-pane>
             <el-tab-pane label="出站量" name="second"></el-tab-pane>
             <el-tab-pane label="换乘量" name="third"></el-tab-pane>
@@ -169,24 +169,24 @@
           <el-row type="flex" justify="space-between" style="padding-bottom: 20px;
     border-bottom: 1px solid #E8ECEF">
             <el-col :span="8" style="border-right: 1px solid #E8ECEF">
-                <LineCharts />
+                <LineCharts id="lineTestEchart1" height="120px" />
             </el-col>
             <el-col :span="8" style="border-right: 1px solid #E8ECEF">
-              <LineCharts />
+              <LineCharts id="lineTestEchart2" height="120px" />
             </el-col>
             <el-col :span="8">
-              <LineCharts />
+              <LineCharts id="lineTestEchart3" height="120px" />
             </el-col>
           </el-row>
           <el-row type="flex" justify="space-between" style="padding-top: 20px;">
             <el-col :span="8" style="border-right: 1px solid #E8ECEF">
-                <LineCharts />
+                <LineCharts id="lineTestEchart4" height="120px" />
             </el-col>
             <el-col :span="8" style="border-right: 1px solid #E8ECEF">
-              <LineCharts />
+              <LineCharts id="lineTestEchart5" height="120px" />
             </el-col>
             <el-col :span="8">
-              <LineCharts />
+              <LineCharts id="lineTestEchart6" height="120px" />
             </el-col>
           </el-row>
         </el-card>

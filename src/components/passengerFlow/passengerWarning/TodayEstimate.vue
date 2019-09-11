@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-09-05 23:58:42
+ * @LastEditTime: 2019-09-11 14:52:42
  -->
 <template>
   <div class="dialogBox">
@@ -44,7 +44,7 @@
         <div class="charts">
           <p>09.24之后为测试数据</p>
           <div>
-            <BarChart id="testBar" height="400px" width="100%" />
+            <ChartsXWCX id="testBar" height="400px" width="100%" />
           </div>
           
         </div>
@@ -54,8 +54,7 @@
 </template>
 
 <script>
-// import BarChart from '@/components/echarts/bar'
-import BarChart from '@/components/vcharts/bar'
+import ChartsXWCX from '@/components/passengerFlow/ChartsXWCX'
 export default {
   props: {
     isShow: {
@@ -64,7 +63,7 @@ export default {
     }
   },
   components: {
-    BarChart
+    ChartsXWCX
   },
   data () {
     return {
