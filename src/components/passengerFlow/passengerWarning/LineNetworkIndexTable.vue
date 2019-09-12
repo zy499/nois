@@ -3,14 +3,17 @@
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-09-09 14:02:27
+ * @LastEditTime: 2019-09-12 12:47:25
  -->
 <template>
   <div class="yujingbiaoge">
-    <el-card>
-      <div slot="header">
+    <div>
+      <div>
         <template>
-          <div class="flexStart align-items-center padding_left_20">
+          <div
+            class="flexStart align-items-center padding_left_20 padding-bottom20"
+            style="padding-top: 20px;"
+          >
             <div>
               <span class="yj_biaoge_title">{{yj_biaoge_title}}指标</span>
             </div>
@@ -24,10 +27,9 @@
           </div>
         </template>
       </div>
-      <div class="cont">
+      <!-- <div class="cont">
         <div class="tp-line-table-box">
-          <!-- 线网指标头部 start -->
-          <el-row type="flex" justify="center" class="margin-bottom20 lineNetworkHeader">
+          <el-row type="flex" justify="center" class="lineNetworkHeader">
             <el-col
               v-for="(item, index) in ky_liang_option"
               :key="index"
@@ -38,16 +40,15 @@
               <p class="font-size28 font_weight_600">{{item.num}}</p>
             </el-col>
           </el-row>
-          <!-- 线网指标头部 end -->
         </div>
-      </div>
-    </el-card>
+      </div> -->
+    </div>
     <!-- 线网指标表格 start -->
-    <div class="tp-line-table-box margin-bottom20">
+    <div class="tp-line-table-box">
       <div class="tableCont position_relative">
         <div
           class="position_absolute"
-          style="top: 10px;
+          style="top: 96px;
     right: 40px;
     font-size: 20px;
     cursor: pointer;"
@@ -55,12 +56,7 @@
         >
           <icon-svg name="shangxiajiantou" style="color: #CED0DA;" :class="{'is-toggle':mark}"></icon-svg>
         </div>
-        <el-table
-          id="lineNetWorkTable"
-          :data="tableData"
-          :show-header="false"
-          style="font-size:14px;text-align:right;"
-        >
+        <el-table id="lineNetWorkTable" :data="tableData" style="font-size:14px;text-align:right;">
           <el-table-column prop="name" label width="100px">
             <template slot-scope="scope">
               <div
@@ -74,12 +70,13 @@
               <div v-else>{{scope.row.name}}</div>
             </template>
           </el-table-column>
-          <el-table-column prop="xwcxl">
+          <el-table-column prop="xwcxl" label="线网出行量">
             <template slot-scope="scope">
               <div v-if="scope.row.name == '预计今日'" class="font_weight_bold">
                 <span
                   v-if="parseInt(scope.row.xwcxl.replace(/,/g,'')) > 1000000"
-                  style="color:#FF2F78;" class="yj_arrow"
+                  style="color:#FF2F78;"
+                  class="yj_arrow"
                 >
                   <icon-svg class="margin_right_8" width="20px" height="20px" name="shangjiantou"></icon-svg>
                   {{scope.row.xwcxl}}
@@ -92,12 +89,13 @@
               <div v-else>{{scope.row.xwcxl}}</div>
             </template>
           </el-table-column>
-          <el-table-column prop="xwczl">
+          <el-table-column prop="xwczl" label="线网出站量">
             <template slot-scope="scope">
               <div v-if="scope.row.name == '预计今日'" class="font_weight_bold">
                 <span
                   v-if="parseInt(scope.row.xwczl.replace(/,/g,'')) > 1000000"
-                  style="color:#FF2F78;" class="yj_arrow"
+                  style="color:#FF2F78;"
+                  class="yj_arrow"
                 >
                   <icon-svg class="margin_right_8" width="20px" height="20px" name="shangjiantou"></icon-svg>
                   {{scope.row.xwczl}}
@@ -110,12 +108,13 @@
               <div v-else>{{scope.row.xwczl}}</div>
             </template>
           </el-table-column>
-          <el-table-column prop="xwhxl">
+          <el-table-column prop="xwhxl" label="线网换行量">
             <template slot-scope="scope">
               <div v-if="scope.row.name == '预计今日'" class="font_weight_bold">
                 <span
                   v-if="parseInt(scope.row.xwhxl.replace(/,/g,'')) > 2000000"
-                  style="color:#FF2F78;" class="yj_arrow"
+                  style="color:#FF2F78;"
+                  class="yj_arrow"
                 >
                   <icon-svg class="margin_right_8" width="20px" height="20px" name="shangjiantou"></icon-svg>
                   {{scope.row.xwhxl}}
@@ -128,12 +127,13 @@
               <div v-else>{{scope.row.xwhxl}}</div>
             </template>
           </el-table-column>
-          <el-table-column prop="xwkyl">
+          <el-table-column prop="xwkyl" label="线网客运量">
             <template slot-scope="scope">
               <div v-if="scope.row.name == '预计今日'" class="font_weight_bold">
                 <span
                   v-if="parseInt(scope.row.xwkyl.replace(/,/g,'')) > 2000000"
-                  style="color:#FF2F78;" class="yj_arrow"
+                  style="color:#FF2F78;"
+                  class="yj_arrow"
                 >
                   <icon-svg class="margin_right_8" width="20px" height="20px" name="shangjiantou"></icon-svg>
                   {{scope.row.xwkyl}}
@@ -146,12 +146,13 @@
               <div v-else>{{scope.row.xwkyl}}</div>
             </template>
           </el-table-column>
-          <el-table-column prop="xwzxrs">
+          <el-table-column prop="xwzxrs" label="线网在网人数">
             <template slot-scope="scope">
               <div v-if="scope.row.name == '预计今日'" class="font_weight_bold">
-                 <span
+                <span
                   v-if="parseInt(scope.row.xwzxrs.replace(/,/g,'')) > 1000000"
-                  style="color:#FF2F78;" class="yj_arrow"
+                  style="color:#FF2F78;"
+                  class="yj_arrow"
                 >
                   <icon-svg class="margin_right_8" width="20px" height="20px" name="shangjiantou"></icon-svg>
                   {{scope.row.xwzxrs}}
@@ -186,7 +187,15 @@ export default {
       activeNames: ['1'],
       tableData: [
         {
+          xwcxl: '1,491,781',
+          xwczl: '1,491,781',
+          xwhxl: '1,491,781',
+          xwkyl: '1,491,781',
+          xwzxrs: '1,491,781'
+        },
+        {
           name: '预计今日',
+
           xwcxl: '1,491,781',
           xwczl: '1,491,781',
           xwhxl: '1,491,781',
@@ -195,6 +204,7 @@ export default {
         },
         {
           name: '上周同期',
+
           xwcxl: '1,491,781',
           xwczl: '1,491,781',
           xwhxl: '1,491,781',
@@ -203,6 +213,7 @@ export default {
         },
         {
           name: '月日均值',
+
           xwcxl: '3,634,754',
           xwczl: '3,634,754',
           xwhxl: '3,634,754',
@@ -211,6 +222,7 @@ export default {
         },
         {
           name: '峰值',
+
           xwcxl: '4,843,335',
           xwczl: '4,843,335',
           xwhxl: '4,843,335',
@@ -219,6 +231,7 @@ export default {
         },
         {
           name: '年累计',
+
           xwcxl: '1,248,420,112',
           xwczl: '1,248,420,112',
           xwhxl: '1,248,420,112',
@@ -273,7 +286,7 @@ export default {
       if (this.mark) {
         for (let i = 0; i < trs.length; i++) {
           let item = trs[i]
-          if (i > 0) {
+          if (i > 1) {
             item.style.visibility = 'collapse'
           }
         }
@@ -281,7 +294,7 @@ export default {
       } else {
         for (let i = 0; i < trs.length; i++) {
           let item = trs[i]
-          if (i > 0) {
+          if (i > 1) {
             item.style.visibility = 'visible'
           }
         }
@@ -294,54 +307,68 @@ export default {
 
 <style lang="scss" scoped>
 .yujingbiaoge {
+  margin-bottom: 30px;
+  border: 1px solid #ebeef5;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px 0 rgba(0, 122, 255, 0.08);
   p {
     margin: 0;
   }
-  /deep/ .el-card {
-    border-bottom: none;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-  /deep/ .el-card__body {
-    padding: 10px 30px 0 30px;
-  }
-  .lineNetworkHeader {
-    .border_right_e8ecef {
-      border-right: 1px solid #E8ECEF;
-    }
-    .el-col:last-child {
-      border-right: none;
-    }
-  }
+  // /deep/ .el-card {
+  //   border-bottom: none;
+  //   border-bottom-right-radius: 0;
+  //   border-bottom-left-radius: 0;
+  // }
+  // /deep/ .el-card__body {
+  //   padding: 10px 30px 0 30px;
+  // }
+  // .lineNetworkHeader {
+  //   .border_right_e8ecef {
+  //     border-right: 1px solid #e8ecef;
+  //   }
+  //   .el-col:last-child {
+  //     border-right: none;
+  //   }
+  // }
 }
 .tp-line-table-box {
   .tableCont {
-    border: 1px solid #ebeef5;
-    background-color: #F8F9FA;
-    padding: 0 30px 0 30px;
-    border-bottom-right-radius: 2px;
-    border-bottom-left-radius: 2px;
-    box-shadow: 0 2px 12px 0 rgba(0, 122, 255, 0.08)
+    background-color: #fff;
+    padding: 0 30px 20px 30px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    // box-shadow: 0 2px 12px 0 rgba(0, 122, 255, 0.08)
   }
   /deep/ .el-table {
-    width: 87%;
-    font-size: 14px;
+    width: 90%;
+    font-size: 12px;
     color: #949ea8;
     // font-weight: 600;
     td {
       text-align: right;
-      background-color: #F8F9FA;
+      background-color: #fff;
     }
     td,
     th.is-leaf {
       border-bottom: none !important;
     }
     th {
-      background-color: #F8F9FA;
-      text-align: center;
+      background-color: #fff;
+      text-align: right;
+      font-size: 12px;
     }
     .el-table__body-wrapper {
       .el-table__body {
+        .el-table__row:first-child {
+          font-size: 28px;
+          font-family:PingFang-SC;
+          font-weight:500;
+          color:rgba(32,46,61,1);
+          .td {
+            padding-bottom: 20px;
+          }
+        }
         .el-table__row {
           td:first-child {
             text-align: left;

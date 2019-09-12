@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-24 17:01:27
  * @LastEditors: zy
- * @LastEditTime: 2019-09-11 17:29:05
+ * @LastEditTime: 2019-09-12 12:51:10
  -->
 <template>
   <div class="passengerFlowWaringBody">
@@ -79,7 +79,7 @@
     <!-- content start -->
     <el-row class="margin-bottom30">
       <el-col :span="16">
-        <el-card style="height:440px;">
+        <el-card>
           <div slot="header" class="flexStart align-items-flex-end">
             <p class="font-size14 font_weight_600 margin_right_8">客流预警</p>
             <span class="font-size12 color_949EA8">17:00 后的数据为预测数据</span>
@@ -88,9 +88,9 @@
         </el-card>
       </el-col>
       <el-col :span="8">
-        <el-card style="height:440px;">
+        <el-card>
           <div slot="header">
-            <p class="font-size14 font_weight_600 margin_right_8">客流预警</p>
+            <p class="font-size14 font_weight_600 margin_right_8">客流告警</p>
           </div>
           <KlGjChart id="klgjChart" height="330px" />
         </el-card>
@@ -108,7 +108,12 @@
             <span class="yj_biaoge_title">线网地图</span>
             <el-tag class="yj_biaoge_tag" type="info">{{yj_biaoge_tag}}</el-tag>
           </div>
-          <div class="xianwang_map_cont"></div>
+          <div class="xianwang_map_cont">
+            <el-button
+      type="primary"
+      @click="$router.push({name:'stationDetails',params:{stationName:'火车南站',routeObj:$route}})"
+    >车站详情</el-button>
+          </div>
         </el-card>
       </el-col>
       <!-- 线网地图 end -->
@@ -215,11 +220,8 @@
     </el-row>
     <!-- 车站客流排名/线网断面最大拥挤度/线网断面客流量排名 end -->
     <!-- content end -->
-    <el-button
-      type="primary"
-      @click="$router.push({name:'stationDetails',params:{stationName:'火车南站',routeObj:$route}})"
-    >车站详情</el-button>
-    <el-button type="primary" @click="test">test</el-button>
+    
+    <!-- <el-button type="primary" @click="test">test</el-button> -->
   </div>
 </template>
 

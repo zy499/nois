@@ -3,12 +3,12 @@
  * @Author: zy
  * @Date: 2019-09-09 22:32:42
  * @LastEditors: zy
- * @LastEditTime: 2019-09-11 17:20:02
+ * @LastEditTime: 2019-09-12 12:50:41
  -->
 <template>
   <div>
     <div :id="id" :class="className" :style="{height:height,width:width}" />
-    <p class="yj_title flexStart align-items-center">
+    <p class="yj_title flexStart align-items-center padding-top10">
       <icon-svg name="yujing" class="yj_icon-svg margin_right_8"></icon-svg>
       <span class="font-size14 margin_right_8">9:05</span>
       <span class="font-size14 color_556270">火车南站、高新、火车东站、天府广场、火车北站、犀浦</span>

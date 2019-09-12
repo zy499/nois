@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-09-03 20:50:20
+ * @LastEditTime: 2019-09-12 09:56:05
  -->
 <template>
   <div>
@@ -152,7 +152,5 @@ ul {
 li {
   list-style: none;
   margin: 10px 0;
-}
-.facilities_left {
 }
 </style>

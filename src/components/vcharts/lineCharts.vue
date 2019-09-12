@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-09-09 22:32:42
  * @LastEditors: zy
- * @LastEditTime: 2019-09-11 16:16:47
+ * @LastEditTime: 2019-09-12 14:16:22
  -->
 <template>
   <div style>
@@ -12,7 +12,7 @@
       <p class="subTitle">{{dataTitle.type}}</p>
     </div>
     <div :id="id" :class="className" :style="{height:height,width:width}" />
-    <p class="dizhi">{{dataTitle.dizhi.start}}➡{{dataTitle.dizhi.end}}</p>
+    <p class="dizhi flexStart align-items-center">{{dataTitle.dizhi.start}}<icon-svg name="youjiantou" style="margin:0 6px"></icon-svg>{{dataTitle.dizhi.end}}</p>
   </div>
 </template>
 

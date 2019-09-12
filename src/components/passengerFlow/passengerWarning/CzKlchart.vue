@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-09-05 14:05:56
  * @LastEditors: zy
- * @LastEditTime: 2019-09-11 17:19:41
+ * @LastEditTime: 2019-09-12 09:33:09
  -->
 <template>
   <div :id="id" :class="className" :style="{height:height,width:width}" />
@@ -26,7 +26,7 @@ const chartData = {
     '犀浦'
   ],
   keliu: [
-    1393, 3530, 2923, 1723, 3792, 4593, 2703, 3200, 1878, 2655
+    1393, 3530, 2923, 1723, 3792, 4293, 2703, 3200, 1878, 2655
   ],
   zuida: [5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000]
 }
@@ -168,7 +168,7 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: [270, -20],
+                position: 'right',
                 textStyle: {
                   color: '#7F8FA4',
                   fontSize: '14'

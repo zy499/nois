@@ -3,12 +3,12 @@
  * @Author: zy
  * @Date: 2019-09-09 22:32:42
  * @LastEditors: zy
- * @LastEditTime: 2019-09-11 17:19:51
+ * @LastEditTime: 2019-09-12 12:51:26
  -->
 <template>
   <div>
     <div :id="id" :class="className" :style="{height:height,width:width}" />
-    <p class="yj_title flexStart align-items-center">
+    <p class="yj_title flexStart align-items-center padding-top10">
       <icon-svg name="gaojing" class="yj_icon-svg margin_right_8"></icon-svg>
       <span class="font-size14 color_FF2F78">请注意，火车南站正在遭遇大客流</span>
     </p>

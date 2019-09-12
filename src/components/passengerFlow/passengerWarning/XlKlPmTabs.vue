@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-09-10 14:07:10
  * @LastEditors: zy
- * @LastEditTime: 2019-09-11 17:32:57
+ * @LastEditTime: 2019-09-12 09:30:37
  -->
 <template>
   <el-tabs v-model="activeName" class="xianwang_keliu_cont">
@@ -20,7 +20,7 @@
               class="xianlu_keliu_pm_style margin_right_10"
               :style="{ backgroundColor: frm_jz_colour[index]['colour'][0], color: frm_jz_colour[index]['colour'][1]}"
             >{{item.name}}</el-tag>
-            <div v-if="date_type === '实时'" class="flexStart align-items-center">
+            <div v-if="date_type !== '实时'" class="flexStart align-items-center">
               <p class="margin_right_4 color_949EA8">{{item.typeNum}}</p>
               <icon-svg v-if="item.type === 'top' " name="kltop"></icon-svg>
               <icon-svg v-else name="klbottom"></icon-svg>
