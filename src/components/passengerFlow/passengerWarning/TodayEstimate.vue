@@ -3,7 +3,7 @@
  * @Author: zy
  * @Date: 2019-08-31 01:42:29
  * @LastEditors: zy
- * @LastEditTime: 2019-09-14 15:47:56
+ * @LastEditTime: 2019-09-14 18:37:06
  -->
 <template>
   <div class="dialogBox">
@@ -110,10 +110,12 @@ export default {
 <style lang="scss" scoped>
 .dialogBox {
   /deep/ .el-dialog__header {
-    padding: 40px 20px 20px 20px;
+    margin: 0 40px;
+    padding: 40px 0 20px 0;
     border-bottom: 2px solid #e8ecef;
     .el-dialog__headerbtn {
       top: 38px;
+      right: 36px;
       font-size: 24px;
     }
   }
