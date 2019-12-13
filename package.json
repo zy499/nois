@@ -29,7 +29,7 @@
     "js-md5": "^0.7.3",
     "lodash": "4.17.5",
     "node-sass": "4.9.0",
-    "npm": "^6.9.0",
+    "npm": "^6.13.4",
     "nprogress": "^0.2.0",
     "sass-loader": "6.0.6",
     "svg-sprite-loader": "3.7.3",
