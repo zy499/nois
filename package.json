@@ -28,7 +28,7 @@
     "js-base64": "^2.5.1",
     "js-md5": "^0.7.3",
     "lodash": "4.17.5",
-    "node-sass": "4.9.0",
+    "node-sass": "4.13.1",
     "npm": "^6.9.0",
     "nprogress": "^0.2.0",
     "sass-loader": "6.0.6",
